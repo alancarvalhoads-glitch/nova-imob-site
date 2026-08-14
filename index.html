@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Imob — Sistema de atendimento e gestão de leads com IA</title>
+  <meta name="description" content="Sistema de atendimento automatizado com IA, follow-up e painel de gestão pra imobiliárias. WhatsApp, Instagram e site da empresa integrados com API Oficial. 24h por dia." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://vz-687f5a23-486.b-cdn.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1323374123103378');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1323374123103378&ev=PageView&noscript=1"/></noscript>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0B0F19;
+      --bg2: #0f1524;
+      --blue: #3B82F6;
+      --purple: #7C3AED;
+      --text: #D1D5DB;
+      --white: #FFFFFF;
+      --glass-bg: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+      --gradient: linear-gradient(135deg, #3B82F6, #7C3AED);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRID BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    section, nav, footer { position: relative; z-index: 1; }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; color: var(--white); line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; }
+    h3 { font-size: 1.25rem; font-weight: 600; }
+    p { color: var(--text); }
+    code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.85em; }
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 1.02rem;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: var(--white);
+      box-shadow: 0 0 24px rgba(59,130,246,0.35), 0 0 48px rgba(124,58,237,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(59,130,246,0.5), 0 0 60px rgba(124,58,237,0.3);
+    }
+    /* brilho passando a cada 4s pra dar destaque no CTA */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80%;
+      width: 55%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+      transform: skewX(-22deg);
+      animation: btnShine 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes btnShine {
+      0%, 22% { left: -80%; }
+      48% { left: 130%; }
+      100% { left: 130%; }
+    }
+    @media (prefers-reduced-motion: reduce) { .btn-primary::after { animation: none; display: none; } }
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--glass-border);
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+    .btn-hint {
+      display: block;
+      font-size: 0.75rem;
+      color: rgba(209,213,219,0.5);
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── GLASS CARD ─── */
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card:hover { border-color: rgba(59,130,246,0.25); transform: translateY(-3px); }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(11,15,25,0.8);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .logo-icon { display: block; width: 32px; height: 32px; flex-shrink: 0; }
+    .logo-icon svg { width: 100%; height: 100%; display: block; }
+    .logo-wordmark { display: flex; flex-direction: column; gap: 2px; }
+    .logo-wordmark svg { display: block; height: 22px; width: auto; }
+    .logo-tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9.5px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+    .logo:hover .logo-tagline { color: rgba(255,255,255,0.55); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ─── HERO ─── */
+    #hero {
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      color: var(--blue);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    #hero h1 { max-width: 800px; margin: 0 auto 24px; }
+    #hero p.subtitle {
+      font-size: 1.1rem;
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      color: rgba(209,213,219,0.8);
+    }
+    .hero-features {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+    }
+    .hero-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: rgba(209,213,219,0.7);
+    }
+    .hero-feature::before {
+      content: '✦';
+      color: var(--blue);
+      font-size: 0.65rem;
+    }
+
+    /* ─── PALAVRA ROTATIVA (hero H1) ─── */
+    .rotating-word {
+      display: inline-block;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      will-change: opacity, transform;
+    }
+    .rotating-word.is-swapping {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    /* ─── PROBLEMA ─── */
+    #problema { padding: 80px 0; }
+    .problema-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .problema-left {
+      background: var(--glass-bg);
+      border: 1px solid rgba(239,68,68,0.15);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .problema-left h3 { color: #F87171; margin-bottom: 20px; }
+    .prob-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .prob-item:last-of-type { border-bottom: none; }
+    .prob-dot { width: 6px; height: 6px; border-radius: 50%; background: #F87171; margin-top: 8px; flex-shrink: 0; }
+    .resultado-box {
+      background: rgba(239,68,68,0.05);
+      border: 1px solid rgba(239,68,68,0.15);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .resultado-box p { font-size: 0.9rem; color: #FCA5A5; }
+    .problema-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .stat-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .stat-icon { font-size: 1.5rem; }
+    .stat-label { font-size: 0.8rem; color: rgba(209,213,219,0.5); }
+    .stat-value { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--white); font-size: 1.05rem; }
+
+    /* ─── SOLUÇÃO ─── */
+    #solucao { padding: 80px 0; }
+    .solucao-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 0.65rem;
+      color: white;
+    }
+    .terminal-box {
+      background: #060912;
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: rgba(59,130,246,0.05);
+      border-bottom: 1px solid rgba(59,130,246,0.1);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #FF5F57; }
+    .dot-yellow { background: #FEBC2E; }
+    .dot-green { background: #28C840; }
+    .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: rgba(209,213,219,0.4); margin-left: 8px; }
+    .terminal-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; line-height: 2; }
+    .t-dim { color: rgba(209,213,219,0.3); }
+    .t-blue { color: #60A5FA; }
+    .t-green { color: #34D399; }
+    .t-purple { color: #A78BFA; }
+    .t-white { color: var(--white); }
+
+    /* ─── CANAIS ─── */
+    #canais { padding: 80px 0; }
+    .canais-intro { max-width: 620px; margin-top: 20px; color: rgba(209,213,219,0.75); }
+    .canais-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 40px;
+    }
+    .canal-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .canal-card:hover { border-color: rgba(59,130,246,0.25); transform: translateY(-3px); }
+    .canal-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+    .canal-icon svg { width: 28px; height: 28px; }
+    .canal-icon-wa {
+      background: rgba(37,211,102,0.12);
+      color: #25D366;
+      border: 1px solid rgba(37,211,102,0.28);
+    }
+    .canal-icon-ig {
+      background: linear-gradient(135deg, rgba(247,138,30,0.15), rgba(225,48,108,0.15), rgba(157,53,200,0.15));
+      color: #E1306C;
+      border: 1px solid rgba(225,48,108,0.28);
+    }
+    .canal-icon-site {
+      background: rgba(59,130,246,0.12);
+      color: var(--blue);
+      border: 1px solid rgba(59,130,246,0.28);
+    }
+    .canal-card h3 {
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .canal-card p {
+      font-size: 0.9rem;
+      color: rgba(209,213,219,0.7);
+      line-height: 1.6;
+    }
+    .canal-card .canal-meta {
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(209,213,219,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── DASHBOARD MOCK (Painel Nova Imob) ─── */
+    .solucao-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .aura-dashboard {
+      background: linear-gradient(180deg, rgba(59,130,246,0.06), rgba(124,58,237,0.04));
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(59,130,246,0.06);
+      border-bottom: 1px solid rgba(59,130,246,0.12);
+    }
+    .dash-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .dash-title span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .dash-live {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: #34D399;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .dash-live-dot {
+      width: 6px; height: 6px;
+      background: #34D399;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    .dash-body { padding: 16px 18px; }
+    .dash-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .dash-kpi {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 9px 10px;
+    }
+    .dash-kpi-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      color: rgba(209,213,219,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dash-kpi-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .dash-kpi-value .accent {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .dash-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: rgba(209,213,219,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .dash-funnel {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .dash-funnel-row {
+      display: grid;
+      grid-template-columns: 78px 1fr 34px;
+      align-items: center;
+      gap: 10px;
+    }
+    .dash-funnel-label {
+      font-family: 'JetBrains Mono', monospace;
+      color: rgba(209,213,219,0.6);
+      font-size: 0.68rem;
+    }
+    .dash-funnel-bar-wrap {
+      height: 14px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .dash-funnel-bar {
+      height: 100%;
+      background: var(--gradient);
+      opacity: 0.85;
+      border-radius: 4px;
+    }
+    .dash-funnel-value {
+      color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-align: right;
+    }
+    .dash-leads { display: flex; flex-direction: column; gap: 6px; }
+    .dash-lead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 6px;
+    }
+    .dash-lead-info { min-width: 0; }
+    .dash-lead-name { color: var(--white); font-size: 0.78rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dash-lead-meta { color: rgba(209,213,219,0.5); font-size: 0.66rem; font-family: 'JetBrains Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dash-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      padding: 3px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .dash-pill-qualif { background: rgba(124,58,237,0.15); color: #C4B5FD; border: 1px solid rgba(124,58,237,0.3); }
+    .dash-pill-quente { background: rgba(245,158,11,0.15); color: #FCD34D; border: 1px solid rgba(245,158,11,0.3); }
+    .dash-pill-visita { background: rgba(52,211,153,0.15); color: #34D399; border: 1px solid rgba(52,211,153,0.3); }
+
+    /* ─── FEATURES ─── */
+    #features { padding: 80px 0; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-card:hover { border-color: rgba(59,130,246,0.2); transform: translateY(-4px); }
+    .feature-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--blue);
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    /* ─── RESULTADOS ─── */
+    #resultados { padding: 80px 0; }
+    .resultados-inner {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 48px;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .resultados-inner::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(124,58,237,0.1), transparent 70%);
+    }
+    .resultados-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+    .resultado-stat { text-align: center; }
+    .resultado-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .resultado-desc { font-size: 0.85rem; color: rgba(209,213,219,0.6); margin-top: 4px; }
+    .resultados-note {
+      border-top: 1px solid var(--glass-border);
+      padding-top: 28px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .resultados-note strong { color: var(--white); }
+
+    /* ─── DEPOIMENTOS — COVERFLOW 3D (dark) ─── */
+    #depoimentos { padding: 80px 0; }
+    .depo-note {
+      max-width: 580px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: rgba(209,213,219,0.55);
+    }
+    .cf { position: relative; max-width: 1080px; margin: 48px auto 0; padding: 0 60px; overflow: hidden; touch-action: pan-y; }
+    .cf-stage { position: relative; height: 700px; perspective: 1400px; perspective-origin: center center; }
+    .cf-slide {
+      position: absolute; top: 50%; left: 50%;
+      height: 700px; width: auto; max-width: 92vw;
+      border-radius: 18px; overflow: hidden; cursor: grab;
+      transition: transform .55s cubic-bezier(.22,.61,.36,1),
+                  opacity .55s cubic-bezier(.22,.61,.36,1),
+                  filter .55s, box-shadow .55s;
+      box-shadow: 0 12px 40px rgba(0,0,0,.4);
+      background: #060912;
+      transform-style: preserve-3d; backface-visibility: hidden;
+      will-change: transform, opacity;
+      user-select: none; -webkit-user-drag: none;
+    }
+    .cf-slide img { display: block; height: 100%; width: auto; pointer-events: none; -webkit-user-drag: none; user-select: none; }
+    .cf.is-dragging .cf-slide { transition: transform .05s linear; cursor: grabbing; }
+    .cf-slide[data-pos="center"] { transform: translate(calc(-50% + var(--cf-drag,0px)),-50%) scale(1) rotateY(0deg); opacity: 1; z-index: 5; box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(59,130,246,.2); }
+    .cf-slide[data-pos="left"] { transform: translate(calc(-50% - 260px + var(--cf-drag,0px) * 0.6),-50%) scale(.82) rotateY(14deg); opacity: .38; z-index: 4; filter: brightness(.7); }
+    .cf-slide[data-pos="right"] { transform: translate(calc(-50% + 260px + var(--cf-drag,0px) * 0.6),-50%) scale(.82) rotateY(-14deg); opacity: .38; z-index: 4; filter: brightness(.7); }
+    .cf-slide[data-pos="far-left"] { transform: translate(calc(-50% - 420px),-50%) scale(.68) rotateY(18deg); opacity: 0; z-index: 3; pointer-events: none; }
+    .cf-slide[data-pos="far-right"] { transform: translate(calc(-50% + 420px),-50%) scale(.68) rotateY(-18deg); opacity: 0; z-index: 3; pointer-events: none; }
+    .cf-slide[data-pos="hidden"] { transform: translate(-50%,-50%) scale(.5); opacity: 0; z-index: 1; pointer-events: none; }
+    .cf-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 999px;
+      border: 1px solid var(--glass-border); background: var(--glass-bg);
+      color: var(--text); cursor: pointer; z-index: 10;
+      display: grid; place-items: center;
+      transition: background .2s, color .2s, border-color .2s;
+      backdrop-filter: blur(6px);
+    }
+    .cf-nav:hover { background: rgba(59,130,246,.15); color: var(--white); border-color: var(--blue); }
+    .cf-nav svg { width: 18px; height: 18px; }
+    .cf-prev { left: 0; }
+    .cf-next { right: 0; }
+    .cf-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+    .cf-dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(209,213,219,0.2); border: 0; cursor: pointer; transition: all .25s; padding: 0; }
+    .cf-dot.is-active { background: var(--blue); width: 24px; }
+    @media (max-width: 720px) {
+      .cf { padding: 0 8px; }
+      .cf-stage { height: 500px; }
+      .cf-slide { height: 500px; max-width: 80vw; }
+      .cf-slide[data-pos="center"] { transform: translate(calc(-50% + var(--cf-drag,0px)),-50%) scale(1) rotateY(0deg); }
+      .cf-slide[data-pos="left"] { transform: translate(calc(-50% - 110px + var(--cf-drag,0px) * 0.5),-50%) scale(.7) rotateY(14deg); opacity: .1; }
+      .cf-slide[data-pos="right"] { transform: translate(calc(-50% + 110px + var(--cf-drag,0px) * 0.5),-50%) scale(.7) rotateY(-14deg); opacity: .1; }
+      .cf-slide[data-pos="far-left"] { transform: translate(calc(-50% - 200px),-50%) scale(.6) rotateY(18deg); }
+      .cf-slide[data-pos="far-right"] { transform: translate(calc(-50% + 200px),-50%) scale(.6) rotateY(-18deg); }
+      .cf-nav { width: 38px; height: 38px; }
+      .cf-prev { left: 4px; }
+      .cf-next { right: 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cf-slide { transition: none; } }
+
+    /* ─── COMO FUNCIONA ─── */
+    #como-funciona { padding: 80px 0; }
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 40px; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--blue), var(--purple), transparent);
+    }
+    .step {
+      display: flex;
+      gap: 28px;
+      padding: 28px 0;
+      position: relative;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 20px rgba(59,130,246,0.3);
+    }
+    .step-body { padding-top: 8px; }
+    .step-body h3 { margin-bottom: 8px; }
+    .step-body p { font-size: 0.9rem; color: rgba(209,213,219,0.7); }
+
+    /* ─── EXEMPLO ─── */
+    #exemplo { padding: 80px 0; }
+    .exemplo-inner {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 48px;
+      margin-top: 40px;
+    }
+    .exemplo-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 32px; max-width: 760px; }
+    .exemplo-feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .exemplo-feature-icon {
+      font-size: 1.2rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(59,130,246,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .exemplo-feature h4 { font-size: 0.9rem; color: var(--white); margin-bottom: 4px; }
+    .exemplo-feature p { font-size: 0.8rem; color: rgba(209,213,219,0.5); }
+
+    /* ─── PARA QUEM É ─── */
+    #para-quem { padding: 80px 0; }
+    .nichos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .nicho-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s;
+    }
+    .nicho-card.featured {
+      border-color: rgba(59,130,246,0.3);
+      background: rgba(59,130,246,0.05);
+    }
+    .nicho-card.featured .nicho-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      background: rgba(59,130,246,0.15);
+      color: var(--blue);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-top: 4px;
+    }
+    .nicho-card:hover { border-color: rgba(59,130,246,0.25); }
+    .nicho-icon { font-size: 1.5rem; }
+    .nicho-name { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: var(--white); font-weight: 600; }
+
+    /* ─── QUEM SOU EU ─── */
+    #quem-sou { padding: 80px 0; }
+    .quem-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .quem-photo-wrap {
+      position: relative;
+    }
+    .quem-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 20px;
+      background: var(--gradient);
+      z-index: 0;
+      opacity: 0.5;
+      filter: blur(16px);
+    }
+    .quem-photo {
+      width: 100%;
+      border-radius: 18px;
+      display: block;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(59,130,246,0.2);
+      object-fit: cover;
+      aspect-ratio: 3/4;
+    }
+    .quem-photo-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      background: rgba(11,15,25,0.9);
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 8px;
+      padding: 8px 16px;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--blue);
+      backdrop-filter: blur(8px);
+    }
+    .quem-content { display: flex; flex-direction: column; gap: 20px; }
+    .quem-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .quem-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+    }
+    .quem-bio { font-size: 0.95rem; line-height: 1.75; color: rgba(209,213,219,0.8); }
+    .quem-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .quem-stat {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .quem-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .quem-stat-label { font-size: 0.75rem; color: rgba(209,213,219,0.5); margin-top: 4px; line-height: 1.3; }
+    .quem-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .quem-tag {
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      color: rgba(209,213,219,0.7);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    @media (max-width: 768px) {
+      .quem-grid { grid-template-columns: 1fr; }
+      .quem-photo { max-width: 280px; margin: 0 auto; }
+      .quem-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ─── DIFERENCIAL ─── */
+    #diferencial { padding: 80px 0; }
+    .diferencial-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+    }
+    .diferencial-table th {
+      padding: 14px 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .diferencial-table th:first-child { color: rgba(209,213,219,0.4); }
+    .diferencial-table th:nth-child(2) { color: #F87171; }
+    .diferencial-table th:nth-child(3) { background: rgba(59,130,246,0.06); border-radius: 8px 8px 0 0; color: var(--blue); }
+    .diferencial-table td {
+      padding: 14px 20px;
+      border-top: 1px solid var(--glass-border);
+      font-size: 0.875rem;
+    }
+    .diferencial-table td:nth-child(3) {
+      background: rgba(59,130,246,0.04);
+      color: var(--white);
+      font-weight: 500;
+    }
+    .x { color: #F87171; }
+    .check { color: #34D399; }
+
+    /* ─── CTA FINAL ─── */
+    #cta { padding: 100px 0; text-align: center; }
+    .cta-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 64px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box h2 { margin-bottom: 20px; }
+    .cta-box p { font-size: 1rem; max-width: 520px; margin: 0 auto 36px; color: rgba(209,213,219,0.7); }
+
+    /* ─── FORMULÁRIO ─── */
+    .lead-form {
+      max-width: 480px;
+      margin: 8px auto 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field > label,
+    .form-field > .field-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: rgba(209,213,219,0.7);
+      letter-spacing: 0.05em;
+      text-transform: lowercase;
+    }
+    .form-field input[type="text"],
+    .form-field input[type="number"],
+    .form-field input[type="url"],
+    .form-field input[type="tel"] {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+    .form-field input:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: rgba(255,255,255,0.05);
+    }
+    .form-field input::placeholder { color: rgba(209,213,219,0.3); }
+    .radio-group { display: flex; gap: 10px; }
+    .radio-option { flex: 1; position: relative; }
+    .radio-option input[type="radio"] {
+      position: absolute; opacity: 0; pointer-events: none;
+    }
+    .radio-option label {
+      display: block;
+      padding: 11px 14px;
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0;
+      text-transform: none;
+      transition: all 0.2s;
+    }
+    .radio-option label:hover { border-color: rgba(59,130,246,0.4); }
+    .radio-option input[type="radio"]:checked + label {
+      background: rgba(59,130,246,0.12);
+      border-color: var(--blue);
+      color: var(--white);
+    }
+    .lgpd-check {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-top: 4px; cursor: pointer;
+    }
+    .lgpd-check input[type="checkbox"] {
+      margin-top: 3px;
+      width: 16px; height: 16px;
+      accent-color: var(--blue);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .lgpd-check span {
+      font-size: 0.8rem;
+      color: rgba(209,213,219,0.7);
+      line-height: 1.5;
+    }
+    .lgpd-check a { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+    .form-submit { margin-top: 12px; width: 100%; justify-content: center; }
+    .form-submit[disabled] { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+    .form-error {
+      display: none;
+      color: #f87171;
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .form-error.show { display: block; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy { font-size: 0.8rem; color: rgba(209,213,219,0.35); }
+    .footer-link { font-size: 0.8rem; color: rgba(209,213,219,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: var(--white); }
+    .footer-mono { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: rgba(59,130,246,0.5); }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: #0f1524;
+      border: 1px solid rgba(59,130,246,0.22);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.25s ease;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+    .modal-overlay.is-open .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { border-color: var(--blue); color: var(--white); }
+    .modal-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .modal-subtitle {
+      font-size: 0.875rem;
+      color: rgba(209,213,219,0.6);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) { .modal-box { padding: 28px 20px; } }
+
+    /* ─── RESULTADOS V2 ─── */
+    .resultados-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .resultados-visual-block { display: flex; flex-direction: column; align-items: center; }
+    .funil-questions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 12px;
+      max-width: 320px;
+    }
+    .fq {
+      background: rgba(59,130,246,0.07);
+      border: 1px solid rgba(59,130,246,0.18);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: rgba(209,213,219,0.65);
+      animation: fqFloat 3s ease-in-out infinite;
+    }
+    .fq-1 { animation-delay: 0s; }
+    .fq-2 { animation-delay: 0.35s; }
+    .fq-3 { animation-delay: 0.7s; }
+    .fq-4 { animation-delay: 1.05s; }
+    .fq-5 { animation-delay: 1.4s; }
+    .fq-6 { animation-delay: 1.75s; }
+    @keyframes fqFloat {
+      0%, 100% { transform: translateY(0px); opacity: 0.65; }
+      50% { transform: translateY(-5px); opacity: 1; }
+    }
+    .funil-stage {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 16px;
+    }
+    .funil-svg { width: 150px; flex-shrink: 0; }
+    .corretor-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding-top: 6px;
+    }
+    .corretor-head {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3B82F6, #7C3AED);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .corretor-head::before {
+      content: '';
+      position: absolute;
+      bottom: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 6px;
+      border-radius: 0 0 8px 8px;
+      border-bottom: 1.5px solid rgba(255,255,255,0.75);
+      border-left: 1px solid rgba(255,255,255,0.75);
+      border-right: 1px solid rgba(255,255,255,0.75);
+    }
+    .corretor-head::after {
+      content: '';
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.55);
+    }
+    .corretor-body {
+      width: 52px;
+      height: 62px;
+      border-radius: 12px 12px 8px 8px;
+      background: linear-gradient(180deg, rgba(59,130,246,0.25), rgba(124,58,237,0.2));
+      border: 1px solid rgba(59,130,246,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 5px;
+    }
+    .corretor-phone {
+      width: 22px;
+      height: 36px;
+      border-radius: 5px;
+      background: rgba(6,9,18,0.9);
+      border: 1px solid rgba(59,130,246,0.5);
+      padding: 3px 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .corretor-phone-screen {
+      flex: 1;
+      border-radius: 2px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.5), rgba(52,211,153,0.4));
+      animation: screenPulse 2s ease-in-out infinite;
+    }
+    .corretor-phone-btn {
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(59,130,246,0.3);
+      flex-shrink: 0;
+    }
+    @keyframes screenPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .funil-outputs {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .funil-output-card {
+      background: rgba(52,211,153,0.05);
+      border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      max-width: 130px;
+    }
+    .fo-emoji { font-size: 1.4rem; line-height: 1; }
+    .fo-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #34D399;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+    .resultados-text-block { display: flex; flex-direction: column; gap: 28px; }
+    .resultados-stats { display: flex; flex-direction: column; gap: 16px; }
+    .resultado-stat-row { display: flex; align-items: baseline; gap: 12px; }
+    .resultado-num-sm {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex-shrink: 0;
+    }
+    .resultado-desc-sm { font-size: 0.85rem; color: rgba(209,213,219,0.6); }
+    .resultados-note-text { font-size: 0.9rem; color: rgba(209,213,219,0.75); line-height: 1.7; border-top: 1px solid var(--glass-border); padding-top: 20px; }
+    @media (max-width: 768px) {
+      .resultados-layout { grid-template-columns: 1fr; }
+    }
+
+    /* ─── CTA BOX SEM FORM ─── */
+    .cta-btn-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+    /* ─── DIVIDER ─── */
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--gradient);
+      border-radius: 2px;
+      margin: 16px 0 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .problema-grid, .solucao-intro, .features-grid, .exemplo-features { grid-template-columns: 1fr; }
+      .resultados-grid { grid-template-columns: repeat(2, 1fr); }
+      .canais-grid { grid-template-columns: 1fr; }
+      .nichos-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+      .hero-features { flex-direction: column; align-items: center; gap: 10px; }
+      .dash-kpis { grid-template-columns: repeat(2, 1fr); }
+      /* menos espaço entre o header e o eyebrow no mobile */
+      #hero { padding-top: 44px; }
+      /* tabela de comparação cabe na tela (não estoura a largura) */
+      .diferencial-table th, .diferencial-table td { padding: 9px 8px; font-size: 0.7rem; }
+    }
+  </style>
+<style>
+  /* ── VÍDEO ─────────────────────────────────────────────── */
+  .video-wrap{max-width:420px;margin:0 auto}
+  .videobox{position:relative;border-radius:16px;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 24px 70px rgba(0,0,0,.5);aspect-ratio:9/16;width:100%;margin:0 auto}
+  .videobox:fullscreen{border-radius:0;border:0;aspect-ratio:auto;max-width:none;width:100%;height:100%}
+  .videobox video{position:absolute;inset:0;display:block;width:100%;height:100%;border:0;background:#000;object-fit:cover}
+  .clicklayer{position:absolute;inset:0;z-index:1;cursor:pointer}
+  .vph{position:absolute;inset:0;z-index:3;display:grid;place-items:center;text-align:center;gap:8px;color:var(--text);
+    background:radial-gradient(circle at 50% 40%,#16203a,#0a0e17)}
+  .vph .vpi{width:64px;height:64px;border-radius:50%;background:var(--gradient);display:grid;place-items:center}
+  .vph .vpi svg{width:26px;height:26px;fill:#0B0F19;margin-left:3px}
+  .vph small{font-family:'JetBrains Mono',monospace;font-size:.72rem}
+  .vcontrols{position:absolute;left:0;right:0;bottom:0;z-index:2;display:none;align-items:center;gap:10px;
+    padding:10px 12px;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0));opacity:0;transition:opacity .25s}
+  .videobox:hover .vcontrols,.videobox.is-playing .vcontrols{opacity:1}
+  .vcbtn{flex:0 0 auto;background:none;border:0;padding:4px;cursor:pointer;display:grid;place-items:center;color:#fff}
+  .vcbtn svg{width:20px;height:20px;fill:#fff}
+  .vcbtn.txt{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:500;min-width:34px}
+  .vsound{position:absolute;inset:0;z-index:4;display:none;place-items:center;cursor:pointer;background:rgba(0,0,0,.35);backdrop-filter:blur(1px)}
+  .vsound .soundinner{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:0 20px}
+  .vsound .urg{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:1.18rem;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+  .vsound .pill{background:#fff;color:#0B0F19;font-family:'Space Grotesk',sans-serif;font-weight:700;
+    padding:14px 26px;border-radius:40px;font-size:1rem;display:flex;align-items:center;gap:10px;
+    animation:pulsePill 1.8s ease-in-out infinite}
+  @keyframes pulsePill{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+  .vidnote{text-align:center;color:var(--text);opacity:.55;font-size:.82rem;margin:11px 0 0;font-family:'JetBrains Mono',monospace}
+  .vidnote svg{width:13px;height:13px;vertical-align:-2px;fill:currentColor;margin-right:5px}
+  /* Mobile: retrato 9:16, contido */
+  @media(max-width:600px){
+    .videobox{aspect-ratio:9/16;max-width:100%;border-radius:12px;}
+    .vcontrols{opacity:1}
+  }
+
+  /* ── MODAL DE QUALIFICAÇÃO ──────────────────────────────── */
+  .qmodal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(5,8,15,.85);backdrop-filter:blur(5px)}
+  .qmodal.open{display:flex}
+  .qcard{position:relative;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:32px 26px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+  .qclose{position:absolute;top:10px;right:14px;background:none;border:0;color:var(--text);font-size:1.7rem;line-height:1;cursor:pointer;opacity:.6}
+  .qclose:hover{opacity:1;color:#fff}
+  .qstep h3{font-size:1.2rem;color:#fff;margin-bottom:4px;line-height:1.32;font-family:'Space Grotesk',sans-serif}
+  .qstep .qsub{color:var(--text);font-size:.9rem;margin-bottom:6px;opacity:.7}
+  .qopt-label{color:var(--text);font-weight:400;font-size:.85rem;opacity:.6}
+  .qopts{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .qopt{text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);color:var(--text);font:inherit;font-size:1rem;padding:14px 16px;border-radius:12px;cursor:pointer;transition:border-color .15s,background .15s}
+  .qopt:hover,.qopt.sel{border-color:var(--blue);background:rgba(59,130,246,.08);color:#fff}
+  .qnext,.qexit{margin-top:18px;width:100%;background:var(--gradient);color:#0B0F19;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;padding:15px;border:0;border-radius:12px;cursor:pointer}
+  .qnext:disabled{opacity:.5;cursor:default}
+  .qwarn{margin-top:16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.32);border-radius:12px;padding:14px 16px}
+  .qwarn p{color:#fcd9a8;font-size:.9rem;margin:0 0 12px;line-height:1.5}
+  .qwarn .qnext{margin-top:0;background:rgba(255,255,255,.1);color:#fff}
+  .qstep textarea,.qstep input[type=tel],.qstep input[type=text]{width:100%;margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#fff;font:inherit;font-size:1rem;padding:13px 14px;border-radius:12px}
+  .qstep input[type=text]{margin-top:0}
+  .qstep textarea:focus,.qstep input:focus{outline:none;border-color:var(--blue)}
+  .qfield{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+  .qfield label{font-size:.8rem;color:var(--text);opacity:.6;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+  .qerr{color:#fca5a5;font-size:.85rem;margin-top:8px}
+  .qdisq{text-align:center;padding:12px 6px}
+  .qdisq-icon{font-size:2.4rem;margin-bottom:10px}
+  .qdisq p{color:var(--text);font-size:1.05rem;line-height:1.55;margin-bottom:22px}
+  .qdisq strong{color:#fff}
+  .cal-inline{min-height:560px;margin-top:14px;border-radius:12px;overflow:hidden}
+</style>
+<!-- Google tag (gtag.js) — GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6RJRXRQ8F8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6RJRXRQ8F8');
+</script>
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x5njecpyt2");
+</script>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="Nova Imob — início">
+        <svg viewBox="0 0 158 28" xmlns="http://www.w3.org/2000/svg" height="26" aria-hidden="true">
+          <defs>
+            <linearGradient id="nav-ai-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#60A5FA"/>
+              <stop offset="100%" stop-color="#A78BFA"/>
+            </linearGradient>
+          </defs>
+          <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
+            <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#nav-ai-grad)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+          </text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#solucao">Solução</a></li>
+        <li><a href="#canais">Canais</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#para-quem">Para quem é</a></li>
+      </ul>
+      <button onclick="openModal()" class="btn btn-primary" style="padding:10px 20px;font-size:0.85rem;">Ver demonstração</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-badge">ia para imobiliárias · atendimento 24h/7 · API Oficial</div>
+    <h1>Seus corretores ainda perdem tempo com leads <span class="gradient-text rotating-word" id="rotating-word" aria-live="polite">frios</span>?</h1>
+    <p class="subtitle">
+      Implemente um sistema de atendimento com IA que responde no WhatsApp, Instagram e site da sua imobiliária em segundos, faz a qualificação completa e entrega só as <span class="gradient-text">melhores oportunidades</span> para o seu corretor.
+    </p>
+
+    <!-- ── vídeo ── -->
+    <div id="video-aula" style="margin:36px 0 0">
+      <div class="video-wrap">
+        <div class="videobox" id="videobox">
+          <video id="vsl" playsinline webkit-playsinline preload="auto" muted></video>
+          <div class="clicklayer" id="clicklayer"></div>
+          <div class="vcontrols" id="vcontrols">
+            <button class="vcbtn" id="playpause" type="button" aria-label="Play/Pause"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+            <button class="vcbtn txt" id="vrewind" type="button" aria-label="Voltar 5s" style="font-size:.75rem;min-width:36px">−5s</button>
+            <div style="flex:1"></div>
+            <button class="vcbtn txt" id="vspeed" type="button" aria-label="Velocidade">1×</button>
+          </div>
+          <div class="vph" id="vph">
+            <div class="vpi"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <small>carregando vídeo…</small>
+          </div>
+          <div class="vsound" id="vsound">
+            <div class="soundinner">
+              <div class="urg">⚠️ Seu vídeo já começou!</div>
+              <div class="pill">🔊 Assistir com som</div>
+            </div>
+          </div>
+        </div>
+        <p class="vidnote" id="vidnote">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.4 4 2.3-.9 1.6-5.1-3V6h2z"/></svg>
+          Assista esse vídeo de apenas 10 mins pra entender mais
+        </p>
+      </div>
+    </div>
+
+    <!-- ── cta + bullets ── -->
+    <button onclick="openModal()" class="btn btn-primary" style="margin-top:32px">Ver demonstração</button>
+    <div class="hero-features">
+      <div class="hero-feature">Lead quente pro corretor</div>
+      <div class="hero-feature">WhatsApp API Oficial</div>
+      <div class="hero-feature">Tampe o buraco do tráfego</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ O PROBLEMA ═══ -->
+<section id="problema">
+  <div class="container">
+    <span class="section-label">// o problema</span>
+    <h2>Toda imobiliária perde lead todos os dias. <span class="gradient-text">Você só não vê.</span></h2>
+    <div class="section-divider"></div>
+    <div class="problema-grid">
+      <div class="problema-left">
+        <h3>Dores que toda imobiliária com volume conhece</h3>
+        <div class="prob-item"><div class="prob-dot"></div><p>corretor desanimado de atender lead frio/curioso o dia inteiro</p></div>
+        <div class="prob-item"><div class="prob-dot"></div><p>atendimento humano demorado, sem padrão, sem personalização</p></div>
+        <div class="prob-item"><div class="prob-dot"></div><p>sem follow up — base inteira vira lead morto</p></div>
+        <div class="prob-item"><div class="prob-dot"></div><p>tráfego pago = balde furado quando ninguém recupera o lead</p></div>
+        <div class="prob-item"><div class="prob-dot"></div><p>disparo em massa com API <strong>não oficial</strong> = risco de banimento pela Meta</p></div>
+        <div class="resultado-box">
+          <p>Você investe em Meta Ads, Google e Zap, gera lead, mas o atendimento humano não dá conta — corretor sobrecarregado com lead ruim, base sem reativação, e o número principal da imobiliária em risco por usar gateway pirata.<br><br><strong style="color:#FECACA;">Resultado: captação que devia escalar virou balde furado.</strong></p>
+        </div>
+      </div>
+      <div class="problema-right">
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div>
+            <div class="stat-label">tempo de resposta no setor</div>
+            <div class="stat-value">2–5h vs &lt; 5 min ideal</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📉</div>
+          <div>
+            <div class="stat-label">leads que esfriam sem resposta em 1h</div>
+            <div class="stat-value">+60% perdidos</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div>
+            <div class="stat-label">qualificação ao responder em &lt; 5min</div>
+            <div class="stat-value">até 7× maior*</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🛡️</div>
+          <div>
+            <div class="stat-label">disparo em massa sem API oficial</div>
+            <div class="stat-value">alto risco de ban da Meta</div>
+          </div>
+        </div>
+        <p style="font-size:0.7rem;color:rgba(209,213,219,0.4);margin-top:4px;font-family:'JetBrains Mono',monospace;">* estudos de tempo de resposta de leads — HBR / InsideSales / Drift / Velocify.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ A SOLUÇÃO ═══ -->
+<section id="solucao">
+  <div class="container">
+    <span class="section-label">// a solução</span>
+    <h2>IA pra atender. Painel pra você <span class="gradient-text">acompanhar tudo.</span></h2>
+    <div class="section-divider"></div>
+    <div class="solucao-intro">
+      <div>
+        <p style="margin-bottom:24px;">Um agente de IA conversa com cada lead novo nos canais da imobiliária — WhatsApp, Instagram ou site — coleta interesse, faixa, prazo, financiamento, e entrega só lead quente pro corretor humano. Você acompanha tudo num <strong style="color:#fff;">painel de gestão simplificado</strong>: leads em tempo real, estágio do funil, ROAS por campanha e follow-up automático da base.</p>
+        <ul class="check-list">
+          <li><div class="check-icon">✓</div><span>Responde o lead em segundos, antes que ele volte pro Zap</span></li>
+          <li><div class="check-icon">✓</div><span>Pergunta tipo de imóvel, bairro, faixa, prazo, financiamento</span></li>
+          <li><div class="check-icon">✓</div><span>Identifica quem é curioso e quem é comprador real</span></li>
+          <li><div class="check-icon">✓</div><span>Marca visita ou reunião direto na agenda do corretor</span></li>
+          <li><div class="check-icon">✓</div><span>Painel de gestão com funil e métricas em tempo real</span></li>
+          <li><div class="check-icon">✓</div><span>Reativação da base com disparo seguro (API Oficial)</span></li>
+        </ul>
+        <p style="margin-top:20px;font-size:0.85rem;color:rgba(209,213,219,0.5);">Tudo dentro do WhatsApp com <strong>API Oficial da Meta</strong> — sem risco de banimento do número da imobiliária.</p>
+      </div>
+      <div class="solucao-visual">
+
+        <!-- Dashboard mock — Painel Nova Imob -->
+        <div class="aura-dashboard" aria-label="Painel de gestão — exemplo">
+          <div class="dash-header">
+            <span class="dash-title">Nova <span>Imob</span> · painel</span>
+            <span class="dash-live"><span class="dash-live-dot"></span>ao vivo</span>
+          </div>
+          <div class="dash-body">
+
+            <div class="dash-kpis">
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">leads hoje</div>
+                <div class="dash-kpi-value">27</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">qualificação</div>
+                <div class="dash-kpi-value"><span class="accent">81%</span></div>
+              </div>
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">visitas</div>
+                <div class="dash-kpi-value">12</div>
+              </div>
+              <div class="dash-kpi">
+                <div class="dash-kpi-label">ROAS</div>
+                <div class="dash-kpi-value"><span class="accent">4.2×</span></div>
+              </div>
+            </div>
+
+            <div class="dash-section-label">funil dos últimos 7 dias</div>
+            <div class="dash-funnel">
+              <div class="dash-funnel-row">
+                <span class="dash-funnel-label">leads</span>
+                <div class="dash-funnel-bar-wrap"><div class="dash-funnel-bar" style="width:100%"></div></div>
+                <span class="dash-funnel-value">127</span>
+              </div>
+              <div class="dash-funnel-row">
+                <span class="dash-funnel-label">qualificados</span>
+                <div class="dash-funnel-bar-wrap"><div class="dash-funnel-bar" style="width:65%"></div></div>
+                <span class="dash-funnel-value">82</span>
+              </div>
+              <div class="dash-funnel-row">
+                <span class="dash-funnel-label">visitas</span>
+                <div class="dash-funnel-bar-wrap"><div class="dash-funnel-bar" style="width:30%"></div></div>
+                <span class="dash-funnel-value">38</span>
+              </div>
+            </div>
+
+            <div class="dash-section-label">últimos leads</div>
+            <div class="dash-leads">
+              <div class="dash-lead">
+                <div class="dash-lead-info">
+                  <div class="dash-lead-name">Carlos Mendes</div>
+                  <div class="dash-lead-meta">apto 2d · R$ 450k–600k · FGTS</div>
+                </div>
+                <span class="dash-pill dash-pill-qualif">qualif</span>
+              </div>
+              <div class="dash-lead">
+                <div class="dash-lead-info">
+                  <div class="dash-lead-name">Joana Silva</div>
+                  <div class="dash-lead-meta">cobertura · alto padrão · à vista</div>
+                </div>
+                <span class="dash-pill dash-pill-quente">quente</span>
+              </div>
+              <div class="dash-lead">
+                <div class="dash-lead-info">
+                  <div class="dash-lead-name">Ricardo P.</div>
+                  <div class="dash-lead-meta">casa 3d · zn sul · visita 14h</div>
+                </div>
+                <span class="dash-pill dash-pill-visita">visita</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Terminal log (mesma sessão IA convertendo o lead em tempo real) -->
+        <div class="terminal-box">
+        <div class="terminal-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="terminal-title">nova_imob.log</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-dim">22:47:03</span> <span class="t-blue">[LEAD]</span> <span class="t-white">novo contato no WhatsApp</span></div>
+          <div><span class="t-dim">22:47:03</span> <span class="t-green">[AURA]</span> <span class="t-white">respondendo em 0.3s...</span></div>
+          <div><span class="t-dim">22:47:09</span> <span class="t-purple">[QUALIF]</span> <span class="t-white">tipo: apto 2 dorms</span></div>
+          <div><span class="t-dim">22:47:18</span> <span class="t-purple">[QUALIF]</span> <span class="t-white">faixa: R$ 450k–600k</span></div>
+          <div><span class="t-dim">22:47:25</span> <span class="t-purple">[QUALIF]</span> <span class="t-white">FGTS: sim · entrada: 20%</span></div>
+          <div><span class="t-dim">22:47:31</span> <span class="t-purple">[QUALIF]</span> <span class="t-white">lead qualificado ✓</span></div>
+          <div><span class="t-dim">22:47:45</span> <span class="t-green">[AGENDA]</span> <span class="t-white">visita marcada · corretor Carlos</span></div>
+          <div><span class="t-dim">22:47:46</span> <span class="t-blue">[PAINEL]</span> <span class="t-white">lead encaminhado pro corretor ✓</span></div>
+          <div style="margin-top:8px;"><span class="t-dim">─────────────────────────────</span></div>
+          <div><span class="t-green">→ </span><span class="t-white">tempo total: </span><span class="t-blue">43 segundos</span></div>
+          <div><span class="t-green">→ </span><span class="t-white">corretor envolvido: </span><span class="t-blue">só na visita</span></div>
+        </div>
+      </div>
+
+      </div><!-- /.solucao-visual -->
+    </div>
+  </div>
+</section>
+
+<!-- CTA intermediário -->
+<div class="container" style="text-align:center;margin-top:-36px;padding-bottom:72px;">
+  <button onclick="openModal()" class="btn btn-primary">Ver demonstração</button>
+</div>
+
+<!-- ═══ CANAIS ═══ -->
+<section id="canais">
+  <div class="container">
+    <span class="section-label">// canais de atendimento</span>
+    <h2>A mesma IA respondendo onde o seu lead <span class="gradient-text">conversa</span></h2>
+    <div class="section-divider"></div>
+    <p class="canais-intro">Implementação multi-canal sob medida. O sistema atende no WhatsApp, no Instagram e no site da imobiliária — todas as portas de entrada cobertas pelo mesmo agente de IA, com a mesma qualidade.</p>
+
+    <div class="canais-grid">
+
+      <div class="canal-card">
+        <div class="canal-icon canal-icon-wa" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+          </svg>
+        </div>
+        <h3>WhatsApp</h3>
+        <p>API Oficial da Meta, sem risco de banimento. Atendimento, qualificação, agendamento e disparo seguro pra reativar a base.</p>
+        <div class="canal-meta">Business API · Meta-aprovado</div>
+      </div>
+
+      <div class="canal-card">
+        <div class="canal-icon canal-icon-ig" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Instagram</h3>
+        <p>Responde Direct, comentários em post e mensagem vinda de anúncio. Lead engajado no feed vira conversa qualificada em segundos.</p>
+        <div class="canal-meta">DM · Comentários · Story</div>
+      </div>
+
+      <div class="canal-card">
+        <div class="canal-icon canal-icon-site" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18"/>
+            <path d="M12 3a13.5 13.5 0 0 1 0 18"/>
+            <path d="M12 3a13.5 13.5 0 0 0 0 18"/>
+          </svg>
+        </div>
+        <h3>Site</h3>
+        <p>Chat embedded no site da imobiliária. Visitante captura, qualificação e agendamento sem precisar sair da página.</p>
+        <div class="canal-meta">Widget embutido</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ O QUE A IA FAZ ═══ -->
+<section id="features">
+  <div class="container">
+    <span class="section-label">// o que o sistema faz</span>
+    <h2>O que o sistema faz <span class="gradient-text">nos seus canais</span></h2>
+    <div class="section-divider"></div>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-number">01</div>
+        <div class="card-icon">🌙</div>
+        <h3>Atende 24/7, sem plantão</h3>
+        <p style="margin-top:10px;font-size:0.9rem;">Lead cai às 23h num feriado? O sistema responde na hora. Domingo às 8h? Igual. Sua imobiliária nunca dorme — e nunca passa lead em horário comercial pra concorrência por demora.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-number">02</div>
+        <div class="card-icon">🎯</div>
+        <h3>Qualifica antes do corretor entrar</h3>
+        <p style="margin-top:10px;font-size:0.9rem;">Tipo de imóvel, bairros de interesse, faixa de preço, prazo, perfil financeiro. A IA coleta tudo antes de qualquer corretor seu gastar 1 minuto.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-number">03</div>
+        <div class="card-icon">📅</div>
+        <h3>Marca visita direto na agenda</h3>
+        <p style="margin-top:10px;font-size:0.9rem;">Lead quente quer visitar? O sistema consulta a agenda do corretor, marca o horário e confirma na hora. Sem o famoso "depois eu te passo um horário".</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-number">04</div>
+        <div class="card-icon">📊</div>
+        <h3>Funil organizado pra você acompanhar</h3>
+        <p style="margin-top:10px;font-size:0.9rem;">Cada conversa vira lead no painel: origem, qualificação, estágio, corretor responsável. Você vê em tempo real o que o time está perdendo ou ganhando.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULTADOS ═══ -->
+<section id="resultados">
+  <div class="container">
+    <span class="section-label">// resultados</span>
+    <div class="section-divider"></div>
+
+    <div class="resultados-layout">
+
+      <!-- Visual do funil -->
+      <div class="resultados-visual-block">
+
+        <!-- Perguntas flutuando -->
+        <div class="funil-questions">
+          <span class="fq fq-1">onde é?</span>
+          <span class="fq fq-2">tem vaga?</span>
+          <span class="fq fq-3">quanto custa?</span>
+          <span class="fq fq-4">aceita MCMV?</span>
+          <span class="fq fq-5">valor?</span>
+          <span class="fq fq-6">quanto de entrada?</span>
+        </div>
+
+        <!-- Funil + Corretor -->
+        <div class="funil-stage">
+          <svg class="funil-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3B82F6"/>
+                <stop offset="100%" stop-color="#7C3AED"/>
+              </linearGradient>
+              <filter id="fglow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="4" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- Funil preenchido -->
+            <path d="M8,12 L152,12 L105,75 L92,148 L68,148 L55,75 Z"
+                  fill="url(#fg)" opacity="0.12"/>
+            <!-- Funil borda brilhante -->
+            <path d="M8,12 L152,12 L105,75 L92,148 L68,148 L55,75 Z"
+                  fill="none" stroke="url(#fg)" stroke-width="1.5" filter="url(#fglow)"/>
+            <!-- Linhas internas tracejadas -->
+            <line x1="30" y1="44" x2="130" y2="44" stroke="rgba(59,130,246,0.28)" stroke-width="1" stroke-dasharray="5,4"/>
+            <line x1="55" y1="76" x2="105" y2="76" stroke="rgba(59,130,246,0.28)" stroke-width="1" stroke-dasharray="4,4"/>
+            <!-- Ícone IA -->
+            <text x="80" y="62" text-anchor="middle" font-size="26" opacity="0.85">⚡</text>
+            <!-- Seta saída -->
+            <path d="M80,148 L80,158" stroke="url(#fg)" stroke-width="2" marker-end="url(#arr)"/>
+            <defs>
+              <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#7C3AED"/>
+              </marker>
+            </defs>
+          </svg>
+
+          <!-- Corretor minimalista -->
+          <div class="corretor-wrap">
+            <div class="corretor-head"></div>
+            <div class="corretor-body">
+              <div class="corretor-phone">
+                <div class="corretor-phone-screen"></div>
+                <div class="corretor-phone-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards de output -->
+        <div class="funil-outputs">
+          <div class="funil-output-card">
+            <span class="fo-emoji">🤝</span>
+            <span class="fo-label">agendado</span>
+          </div>
+          <div class="funil-output-card">
+            <span class="fo-emoji">📃</span>
+            <span class="fo-label">segue a proposta</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Texto de apoio -->
+      <div class="resultados-text-block">
+        <h2>O que muda na imobiliária com o <span class="gradient-text">sistema</span></h2>
+        <div class="resultados-stats">
+          <div class="resultado-stat-row">
+            <div class="resultado-num-sm">10×</div>
+            <div class="resultado-desc-sm">mais rápido que resposta humana</div>
+          </div>
+          <div class="resultado-stat-row">
+            <div class="resultado-num-sm">+↑</div>
+            <div class="resultado-desc-sm">lead qualificado pro corretor</div>
+          </div>
+          <div class="resultado-stat-row">
+            <div class="resultado-num-sm">−80%</div>
+            <div class="resultado-desc-sm">tempo do corretor em pré-qualificação</div>
+          </div>
+        </div>
+        <p class="resultados-note-text">
+          <strong style="color:#fff;">O sistema não substitui seu corretor.</strong><br>
+          Ele tira do caminho o trabalho ingrato — pergunta repetida, lead curioso, qualificação manual — pra ele focar no que faz melhor: <strong style="color:#fff;">fechar negócio.</strong>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DEPOIMENTOS ═══ -->
+<section id="depoimentos">
+  <div class="container">
+    <span class="section-label">// o que dizem</span>
+    <h2>O que dizem <span class="gradient-text">nossos clientes</span></h2>
+    <div class="section-divider"></div>
+    <p class="depo-note">Depoimentos reais — de imobiliária a clínicas e contabilidade — usando a mesma metodologia (agente de IA no WhatsApp + acompanhamento) que aplicamos no seu negócio.</p>
+
+    <div class="cf reveal" id="cf">
+      <button class="cf-nav cf-prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <div class="cf-stage">
+        <article class="cf-slide"><img src="/img/depoimentos/01-fernando-larroyd.jpg" alt="Depoimento Fernando Larroyd (Larroyd Imóveis) — projeto de automação e inteligência artificial" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/02-valeria-roi.jpg" alt="Depoimento Dra. Valéria — campanha trouxe lead qualificado com ticket de R$ 17 mil" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/03-valeria-ia.jpg" alt="Depoimento Dra. Valéria — paciente não percebeu que estava falando com uma IA" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/04-annalie-ia.jpg" alt="Depoimento Dra. Annalie — IA Ana cobrou o sinal e agendou a paciente sozinha" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/05-annalie-parceria.jpg" alt="Depoimento Dra. Annalie — agradecimento pela parceria e suporte no projeto" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/06-otavio.jpg" alt="Depoimento Otávio (contador) — automação de cobranças, de 2h30 para 1 minuto" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/07-tatiana.jpg" alt="Depoimento Tatiana Moreira — aprendeu automação e melhorou a entrega aos clientes" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/08-diego-maier.jpg" alt="Depoimento Dr. Diego Maier — acompanhamento que virou diferencial" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/09-the-hof.jpg" alt="Depoimento The HOF (Dr. Tiago e Dr. Angelo) — 17 leads de tráfego logo no início" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/10-tebyrica.jpg" alt="Depoimento João Tebyriçá — clínica em destaque na região pelo site" loading="lazy"></article>
+        <article class="cf-slide"><img src="/img/depoimentos/11-annaflavia.jpg" alt="Depoimento Anna Flavia — serviços da agência foram um divisor de águas" loading="lazy"></article>
+      </div>
+      <button class="cf-nav cf-next" aria-label="Próximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+      <div class="cf-dots" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA intermediário -->
+<div class="container" style="text-align:center;margin-top:-24px;padding-bottom:72px;">
+  <button onclick="openModal()" class="btn btn-primary">Ver demonstração</button>
+</div>
+
+<!-- ═══ COMO FUNCIONA ═══ -->
+<section id="como-funciona">
+  <div class="container">
+    <span class="section-label">// como funciona</span>
+    <h2>Como colocamos o <span class="gradient-text">sistema</span> pra rodar na sua imobiliária</h2>
+    <div class="section-divider"></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Diagnóstico</h3>
+          <p>Mapeamos como sua imobiliária recebe leads hoje (Meta Ads, Zap/VivaReal, indicação, WhatsApp direto) e onde os leads estão escapando no caminho.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Estruturação</h3>
+          <p>Construímos o roteiro de qualificação da SUA imobiliária — bairros que vocês atendem, faixas que vocês trabalham, perfil ideal de cliente — e como a IA conversa com cada lead.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Implantação · API Oficial</h3>
+          <p>Cadastramos sua imobiliária no <strong>WhatsApp Business API Oficial</strong> (Meta-aprovado), conectamos o sistema ao número e ao painel onde corretor e gestor acompanham os leads. Disparo em massa pra base com segurança, sem risco de banimento.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Otimização</h3>
+          <p>Acompanhamos qualidade da qualificação, taxa de conversão pra visita e feedback dos corretores. Ajustamos o roteiro até ficar afiado pro padrão da casa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXEMPLO ═══ -->
+<section id="exemplo">
+  <div class="container">
+    <span class="section-label">// exemplo real</span>
+    <h2>Atendimento resolve o lead.<br><span class="gradient-text">Painel resolve o funil.</span></h2>
+    <div class="section-divider"></div>
+    <div class="exemplo-inner">
+      <p style="max-width:620px;">Imobiliária com volume de lead não precisa só de quem responde — precisa de um painel onde gestor, corretor e dono enxergam o que está rolando no funil em tempo real.</p>
+      <div class="exemplo-features">
+        <div class="exemplo-feature">
+          <div class="exemplo-feature-icon">💬</div>
+          <div>
+            <h4>Central de conversas</h4>
+            <p>Todas as conversas do WhatsApp, Instagram e site num só lugar. Cada lead com histórico: o que perguntou, o que a IA respondeu, em qual estágio está parado.</p>
+          </div>
+        </div>
+        <div class="exemplo-feature">
+          <div class="exemplo-feature-icon">🗓️</div>
+          <div>
+            <h4>Agenda dos corretores</h4>
+            <p>Visitas e reuniões marcadas pela IA caem direto na agenda do corretor. Confirmação automática no dia anterior pra reduzir no-show.</p>
+          </div>
+        </div>
+        <div class="exemplo-feature">
+          <div class="exemplo-feature-icon">👤</div>
+          <div>
+            <h4>Ficha de cada lead</h4>
+            <p>Tipo de imóvel buscado, bairros, faixa, perfil financeiro, propostas anteriores, conversa completa. Tudo num lugar só, sempre atualizado.</p>
+          </div>
+        </div>
+        <div class="exemplo-feature">
+          <div class="exemplo-feature-icon">📈</div>
+          <div>
+            <h4>Dashboard de resultados</h4>
+            <p>Novos leads do dia, origem (Meta, Google, Zap, indicação), taxa de qualificação, ROAS da campanha. Decisão com número, não com achismo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PARA QUEM É ═══ -->
+<section id="para-quem">
+  <div class="container">
+    <span class="section-label">// para quem é</span>
+    <h2>Imobiliárias que <span class="gradient-text">vendem por WhatsApp</span> ganham mais com o sistema</h2>
+    <div class="section-divider"></div>
+    <p style="margin-top:20px;max-width:580px;">Quanto mais lead chega nos canais da sua imobiliária, maior o impacto do sistema no resultado. Em especial se vocês se encaixam em algum desses perfis:</p>
+    <div class="nichos-grid">
+      <div class="nicho-card featured">
+        <div class="nicho-icon">📣</div>
+        <div>
+          <div class="nicho-name">Imobiliária com tráfego pago</div>
+          <span class="nicho-badge">Meta · Google · TikTok</span>
+        </div>
+      </div>
+      <div class="nicho-card featured">
+        <div class="nicho-icon">🏗️</div>
+        <div>
+          <div class="nicho-name">Construtora com plantão de vendas</div>
+          <span class="nicho-badge">alto volume</span>
+        </div>
+      </div>
+      <div class="nicho-card">
+        <div class="nicho-icon">🏘️</div>
+        <div><div class="nicho-name">Imob de bairro forte no Zap/VivaReal</div></div>
+      </div>
+      <div class="nicho-card">
+        <div class="nicho-icon">🌇</div>
+        <div><div class="nicho-name">Alto padrão (qualificação antes do corretor)</div></div>
+      </div>
+      <div class="nicho-card">
+        <div class="nicho-icon">🔑</div>
+        <div><div class="nicho-name">Locação com volume de pergunta repetida</div></div>
+      </div>
+      <div class="nicho-card">
+        <div class="nicho-icon">🌙</div>
+        <div><div class="nicho-name">Imob sem plantão noturno e fim de semana</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA intermediário -->
+<div class="container" style="text-align:center;margin-top:-36px;padding-bottom:72px;">
+  <button onclick="openModal()" class="btn btn-primary">Ver demonstração</button>
+</div>
+
+<!-- ═══ QUEM SOU EU ═══ -->
+<section id="quem-sou">
+  <div class="container">
+    <span class="section-label">// quem está por trás disso</span>
+    <h2>O sistema é construído por quem <span class="gradient-text">vive vendas há 20 anos</span></h2>
+    <div class="section-divider"></div>
+    <div class="quem-grid">
+      <div class="quem-photo-wrap">
+        <img
+          src="/alan-carvalho.jpg"
+          alt="Alan Carvalho – Especialista em Automação com IA"
+          class="quem-photo"
+          onerror="this.style.background='linear-gradient(135deg,#3B82F6,#7C3AED)';this.style.minHeight='420px';this.removeAttribute('src')"
+        />
+        <div class="quem-photo-badge">Alan Carvalho · Fundador</div>
+      </div>
+      <div class="quem-content">
+        <div>
+          <div class="quem-role">Fundador · Nova Imob</div>
+          <div class="quem-name">Alan Carvalho</div>
+        </div>
+        <p class="quem-bio">
+          Prazer, Alan! Vim das vendas, amo marketing e comportamento humano. Já fui desde vendedor em loja de varejo até agente de suporte N1 em empresa tech.
+        </p>
+        <p class="quem-bio">
+          Na minha última experiência como sub-gerente de contas em um grande banco, pude aprender lições valiosas sobre vendas, relacionamento e operações. Nesse mesmo banco, tive o meu primeiro contato com IA conversacional bem no início — e vi o quão revolucionário aquilo era.
+        </p>
+        <p class="quem-bio">
+          Desde que saí do banco, decidi empreender e já são 3 anos aprendendo sobre posicionamento no digital, tráfego pago e IA aplicada a negócios. Já ajudei desde cafeterias até imobiliárias a automatizar a operação e reduzir custos.
+        </p>
+        <p class="quem-bio">
+          Hoje, à frente da Nova Imob, implemento essa metodologia inteira na sua imobiliária: um <strong style="color:#fff;">sistema de atendimento e reengajamento dos seus leads com IA + painel de gestão</strong> pra você não perder nada. Tudo integrado da <em style="color:#fff;font-style:italic;">forma correta</em>, utilizando o <strong style="color:#fff;">WhatsApp Business API Oficial</strong> para disparos seguros.
+        </p>
+        <p class="quem-bio">
+          Não é chatbot de menu nem gateway pirata — é uma estrutura completa pra fazer seu comercial funcionar no automático e faturar mais.
+        </p>
+        <div class="quem-stats">
+          <div class="quem-stat">
+            <div class="quem-stat-num">+40</div>
+            <div class="quem-stat-label">agentes de IA criados</div>
+          </div>
+          <div class="quem-stat">
+            <div class="quem-stat-num">100%</div>
+            <div class="quem-stat-label">implantação sob medida</div>
+          </div>
+          <div class="quem-stat">
+            <div class="quem-stat-num">B2B</div>
+            <div class="quem-stat-label">foco em imobiliárias com volume</div>
+          </div>
+        </div>
+        <div class="quem-tags">
+          <span class="quem-tag">Mercado Imobiliário</span>
+          <span class="quem-tag">Agentes de IA</span>
+          <span class="quem-tag">WhatsApp API Oficial</span>
+          <span class="quem-tag">Automação</span>
+          <span class="quem-tag">Painel de Gestão</span>
+          <span class="quem-tag">Vendas B2B</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFERENCIAL ═══ -->
+<section id="diferencial">
+  <div class="container">
+    <span class="section-label">// diferencial</span>
+    <h2>Não é apenas <span class="gradient-text">chatbot de menu</span></h2>
+    <div class="section-divider"></div>
+    <p style="margin-top:20px;max-width:580px;margin-bottom:32px;">Imobiliárias que tentaram chatbot tradicional sabem: 3 mensagens depois o lead pede "fala com humano" e o problema volta pra estaca zero. O sistema é diferente porque foi construído pra essa indústria, não com template genérico de bot.</p>
+    <table class="diferencial-table">
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th>❌ Chatbot tradicional</th>
+          <th>✦ Nova Imob</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tipo de conversa</td>
+          <td><span class="x">Menus fixos e botões</span></td>
+          <td><span class="check">Linguagem natural, entende contexto</span></td>
+        </tr>
+        <tr>
+          <td>Qualificação do lead</td>
+          <td><span class="x">Não faz</span></td>
+          <td><span class="check">Imóvel, faixa, prazo, financiamento</span></td>
+        </tr>
+        <tr>
+          <td>Agendamento de visita</td>
+          <td><span class="x">Manual ou link externo</span></td>
+          <td><span class="check">Marca direto na agenda do corretor</span></td>
+        </tr>
+        <tr>
+          <td>Personalização</td>
+          <td><span class="x">Genérico pra qualquer negócio</span></td>
+          <td><span class="check">Treinada com estoque, bairros e perfil da sua imob</span></td>
+        </tr>
+        <tr>
+          <td>Painel de gestão</td>
+          <td><span class="x">Limitado ou inexistente</span></td>
+          <td><span class="check">Painel de gestão com funil + métricas em tempo real</span></td>
+        </tr>
+        <tr>
+          <td>Infra de WhatsApp</td>
+          <td><span class="x">Gateway pirata · risco de ban</span></td>
+          <td><span class="check">API Oficial da Meta (Business Cloud API)</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL ═══ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <span class="section-label">// próximo passo</span>
+      <h2>Pronto pra ver o <span class="gradient-text">sistema</span> rodando na sua imobiliária?</h2>
+      <p>Se você tem volume de lead no WhatsApp e sente que muito está se perdendo no caminho, vale 30 minutos da sua agenda pra ver o sistema na prática — e entender quanto da sua verba de tráfego está sendo recuperada.</p>
+      <div class="cta-btn-wrap">
+        <button onclick="openModal()" class="btn btn-primary" style="font-size:1.05rem;padding:16px 36px;">Ver demonstração</button>
+        <span class="btn-hint">Implantação personalizada para cada imobiliária.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MODAL DE QUALIFICAÇÃO ═══ -->
+<div class="qmodal" id="qmodal" aria-hidden="true">
+  <div class="qcard">
+    <button class="qclose" id="qclose" aria-label="Fechar">&times;</button>
+
+    <!-- 1: nome + whatsapp -->
+    <div class="qstep" data-step="contato">
+      <h3>Antes de tudo, me fala quem é você 👋</h3>
+      <div class="qfield">
+        <label>nome</label>
+        <input type="text" id="qNome" autocomplete="name" placeholder="Seu nome" />
+      </div>
+      <div class="qfield" style="margin-top:12px">
+        <label>whatsapp</label>
+        <input type="tel" id="qWhats" inputmode="tel" autocomplete="tel" placeholder="(11) 99999-9999" />
+      </div>
+      <p class="qerr" id="qErrContato" hidden>Preencha seu nome e WhatsApp para continuar.</p>
+      <button class="qnext" id="qContatoNext">Continuar →</button>
+    </div>
+
+    <!-- 2: cargo -->
+    <div class="qstep" data-step="cargo" hidden>
+      <h3>Você é...</h3>
+      <div class="qopts">
+        <button class="qopt" data-field="cargo" data-val="Dono/Sócio de Imobiliária" data-go="corretores">Dono/Sócio de Imobiliária</button>
+        <button class="qopt" data-field="cargo" data-val="Diretor/Gerente Comercial" data-go="corretores">Diretor/Gerente Comercial</button>
+        <button class="qopt" data-field="cargo" data-val="Corretor" data-act="corretor-warn">Corretor</button>
+        <button class="qopt" data-field="cargo" data-val="Outro" data-act="disq-cargo">Outro</button>
+      </div>
+      <div class="qwarn" id="qwarnCorretor" hidden>
+        <p>Caro corretor, essa solução foi pensada para <strong>donos/gestores de imobiliárias</strong>, visto que é útil para quem já possui <strong>volume</strong> de leads. Se ainda assim você quiser conhecer ou propor parcerias, avance e deixe uma observação.</p>
+        <button class="qnext" data-go="corretores">Avançar mesmo assim</button>
+      </div>
+    </div>
+
+    <!-- 3: corretores -->
+    <div class="qstep" data-step="corretores" hidden>
+      <h3>Quantos corretores ativos você possui?</h3>
+      <div class="qopts">
+        <button class="qopt" data-field="corretores" data-val="Sozinho" data-go="trafego">Sozinho</button>
+        <button class="qopt" data-field="corretores" data-val="2 a 5" data-go="trafego">2 a 5</button>
+        <button class="qopt" data-field="corretores" data-val="6 a 10" data-go="trafego">6 a 10</button>
+        <button class="qopt" data-field="corretores" data-val="11 a 20" data-go="trafego">11 a 20</button>
+        <button class="qopt" data-field="corretores" data-val="Mais de 20" data-go="trafego">Mais de 20</button>
+      </div>
+    </div>
+
+    <!-- 4: tráfego -->
+    <div class="qstep" data-step="trafego" hidden>
+      <h3>Sua imobiliária já investe em tráfego?</h3>
+      <div class="qopts">
+        <button class="qopt" data-field="trafego" data-val="Sim, até R$2.000" data-go="obs">Sim, investe até R$2.000</button>
+        <button class="qopt" data-field="trafego" data-val="Sim, até R$4.000" data-go="obs">Sim, investe até R$4.000</button>
+        <button class="qopt" data-field="trafego" data-val="Sim, mais de R$5.000" data-go="obs">Sim, investe mais de R$5.000</button>
+        <button class="qopt" data-field="trafego" data-val="Não, mas queremos começar" data-go="obs">Não investimos, mas queremos começar</button>
+        <button class="qopt" data-field="trafego" data-val="Não e não pretende" data-act="disq-trafego">Não investimos e nem pretendemos</button>
+      </div>
+    </div>
+
+    <!-- 5: observações -->
+    <div class="qstep" data-step="obs" hidden>
+      <h3>Tem alguma observação antes do nosso encontro? <span class="qopt-label">(opcional)</span></h3>
+      <textarea id="qObs" rows="4" placeholder="Escreva aqui..."></textarea>
+      <button class="qnext" id="qSubmit">Garantir minha vaga</button>
+    </div>
+
+    <!-- 6: cal.com -->
+    <div class="qstep" data-step="cal" hidden>
+      <h3>Quase lá! Escolha o melhor horário 👇</h3>
+      <div id="cal-inline" class="cal-inline"></div>
+    </div>
+
+    <!-- desqualificação -->
+    <div class="qstep qdisq" data-step="disq" hidden>
+      <div class="qdisq-icon">🙏</div>
+      <p id="qDisqMsg"></p>
+      <button class="qexit" id="qExit">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Alan Carvalho. Todos os direitos reservados.</span>
+      <a href="/privacidade.html" class="footer-link">Política de Privacidade</a>
+      <span class="footer-mono">nova_imob · whatsapp · 24/7</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─── MODAL DE QUALIFICAÇÃO ───
+  function openModal() {
+    var m = document.getElementById('qmodal');
+    if (!m) return;
+    m._open();
+  }
+
+  // palavra rotativa no H1 do hero (frios → desqualificados → curiosos)
+  (function rotatingHeadlineWord() {
+    const el = document.getElementById('rotating-word');
+    if (!el) return;
+    const words = ['frios', 'desqualificados', 'curiosos'];
+    let i = 0;
+    setInterval(() => {
+      el.classList.add('is-swapping');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('is-swapping');
+      }, 280);
+    }, 1800);
+  })();
+
+  // captura UTM/fbclid/gclid na chegada e persiste por sessão
+  // depoimentos — coverflow 3D
+  (function depoCoverflow(){
+    const cf = document.getElementById("cf");
+    if(!cf) return;
+    const slides = Array.from(cf.querySelectorAll(".cf-slide"));
+    const dotsBox = cf.querySelector(".cf-dots");
+    const total = slides.length;
+    let idx = 0;
+    let autoTimer = null;
+    const AUTO_MS = 5000;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement("button");
+      d.className = "cf-dot" + (i === 0 ? " is-active" : "");
+      d.setAttribute("aria-label", "Ir para depoimento " + (i + 1));
+      d.addEventListener("click", () => go(i));
+      dotsBox.appendChild(d);
+    });
+
+    function render(){
+      slides.forEach((s, i) => {
+        const diff = ((i - idx) % total + total) % total;
+        let pos;
+        if(diff === 0) pos = "center";
+        else if(diff === 1) pos = "right";
+        else if(diff === total - 1) pos = "left";
+        else if(diff === 2) pos = "far-right";
+        else if(diff === total - 2) pos = "far-left";
+        else pos = "hidden";
+        s.dataset.pos = pos;
+      });
+      dotsBox.querySelectorAll(".cf-dot").forEach((d, i) => d.classList.toggle("is-active", i === idx));
+    }
+    function go(i){ idx = ((i % total) + total) % total; render(); resetAuto(); }
+    function next(){ go(idx + 1); }
+    function prev(){ go(idx - 1); }
+    function resetAuto(){
+      if(autoTimer) clearInterval(autoTimer);
+      if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+        autoTimer = setInterval(next, AUTO_MS);
+      }
+    }
+    cf.querySelector(".cf-prev").addEventListener("click", prev);
+    cf.querySelector(".cf-next").addEventListener("click", next);
+
+    // drag fluído
+    let dragStart = null;
+    let dragX = 0;
+    let clickGuard = false;
+    const SWITCH_THRESHOLD = 60;
+    const MAX_DRAG = 200;
+
+    function dragBegin(clientX){
+      dragStart = clientX; dragX = 0; clickGuard = false;
+      cf.classList.add("is-dragging");
+      if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+    }
+    function dragMove(clientX){
+      if(dragStart === null) return;
+      let dx = clientX - dragStart;
+      if(dx > MAX_DRAG) dx = MAX_DRAG;
+      if(dx < -MAX_DRAG) dx = -MAX_DRAG;
+      dragX = dx;
+      cf.style.setProperty("--cf-drag", dx + "px");
+      if(Math.abs(dx) > 5) clickGuard = true;
+    }
+    function dragEnd(){
+      if(dragStart === null) return;
+      cf.classList.remove("is-dragging");
+      const dx = dragX;
+      dragStart = null; dragX = 0;
+      cf.style.setProperty("--cf-drag", "0px");
+      if(Math.abs(dx) > SWITCH_THRESHOLD){ dx < 0 ? next() : prev(); }
+      else resetAuto();
+      setTimeout(() => { clickGuard = false; }, 50);
+    }
+
+    slides.forEach((s, i) => s.addEventListener("click", () => {
+      if(clickGuard) return;
+      if(s.dataset.pos !== "center") go(i);
+    }));
+
+    cf.addEventListener("touchstart",  (e) => dragBegin(e.touches[0].clientX), { passive: true });
+    cf.addEventListener("touchmove",   (e) => dragMove(e.touches[0].clientX),  { passive: true });
+    cf.addEventListener("touchend",    dragEnd, { passive: true });
+    cf.addEventListener("touchcancel", dragEnd, { passive: true });
+
+    cf.addEventListener("mousedown",  (e) => { e.preventDefault(); dragBegin(e.clientX); });
+    window.addEventListener("mousemove", (e) => { if(dragStart !== null) dragMove(e.clientX); });
+    window.addEventListener("mouseup",   () => { if(dragStart !== null) dragEnd(); });
+
+    cf.addEventListener("mouseenter", () => { if(autoTimer && dragStart === null) clearInterval(autoTimer); });
+    cf.addEventListener("mouseleave", () => { if(dragStart === null) resetAuto(); });
+
+    render();
+    // "lazy start": o carrossel só começa a girar quando a seção entra em vista —
+    // assim o visitante sempre vê a partir dos PRIMEIROS depoimentos (não no meio/fim).
+    (function gateAutoplay(){
+      const section = document.getElementById("depoimentos") || cf;
+      if(!("IntersectionObserver" in window)){ resetAuto(); return; }
+      const io = new IntersectionObserver((entries) => {
+        if(entries.some((en) => en.isIntersecting)){ idx = 0; render(); resetAuto(); io.disconnect(); }
+      }, { threshold: 0.35 });
+      io.observe(section);
+    })();
+  })();
+
+  (function captureMarketingParams() {
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'fbclid', 'gclid'];
+    const params = new URLSearchParams(location.search);
+    keys.forEach((k) => {
+      const v = params.get(k);
+      if (v) { try { sessionStorage.setItem('mk_' + k, v); } catch (_) {} }
+    });
+  })();
+
+</script>
+
+<!-- hls.js — player HLS com piso de qualidade 720p -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
+<script>
+(function(){
+  var STREAM_HOST    = "vz-687f5a23-486.b-cdn.net";
+  var STREAM_UID     = "d62def75-8292-43ad-8151-aa8715826f04";
+  var PREVIEW_SECONDS= 8;   // teaser mudo em loop até o clique
+  var STORAGE        = "ni_lp_v1";
+
+  var ICON_PLAY  = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  var ICON_PAUSE = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+
+
+  var videobox  = document.getElementById("videobox");
+  var video     = document.getElementById("vsl");
+  if(!videobox || !video) return;
+
+  var isIOS     = /iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+  var isMobile  = function(){ return window.innerWidth <= 600; };
+  var ph        = document.getElementById("vph");
+  var sound     = document.getElementById("vsound");
+  var controls  = document.getElementById("vcontrols");
+  var playpause = document.getElementById("playpause");
+  var speed     = document.getElementById("vspeed");
+  var rewind    = document.getElementById("vrewind");
+  var clicklayer= document.getElementById("clicklayer");
+
+  var fmt = function(s){ s=Math.max(0,Math.floor(s||0)); var m=Math.floor(s/60),ss=s%60; return (m<10?"0":"")+m+":"+(ss<10?"0":"")+ss; };
+  var ev  = function(n,p){
+    try{ if(window.gtag) gtag('event',n,p||{}); }catch(e){}
+    try{ if(window.fbq && n==='lp_play') fbq('track','ViewContent',{content_name:'LP Nova Imob'}); }catch(e){}
+  };
+
+  // progresso salvo (só t e watched — sem unlocked)
+  var state = {t:0, watched:0};
+  try{ var raw=localStorage.getItem(STORAGE); if(raw){ var s=JSON.parse(raw); state.t=s.t||0; state.watched=s.watched||0; } }catch(e){}
+  var save = function(){ try{ localStorage.setItem(STORAGE,JSON.stringify(state)); }catch(e){} };
+
+  var hasVideo = STREAM_UID && STREAM_UID.indexOf("PASTE_") < 0;
+  if(!hasVideo) return;
+
+  var MANIFEST = "https://"+STREAM_HOST+"/"+STREAM_UID+"/playlist.m3u8";
+  video.poster = "https://"+STREAM_HOST+"/"+STREAM_UID+"/thumbnail.jpg";
+  if(ph) ph.style.display="none";
+  controls.style.display="flex";
+
+  if(window.Hls && Hls.isSupported()){
+    var hls = new Hls({capLevelToPlayerSize:false, minAutoBitrate:1400000, startLevel:-1});
+    hls.loadSource(MANIFEST); hls.attachMedia(video);
+  } else {
+    video.src = MANIFEST + "?clientBandwidthHint=3";
+  }
+
+  var playing=false, preview=true, engaged=false, last=0, fired={};
+
+
+  function engage(seekTo){
+    preview=false;
+    var to=(typeof seekTo==="number")?seekTo:0;
+    try{ video.currentTime=to; }catch(e){}
+    last=to;
+    video.muted=false;
+    sound.style.display="none";
+    video.play();
+    if(!engaged){ engaged=true; ev('lp_play'); }
+  }
+
+  // teaser mudo em loop
+  video.muted=true; video.play();
+  sound.style.display="grid";
+  sound.onclick=function(){ engage(); ev('lp_unmute'); };
+
+  // velocidade 1× / 1.5×
+  var fast=false;
+  speed.addEventListener('click',function(e){
+    e.stopPropagation(); fast=!fast;
+    var r=fast?1.5:1; try{ video.playbackRate=r; }catch(err){}
+    speed.textContent=fast?"1.5×":"1×"; ev('lp_velocidade',{rate:r});
+  });
+
+  // clique na área do vídeo
+  function togglePlay(){ if(playing){ video.pause(); }else{ video.play(); } }
+  clicklayer.addEventListener('click',function(){ if(!engaged){ engage(); }else{ togglePlay(); } });
+  playpause.addEventListener('click',function(e){ e.stopPropagation(); togglePlay(); });
+
+  // voltar 5s
+  rewind.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(!engaged) return;
+    try{ video.currentTime=Math.max(0,video.currentTime-5); last=video.currentTime; }catch(err){}
+  });
+
+  // eventos de progresso e métricas
+  video.addEventListener('play',  function(){ playing=true;  playpause.innerHTML=ICON_PAUSE; videobox.classList.add('is-playing'); });
+  video.addEventListener('pause', function(){ playing=false; playpause.innerHTML=ICON_PLAY;  videobox.classList.remove('is-playing'); });
+  video.addEventListener('timeupdate',function(){
+    var ct=video.currentTime||0;
+    if(preview){ if(ct>=PREVIEW_SECONDS){ try{video.currentTime=0;video.play();}catch(e){} } return; }
+    var delta=ct-last; if(delta>0&&delta<1.5){ state.watched+=delta; } last=ct;
+    if(ct>state.t) state.t=ct;
+    if(Math.floor(ct)%3===0) save();
+    if(video.duration){
+      var pct=Math.floor((ct/video.duration)*100);
+      [25,50,75,90].forEach(function(m){ if(pct>=m&&!fired[m]){ fired[m]=true; ev('lp_progress',{percent:m}); } });
+    }
+  });
+  video.addEventListener('ended',function(){ playing=false; playpause.innerHTML=ICON_PLAY; videobox.classList.remove('is-playing'); ev('lp_fim'); });
+  window.addEventListener('beforeunload', save);
+})();
+</script>
+
+<!-- cal.com embed -->
+<script>
+(function(C,A,L){let p=function(a,ar){a.q.push(ar)};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true}if(ar[0]===L){const api=function(){p(api,arguments)};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["initNamespace",namespace])}else p(cal,ar);return}p(cal,ar)}})(window,"https://app.cal.com/embed/embed.js","init");
+Cal("init","30min",{origin:"https://app.cal.com"});
+Cal.config=Cal.config||{};Cal.config.forwardQueryParams=true;
+Cal.ns["30min"]("ui",{"hideEventTypeDetails":false,"layout":"month_view","theme":"dark"});
+</script>
+
+<!-- modal de qualificação -->
+<script>
+(function(){
+  var LEAD_ENDPOINT = "https://zqalpihwwtrzbcgqrzic.supabase.co/functions/v1/webinar-lead";
+  var CAL_LINK      = "alan-carvalho-novaimob/30min";
+  var modal = document.getElementById("qmodal");
+  if(!modal) return;
+  var card  = modal.querySelector(".qcard");
+  var answers = {};
+  var calLoaded = false;
+  var sel = function(s){ return modal.querySelector(s); };
+  var ev  = function(n,p){ try{ if(window.gtag) gtag('event',n,p||{}); }catch(e){} };
+
+  function showStep(name){ modal.querySelectorAll(".qstep").forEach(function(s){ s.hidden=s.getAttribute("data-step")!==name; }); if(card) card.scrollTop=0; }
+
+  function open(){
+    if(document.fullscreenElement){ try{document.exitFullscreen();}catch(e){} }
+    answers={};
+    var w=document.getElementById("qwarnCorretor"); if(w) w.hidden=true;
+    modal.querySelectorAll(".qopt.sel").forEach(function(o){ o.classList.remove("sel"); });
+    var ni=document.getElementById("qNome"); if(ni) ni.value="";
+    var wi=document.getElementById("qWhats"); if(wi) wi.value="";
+    var oi=document.getElementById("qObs"); if(oi) oi.value="";
+    document.getElementById("qErrContato").hidden=true;
+    showStep("contato");
+    modal.classList.add("open"); modal.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    setTimeout(function(){ var ni=document.getElementById("qNome"); if(ni) ni.focus(); },50);
+  }
+  function close(){ modal.classList.remove("open"); modal.setAttribute("aria-hidden","true"); document.body.style.overflow=""; }
+
+  // expõe open() para openModal() global
+  modal._open = open;
+
+  sel("#qclose").addEventListener('click',close);
+  modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&modal.classList.contains('open')) close(); });
+
+  // passo 1: nome + whatsapp
+  document.getElementById("qContatoNext").addEventListener('click',function(){
+    var nome  = (document.getElementById("qNome").value||"").trim();
+    var whats = (document.getElementById("qWhats").value||"").trim();
+    var digits= whats.replace(/\D/g,"");
+    if(!nome||digits.length<10){ document.getElementById("qErrContato").hidden=false; return; }
+    document.getElementById("qErrContato").hidden=true;
+    answers.nome=nome; answers.whatsapp=whats;
+    showStep("cargo"); ev('lp_modal_contato');
+  });
+
+  // opções de múltipla escolha
+  modal.querySelectorAll(".qopt").forEach(function(opt){
+    opt.addEventListener('click',function(){
+      if(opt.dataset.field) answers[opt.dataset.field]=opt.dataset.val;
+      var act=opt.dataset.act;
+      if(act==='corretor-warn'){
+        var w=document.getElementById("qwarnCorretor"); w.hidden=false;
+        opt.parentElement.querySelectorAll(".qopt").forEach(function(o){ o.classList.remove("sel"); });
+        opt.classList.add("sel"); w.scrollIntoView({block:"nearest",behavior:"smooth"}); return;
+      }
+      if(act==='disq-cargo'){ disqualify('cargo'); return; }
+      if(act==='disq-trafego'){ disqualify('trafego'); return; }
+      if(opt.dataset.go) showStep(opt.dataset.go);
+    });
+  });
+  modal.querySelectorAll(".qnext[data-go]").forEach(function(b){ b.addEventListener('click',function(){ showStep(b.dataset.go); }); });
+
+  function disqualify(which){
+    sel("#qDisqMsg").innerHTML=which==='trafego'
+      ?'Obrigado pelo interesse! Essa solução é voltada para imobiliárias que já recebem <strong>volume de leads no WhatsApp</strong>.'
+      :'Obrigado! Essa solução é voltada para <strong>Donos e Gestores de Imobiliárias</strong> com time de corretores.';
+    showStep("disq"); ev('lp_desqualificado',{motivo:which});
+  }
+  sel("#qExit").addEventListener('click',close);
+
+  function getCookie(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?decodeURIComponent(m.pop()):''; }
+  function attribution(){ var u=new URLSearchParams(location.search),a={}; ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function(k){ var v=u.get(k); if(v) a[k]=v; }); var fbc=getCookie('_fbc'),fbp=getCookie('_fbp'); if(fbc) a._fbc=fbc; if(fbp) a._fbp=fbp; if(document.referrer) a.referrer=document.referrer; a.landing_page=location.href; return a; }
+
+  // envio final + cal.com
+  document.getElementById("qSubmit").addEventListener('click',function(){
+    answers.observacoes=(sel("#qObs").value||"").trim();
+    var whats=answers.whatsapp||"";
+    var digits=whats.replace(/\D/g,"");
+    var eventId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(digits+"-"+Math.floor(performance.now()));
+    try{ if(window.fbq) fbq('track','Lead',{content_name:'LP Nova Imob'},{eventID:eventId}); }catch(e){}
+    ev('lp_lead_enviado');
+    var btn=this; btn.disabled=true; btn.textContent="Enviando...";
+    fetch(LEAD_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
+      nome:answers.nome, cargo:answers.cargo, corretores:answers.corretores, trafego:answers.trafego,
+      disponibilidade:"Sim", observacoes:answers.observacoes,
+      whatsapp:whats, eventId:eventId, url:location.href, userAgent:navigator.userAgent, attribution:attribution()
+    })}).catch(function(){}).finally(function(){
+      btn.disabled=false; btn.textContent="Garantir minha vaga";
+      goCal(whats,answers.observacoes);
+    });
+  });
+
+  function goCal(whats,obs){
+    showStep("cal");
+    if(calLoaded||!window.Cal) return;
+    var digits=whats.replace(/\D/g,"");
+    if(digits.length<=11) digits="55"+digits;
+    try{ Cal.ns["30min"]("inline",{elementOrSelector:"#cal-inline",calLink:CAL_LINK,config:{layout:"month_view",theme:"dark",attendeePhoneNumber:"+"+digits,notes:obs||undefined}}); calLoaded=true; }catch(e){ console.error("cal embed",e); }
+  }
+})();
+
+</body>
+</html>
