@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#fff;font-family:'Inter',system-ui,sans-serif}
+
+  .banner{
+    width:560px;height:118px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 30px;
+    border-radius:12px;
+    overflow:hidden;position:relative;
+  }
+
+  /* Variante A — base escura da marca com brilho degradê */
+  .varA{
+    background:
+      radial-gradient(120% 180% at 100% 50%, rgba(167,139,250,.38) 0%, rgba(96,165,250,.18) 40%, rgba(11,15,25,0) 70%),
+      linear-gradient(105deg,#0B0F19 0%,#121A2B 55%,#1A2340 100%);
+  }
+  /* Variante B — degradê pleno da marca */
+  .varB{ background:linear-gradient(105deg,#3B82F6 0%,#60A5FA 35%,#A78BFA 100%); }
+
+  .nome{
+    font-size:21px;font-weight:600;letter-spacing:-.015em;
+    color:#fff;line-height:1.15;
+  }
+  .cargo{
+    font-size:12.5px;font-weight:400;margin-top:5px;line-height:1.35;
+  }
+  .varA .cargo{color:rgba(226,232,240,.70)}
+  .varB .cargo{color:rgba(255,255,255,.86)}
+
+  /* Wordmark novAImob */
+  .marca{ display:flex;flex-direction:column;align-items:flex-end;gap:5px }
+  .wordmark{
+    font-family:'Space Grotesk','Inter',sans-serif;
+    font-size:33px;letter-spacing:-.02em;line-height:1;white-space:nowrap;
+  }
+  .wordmark .leve{font-weight:300}
+  .varA .wordmark .leve{color:#fff}
+  .varB .wordmark .leve{color:#fff}
+  .wordmark .ai{
+    font-weight:700;
+    background:linear-gradient(90deg,#60A5FA,#A78BFA);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .varB .wordmark .ai{
+    background:linear-gradient(90deg,#0B0F19,#1E1B4B);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .tag{
+    font-size:9.5px;letter-spacing:.10em;text-transform:uppercase;font-weight:500;
+  }
+  .varA .tag{color:rgba(148,163,184,.85)}
+  .varB .tag{color:rgba(255,255,255,.80)}
+
+  .divisor{width:1px;height:52px}
+  .varA .divisor{background:linear-gradient(180deg,transparent,rgba(148,163,184,.35),transparent)}
+  .varB .divisor{background:linear-gradient(180deg,transparent,rgba(255,255,255,.45),transparent)}
+
+  .rotulo{font-size:11px;color:#71717a;margin:0 0 8px 2px;font-weight:500}
+  .bloco{margin-bottom:26px}
+</style>
+</head>
+<body>
+  <div style="padding:20px;width:600px">
+
+    <div class="bloco">
+      <div class="rotulo">VARIANTE A — base escura da marca</div>
+      <div class="banner varA" id="varA">
+        <div>
+          <div class="nome">Alan Carvalho</div>
+          <div class="cargo">Gestor de automações&nbsp; |&nbsp; Marketing Imobiliário</div>
+        </div>
+        <div class="divisor"></div>
+        <div class="marca">
+          <div class="wordmark"><span class="leve">nov</span><span class="ai">AI</span><span class="leve">mob</span></div>
+          <div class="tag">IA de vendas para imobiliárias</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <div class="rotulo">VARIANTE B — degradê pleno</div>
+      <div class="banner varB" id="varB">
+        <div>
+          <div class="nome">Alan Carvalho</div>
+          <div class="cargo">Gestor de automações&nbsp; |&nbsp; Marketing Imobiliário</div>
+        </div>
+        <div class="divisor"></div>
+        <div class="marca">
+          <div class="wordmark"><span class="leve">nov</span><span class="ai">AI</span><span class="leve">mob</span></div>
+          <div class="tag">IA de vendas para imobiliárias</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

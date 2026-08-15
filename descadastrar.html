@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descadastrar — Nova Imob</title>
+  <meta name="description" content="Cancelar o recebimento de e-mails da Nova Imob." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://novaimob.tech/descadastrar" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0B0F19;
+      --surface: #111827;
+      --border:  rgba(255,255,255,.07);
+      --white:   #F1F5F9;
+      --text:    #94A3B8;
+      --blue:    #60A5FA;
+      --purple:  #A78BFA;
+      --green:   #22C55E;
+      --red:     #F87171;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .logo { display: inline-flex; margin-bottom: 36px; text-decoration: none; }
+    .logo svg { height: 26px; }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    p { font-size: .95rem; margin-bottom: 4px; }
+    p.sub { margin-bottom: 24px; }
+
+    .empresa {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: .95rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border: 0;
+      border-radius: 10px;
+      padding: 13px 30px;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    button:hover:not(:disabled) { opacity: .88; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+
+    .icone {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      margin: 0 auto 18px;
+      font-size: 26px;
+    }
+    .icone.ok  { background: rgba(34,197,94,.12);  color: var(--green); }
+    .icone.err { background: rgba(248,113,113,.12); color: var(--red); }
+
+    .spinner {
+      width: 34px; height: 34px; margin: 0 auto 18px;
+      border: 3px solid rgba(255,255,255,.12);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation: none } }
+
+    .rodape { margin-top: 28px; font-size: .8rem; color: #52606D; }
+    .rodape a { color: #64748B; }
+
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="logo">
+    <svg viewBox="0 0 200 28" xmlns="http://www.w3.org/2000/svg" aria-label="Nova Imob">
+      <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#60A5FA"/>
+          <stop offset="100%" stop-color="#A78BFA"/>
+        </linearGradient>
+      </defs>
+      <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
+        <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#g)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+      </text>
+    </svg>
+  </a>
+
+  <div class="card">
+
+    <!-- 1. Confirmação -->
+    <div id="confirmar">
+      <h1>Cancelar o recebimento?</h1>
+      <p class="sub">Você não vai mais receber nossos e-mails.</p>
+      <button id="btn" type="button">Confirmar descadastro</button>
+    </div>
+
+    <!-- 2. Processando -->
+    <div id="carregando" hidden>
+      <div class="spinner"></div>
+      <p>Processando…</p>
+    </div>
+
+    <!-- 3. Sucesso -->
+    <div id="sucesso" hidden>
+      <div class="icone ok">✓</div>
+      <h1>Pronto, descadastrado</h1>
+      <p class="sub" id="msgSucesso">Você não vai mais receber e-mails nossos.</p>
+    </div>
+
+    <!-- 4. Erro -->
+    <div id="erro" hidden>
+      <div class="icone err">!</div>
+      <h1>Não consegui processar</h1>
+      <p class="sub" id="msgErro">Tente novamente em instantes.</p>
+      <button id="btnRetry" type="button">Tentar de novo</button>
+    </div>
+
+  </div>
+
+  <p class="rodape">
+    Dúvida? Escreva para <a href="mailto:contato@alancarvalho.pro">contato@alancarvalho.pro</a>
+  </p>
+
+<script>
+(function () {
+  "use strict";
+
+  var FN_URL  = "https://zqalpihwwtrzbcgqrzic.supabase.co/functions/v1/unsubscribe";
+  var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+  var el = {
+    confirmar:  document.getElementById("confirmar"),
+    carregando: document.getElementById("carregando"),
+    sucesso:    document.getElementById("sucesso"),
+    erro:       document.getElementById("erro"),
+    btn:        document.getElementById("btn"),
+    btnRetry:   document.getElementById("btnRetry"),
+    msgSucesso: document.getElementById("msgSucesso"),
+    msgErro:    document.getElementById("msgErro")
+  };
+
+  function mostrar(qual) {
+    ["confirmar", "carregando", "sucesso", "erro"].forEach(function (k) {
+      el[k].hidden = (k !== qual);
+    });
+  }
+
+  var leadId = (new URLSearchParams(location.search).get("id") || "").trim();
+
+  // Link sem id válido: não adianta mostrar botão, não há o que descadastrar
+  if (!UUID_RE.test(leadId)) {
+    el.msgErro.textContent = "Este link de descadastro não é válido. "
+      + "Se você continuar recebendo e-mails, responda a mensagem pedindo a remoção.";
+    el.btnRetry.hidden = true;
+    mostrar("erro");
+    return;
+  }
+
+  function enviar() {
+    mostrar("carregando");
+    fetch(FN_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lead_id: leadId })
+    })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; })
+          .then(function (data) { return { ok: r.ok, data: data }; });
+      })
+      .then(function (res) {
+        if (!res.ok || !res.data.ok) throw new Error(res.data.error || "falhou");
+
+        if (res.data.nome) {
+          el.msgSucesso.innerHTML = res.data.ja_estava
+            ? 'A <span class="empresa"></span> já estava fora da nossa lista.'
+            : 'A <span class="empresa"></span> foi removida da nossa lista.';
+          el.msgSucesso.querySelector(".empresa").textContent = res.data.nome;
+        } else {
+          el.msgSucesso.textContent = "Você não vai mais receber e-mails nossos.";
+        }
+        mostrar("sucesso");
+      })
+      .catch(function () {
+        el.msgErro.textContent = "Tente novamente em instantes. Se persistir, "
+          + "responda o e-mail pedindo a remoção que eu faço na mão.";
+        el.btnRetry.hidden = false;
+        mostrar("erro");
+      });
+  }
+
+  el.btn.addEventListener("click", enviar);
+  el.btnRetry.addEventListener("click", enviar);
+})();
+</script>
+</body>
+</html>
