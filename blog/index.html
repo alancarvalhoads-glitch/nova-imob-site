@@ -15,7 +15,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Meta Pixel -->
   <script>
@@ -29,22 +29,26 @@
 
     :root {
       --bg: #0B0F19;
-      --surface: #111827;
-      --border: rgba(255,255,255,.07);
+      --bg2: #0f1524;
       --blue: #3B82F6;
       --purple: #7C3AED;
       --text: #D1D5DB;
       --muted: #6B7280;
       --white: #FFFFFF;
+      --glass-bg: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
       --gradient: linear-gradient(135deg, #3B82F6, #7C3AED);
     }
 
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
     body {
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -52,66 +56,95 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none;
       z-index: 0;
     }
 
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    section, nav, footer, main, header { position: relative; z-index: 1; }
+
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; color: var(--white); line-height: 1.2; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ─── NAV (igual LP) ─── */
     nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--glass-border);
+      background: rgba(11,15,25,0.8);
+      backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11,15,25,.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      height: 56px;
+    }
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
-    .nav-logo { text-decoration: none; display: flex; align-items: center; }
-    .nav-logo svg { height: 22px; }
-
-    .nav-link {
-      font-size: .88rem;
-      color: var(--muted);
+    .logo {
+      display: inline-flex;
+      align-items: center;
       text-decoration: none;
-      transition: color .2s;
+      line-height: 1;
     }
-    .nav-link:hover { color: var(--blue); }
-
-    header {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 64px 24px 48px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header h1 {
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--white); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .btn-primary {
+      background: var(--gradient);
       color: var(--white);
-      margin-bottom: 12px;
+      box-shadow: 0 0 24px rgba(59,130,246,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-1px); opacity: .9; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
     }
 
-    header p {
+    /* ─── HERO ─── */
+    .blog-hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+    .blog-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .blog-hero p {
+      font-size: 1.1rem;
       color: var(--muted);
-      font-size: 1.05rem;
+      max-width: 480px;
+      margin: 0 auto;
     }
 
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-      position: relative;
-      z-index: 1;
-    }
+    /* ─── POSTS ─── */
+    .posts-section { padding: 0 0 80px; }
 
     .posts-grid {
       display: grid;
@@ -120,67 +153,66 @@
     }
 
     .post-card {
-      background: rgba(255,255,255,.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
       padding: 28px;
       text-decoration: none;
       display: block;
-      transition: border-color .2s, background .2s;
+      transition: border-color .25s, transform .25s;
     }
-
     .post-card:hover {
       border-color: rgba(59,130,246,.3);
-      background: rgba(59,130,246,.04);
+      transform: translateY(-3px);
     }
-
     .post-tag {
+      font-family: 'JetBrains Mono', monospace;
       font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .06em;
+      font-weight: 500;
+      letter-spacing: .08em;
       text-transform: uppercase;
       color: var(--blue);
-      margin-bottom: 12px;
+      background: rgba(59,130,246,.08);
+      border: 1px solid rgba(59,130,246,.15);
+      border-radius: 4px;
+      padding: 3px 8px;
+      display: inline-block;
+      margin-bottom: 14px;
     }
-
     .post-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--white);
       line-height: 1.35;
       margin-bottom: 10px;
     }
-
     .post-excerpt {
       font-size: .9rem;
       color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
+      line-height: 1.65;
+      margin-bottom: 18px;
     }
-
     .post-meta {
-      font-size: .8rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
       color: var(--muted);
       opacity: .6;
     }
 
+    /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
+      border-top: 1px solid var(--glass-border);
+      padding: 32px 0;
       text-align: center;
       font-size: .85rem;
       color: var(--muted);
-      position: relative;
-      z-index: 1;
     }
-
-    footer a { color: var(--muted); text-decoration: none; }
+    footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
     footer a:hover { color: var(--blue); }
 
     @media (max-width: 600px) {
-      header { padding: 40px 20px 32px; }
-      main { padding: 0 20px 60px; }
+      .blog-hero { padding: 48px 0 36px; }
       .posts-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -188,44 +220,60 @@
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">
-    <svg viewBox="0 0 200 28" xmlns="http://www.w3.org/2000/svg" aria-label="Nova Imob">
-      <defs>
-        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#3B82F6"/>
-          <stop offset="100%" stop-color="#7C3AED"/>
-        </linearGradient>
-      </defs>
-      <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
-        <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#g)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
-      </text>
-    </svg>
-  </a>
-  <a href="/" class="nav-link">← Início</a>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Nova Imob — início">
+        <svg viewBox="0 0 158 28" xmlns="http://www.w3.org/2000/svg" height="26" aria-hidden="true">
+          <defs>
+            <linearGradient id="nav-ai-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#60A5FA"/>
+              <stop offset="100%" stop-color="#A78BFA"/>
+            </linearGradient>
+          </defs>
+          <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
+            <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#nav-ai-grad)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+          </text>
+        </svg>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#solucao">Solução</a></li>
+        <li><a href="/#canais">Canais</a></li>
+        <li><a href="/#como-funciona">Como funciona</a></li>
+        <li><a href="/blog" class="active">Blog</a></li>
+      </ul>
+      <a href="/#cta" class="btn btn-primary">Ver demonstração</a>
+    </div>
+  </div>
 </nav>
 
-<header>
-  <h1>Blog</h1>
-  <p>IA, automação e gestão de leads para o mercado imobiliário.</p>
+<header class="blog-hero">
+  <div class="container">
+    <h1>Blog</h1>
+    <p>IA, automação e gestão de leads para o mercado imobiliário.</p>
+  </div>
 </header>
 
-<main>
-  <div class="posts-grid">
+<main class="posts-section">
+  <div class="container">
+    <div class="posts-grid">
 
-    <a href="/blog/imobiliarias-perdem-leads-fora-do-horario-comercial" class="post-card">
-      <div class="post-tag">Gestão de Leads</div>
-      <div class="post-title">Por que imobiliárias perdem leads fora do horário comercial</div>
-      <div class="post-excerpt">Um lead chega no sábado às 21h. Na segunda de manhã o corretor responde. Já passaram 36 horas — e o lead está com outra imobiliária.</div>
-      <div class="post-meta">18 ago 2026 · 5 min</div>
-    </a>
+      <a href="/blog/imobiliarias-perdem-leads-fora-do-horario-comercial.html" class="post-card">
+        <div class="post-tag">Gestão de Leads</div>
+        <div class="post-title">Por que imobiliárias perdem leads fora do horário comercial</div>
+        <div class="post-excerpt">Um lead chega no sábado às 21h. Na segunda de manhã o corretor responde. Já passaram 36 horas — e o lead está com outra imobiliária.</div>
+        <div class="post-meta">18 ago 2026 · 5 min</div>
+      </a>
 
-    <!-- Próximos artigos serão adicionados aqui -->
+      <!-- Próximos artigos serão adicionados aqui -->
 
+    </div>
   </div>
 </main>
 
 <footer>
-  <p>© 2026 Nova Imob · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
+  <div class="container">
+    <p>© 2026 Nova Imob · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
+  </div>
 </footer>
 
 </body>

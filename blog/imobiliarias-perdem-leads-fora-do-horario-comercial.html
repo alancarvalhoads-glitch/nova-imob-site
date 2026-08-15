@@ -67,11 +67,15 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11,15,25,.92);
-      backdrop-filter: blur(12px);
+      background: rgba(11,15,25,.9);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      height: 56px;
+      padding: 18px 24px;
+    }
+
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -89,9 +93,6 @@
       font-size: .85rem;
       color: var(--muted);
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
       transition: color .2s;
     }
     .nav-back:hover { color: var(--blue); }
@@ -266,22 +267,22 @@
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">
-    <svg viewBox="0 0 200 28" xmlns="http://www.w3.org/2000/svg" aria-label="Nova Imob">
-      <defs>
-        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#3B82F6"/>
-          <stop offset="100%" stop-color="#7C3AED"/>
-        </linearGradient>
-      </defs>
-      <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
-        <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#g)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
-      </text>
-    </svg>
-  </a>
-  <a href="/blog" class="nav-back">
-    ← Blog
-  </a>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Nova Imob — início">
+      <svg viewBox="0 0 158 28" xmlns="http://www.w3.org/2000/svg" height="26" aria-hidden="true">
+        <defs>
+          <linearGradient id="nav-ai-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#60A5FA"/>
+            <stop offset="100%" stop-color="#A78BFA"/>
+          </linearGradient>
+        </defs>
+        <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
+          <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#nav-ai-grad)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+        </text>
+      </svg>
+    </a>
+    <a href="/blog" class="nav-back">← Blog</a>
+  </div>
 </nav>
 
 <div class="hero">
