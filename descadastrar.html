@@ -39,7 +39,15 @@
       padding: 32px 20px;
     }
 
-    .logo { display: inline-flex; margin-bottom: 36px; text-decoration: none; }
+    .logo {
+      display: inline-flex;
+      margin-bottom: 26px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      width: 100%;
+      justify-content: center;
+    }
     .logo svg { height: 26px; }
 
     .card {
@@ -48,7 +56,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 36px 32px;
+      padding: 32px 32px 36px;
       text-align: center;
     }
 
@@ -112,21 +120,23 @@
 </head>
 <body>
 
-  <a href="/" class="logo">
-    <svg viewBox="0 0 200 28" xmlns="http://www.w3.org/2000/svg" aria-label="Nova Imob">
-      <defs>
-        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#60A5FA"/>
-          <stop offset="100%" stop-color="#A78BFA"/>
-        </linearGradient>
-      </defs>
-      <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
-        <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#g)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
-      </text>
-    </svg>
-  </a>
-
   <div class="card">
+
+    <!-- text-anchor=middle + x no centro do viewBox: sem isso o texto encosta
+         na esquerda da caixa do SVG e a logo parece desalinhada -->
+    <a href="/" class="logo">
+      <svg viewBox="0 0 200 28" xmlns="http://www.w3.org/2000/svg" aria-label="Nova Imob">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#60A5FA"/>
+            <stop offset="100%" stop-color="#A78BFA"/>
+          </linearGradient>
+        </defs>
+        <text x="100" y="22" text-anchor="middle" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
+          <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#g)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+        </text>
+      </svg>
+    </a>
 
     <!-- 1. Confirmação -->
     <div id="confirmar">
