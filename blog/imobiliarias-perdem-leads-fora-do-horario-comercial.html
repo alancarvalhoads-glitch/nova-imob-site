@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Por que imobiliárias perdem leads fora do horário comercial — Nova Imob</title>
+  <meta name="description" content="Entenda por que a maioria das imobiliárias perde oportunidades fora do horário comercial e o que fazer para não deixar mais nenhum lead sem resposta." />
+  <link rel="canonical" href="https://novaimob.tech/blog/imobiliarias-perdem-leads-fora-do-horario-comercial" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://novaimob.tech/blog/imobiliarias-perdem-leads-fora-do-horario-comercial" />
+  <meta property="og:site_name" content="Nova Imob" />
+  <meta property="og:title" content="Por que imobiliárias perdem leads fora do horário comercial" />
+  <meta property="og:description" content="Entenda por que a maioria das imobiliárias perde oportunidades fora do horário comercial e o que fazer para não deixar mais nenhum lead sem resposta." />
+  <meta property="og:image" content="https://novaimob.tech/alan-carvalho.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="article:published_time" content="2026-08-18T09:00:00-03:00" />
+  <meta property="article:author" content="Alan Carvalho" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1323374123103378');
+    fbq('track', 'PageView');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0B0F19;
+      --surface: #111827;
+      --border: rgba(255,255,255,.07);
+      --blue: #3B82F6;
+      --purple: #7C3AED;
+      --text: #D1D5DB;
+      --muted: #6B7280;
+      --white: #FFFFFF;
+      --gradient: linear-gradient(135deg, #3B82F6, #7C3AED);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,15,25,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo svg { height: 22px; }
+
+    .nav-back {
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 24px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .meta {
+      font-size: .85rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .meta-sep { opacity: .3; }
+
+    /* CONTENT */
+    article {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    article p {
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+
+    article h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 48px 0 16px;
+      line-height: 1.3;
+    }
+
+    article h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white);
+      margin: 28px 0 12px;
+    }
+
+    article ul, article ol {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+
+    article li { margin-bottom: 10px; font-size: 1.05rem; }
+
+    article strong { color: var(--white); font-weight: 600; }
+
+    article a { color: var(--blue); text-decoration: none; }
+    article a:hover { text-decoration: underline; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* DESTAQUE BOX */
+    .highlight {
+      background: rgba(59,130,246,.07);
+      border: 1px solid rgba(59,130,246,.2);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+      font-size: 1.05rem;
+    }
+
+    .highlight strong { display: block; margin-bottom: 6px; color: var(--blue); font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; }
+
+    /* CTA */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(59,130,246,.1), rgba(124,58,237,.1));
+      border: 1px solid rgba(124,58,237,.2);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin: 48px 0 0;
+      text-align: center;
+    }
+
+    .cta-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: .95rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--gradient);
+      color: #fff;
+      font-weight: 600;
+      font-size: .95rem;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .85; text-decoration: none; }
+
+    .btn-secondary {
+      display: inline-block;
+      color: var(--blue);
+      font-size: .9rem;
+      margin-top: 14px;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--blue); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 40px 20px 28px; }
+      article { padding: 0 20px 60px; }
+      .cta-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg viewBox="0 0 200 28" xmlns="http://www.w3.org/2000/svg" aria-label="Nova Imob">
+      <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3B82F6"/>
+          <stop offset="100%" stop-color="#7C3AED"/>
+        </linearGradient>
+      </defs>
+      <text y="22" font-family="'Space Grotesk','Inter',sans-serif" font-size="26" letter-spacing="-0.5">
+        <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#g)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+      </text>
+    </svg>
+  </a>
+  <a href="/blog" class="nav-back">
+    ← Blog
+  </a>
+</nav>
+
+<div class="hero">
+  <span class="tag">Gestão de Leads</span>
+  <h1>Por que imobiliárias perdem leads fora do horário comercial</h1>
+  <div class="meta">
+    <span>Alan Carvalho</span>
+    <span class="meta-sep">·</span>
+    <span>18 de agosto de 2026</span>
+    <span class="meta-sep">·</span>
+    <span>5 min de leitura</span>
+  </div>
+</div>
+
+<article>
+
+  <p>Um lead chega no sábado às 21h. Viu o anúncio do imóvel, achou interessante, mandou mensagem. Fica esperando resposta.</p>
+
+  <p>Na segunda-feira de manhã, um corretor abre o WhatsApp e responde. Passaram quase 36 horas.</p>
+
+  <p>O lead já visitou outros três imóveis com outras imobiliárias.</p>
+
+  <p>Esse não é um caso isolado. É o dia a dia da maioria das imobiliárias no Brasil.</p>
+
+  <hr class="divider" />
+
+  <h2>O lead não espera — ele segue em frente</h2>
+
+  <p>Quem pesquisa imóvel geralmente está olhando várias opções ao mesmo tempo. Não existe lealdade de canal. Se a sua imobiliária demora, o próximo que responder fica com a oportunidade.</p>
+
+  <p>Pesquisas sobre comportamento de compra mostram que responder um lead em até 5 minutos aumenta significativamente as chances de converter. Depois de uma hora, essas chances caem drasticamente. Depois de 24 horas, você está basicamente tentando recuperar alguém que já tomou outro caminho.</p>
+
+  <div class="highlight">
+    <strong>O problema central</strong>
+    Não é falta de interesse do lead. É falta de resposta no momento em que ele estava pronto pra conversar.
+  </div>
+
+  <h2>Quando os leads chegam de verdade</h2>
+
+  <p>O horário comercial vai até as 18h, mas o comportamento do consumidor não respeita isso. Grande parte das interações com anúncios imobiliários acontece entre 19h e 23h — quando as pessoas estão em casa, com tempo pra pesquisar.</p>
+
+  <p>Fins de semana então são especialmente críticos. Campanhas de tráfego pago continuam rodando. O algoritmo do Meta continua entregando anúncios. As mensagens chegam. Mas os corretores estão de folga.</p>
+
+  <p>O resultado? Leads pagos que chegam no melhor momento possível — quando a pessoa está com tempo e disposição — ficam sem resposta por horas ou até dias.</p>
+
+  <h2>O custo real disso</h2>
+
+  <p>Se você investe R$3.000 por mês em tráfego pago e 30% dos leads chegam fora do horário comercial, você está jogando R$900 no lixo todo mês só porque não tem ninguém pra responder.</p>
+
+  <p>Não é exagero. É matemática.</p>
+
+  <p>E o problema fica mais grave quando você considera que esses leads de fim de tarde e fim de semana muitas vezes são os mais qualificados — são pessoas que pesquisaram com calma, viram vários imóveis, e chegaram até você com uma intenção real.</p>
+
+  <h2>O que as imobiliárias que não perdem leads fazem diferente</h2>
+
+  <p>A diferença não é ter mais corretores de plantão. É ter um sistema que responde imediatamente e mantém o lead engajado até que um humano possa assumir.</p>
+
+  <p>Na prática, funciona assim:</p>
+
+  <ul>
+    <li>O lead manda mensagem às 22h</li>
+    <li>Recebe uma resposta em segundos, não em horas</li>
+    <li>Começa a responder perguntas — tipo de imóvel, localização, budget</li>
+    <li>Se qualifica automaticamente</li>
+    <li>Na manhã seguinte, o corretor já sabe quem vale priorizar</li>
+  </ul>
+
+  <p>Ninguém foi perdido. O lead não ficou no vazio. E o corretor chega segunda-feira de manhã com uma fila de oportunidades aquecidas, não com uma caixa de mensagens frias pra tentar reanimar.</p>
+
+  <h2>Isso não é chatbot de menu</h2>
+
+  <p>Vale deixar claro porque existe muita confusão sobre isso.</p>
+
+  <p>Chatbot de menu é aquele que pergunta "1 para comprar, 2 para alugar". Todo mundo odeia. Ninguém responde. O lead abandona antes de virar oportunidade.</p>
+
+  <p>Um agente de IA para imobiliária funciona diferente. Ele conversa de forma natural, entende o que o lead está procurando, faz perguntas no momento certo, e qualifica sem parecer um robô. A experiência para o lead é parecida com falar com um atendente — só que disponível 24 horas.</p>
+
+  <h2>Por onde começar</h2>
+
+  <p>Se você quer parar de perder leads fora do horário, o caminho mais direto é implementar atendimento automático no WhatsApp integrado com a API Oficial da Meta.</p>
+
+  <p>Isso garante que toda mensagem receba uma resposta imediata, em qualquer horário, qualquer dia da semana.</p>
+
+  <p>No próximo artigo, explico como funciona na prática a automação de atendimento para imobiliárias — o que é necessário, quanto tempo leva pra implementar e quais resultados esperar.</p>
+
+  <div class="cta-box">
+    <h3>Sua imobiliária ainda perde leads fora do horário?</h3>
+    <p>Conheça como o sistema da Nova Imob funciona. Atendimento 24h no WhatsApp, qualificação automática e painel de gestão — sem chatbot de menu.</p>
+    <a href="https://novaimob.tech/#cta" class="btn-primary">Quero conhecer o sistema</a>
+    <br>
+    <a href="/blog/como-automatizar-atendimento-imobiliaria-whatsapp" class="btn-secondary">Próximo artigo: como automatizar o atendimento →</a>
+  </div>
+
+</article>
+
+<footer>
+  <p>© 2026 Nova Imob · <a href="/blog">Blog</a> · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
+</footer>
+
+</body>
+</html>

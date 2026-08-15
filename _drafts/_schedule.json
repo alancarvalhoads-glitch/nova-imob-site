@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "imobiliarias-perdem-leads-fora-do-horario-comercial",
+    "title": "Por que imobiliárias perdem leads fora do horário comercial",
+    "tag": "Gestão de Leads",
+    "excerpt": "Um lead chega no sábado às 21h. Na segunda de manhã o corretor responde. Já passaram 36 horas — e o lead está com outra imobiliária.",
+    "read_time": "5 min",
+    "publish_date": "2026-08-19",
+    "status": "ready"
+  },
+  {
+    "slug": "como-automatizar-atendimento-imobiliaria-whatsapp",
+    "title": "Como automatizar o atendimento da sua imobiliária pelo WhatsApp",
+    "tag": "Automação",
+    "excerpt": "Atendimento 24h não precisa de plantão. Entenda como funciona a automação no WhatsApp e o que muda no dia a dia da sua equipe.",
+    "read_time": "6 min",
+    "publish_date": "2026-08-22",
+    "status": "draft"
+  },
+  {
+    "slug": "tempo-de-resposta-leads-imobiliaria",
+    "title": "Tempo de resposta para leads: o erro que custa vendas na imobiliária",
+    "tag": "Gestão de Leads",
+    "excerpt": "Quanto tempo você tem para responder um lead antes de perdê-lo? Os dados são claros — e a maioria das imobiliárias está errando nisso.",
+    "read_time": "5 min",
+    "publish_date": "2026-08-26",
+    "status": "draft"
+  },
+  {
+    "slug": "ia-para-imobiliarias",
+    "title": "IA para imobiliárias: o que é, como funciona e onde aplicar",
+    "tag": "Inteligência Artificial",
+    "excerpt": "IA para imobiliária não é ficção científica nem coisa de empresa grande. Entenda o que é, o que resolve e como começar.",
+    "read_time": "7 min",
+    "publish_date": "2026-08-29",
+    "status": "draft"
+  },
+  {
+    "slug": "chatbot-vs-agente-ia-imobiliaria",
+    "title": "Chatbot vs agente de IA: qual faz sentido para imobiliárias?",
+    "tag": "Inteligência Artificial",
+    "excerpt": "Todo mundo diz que chatbot não funciona. Mas existe uma diferença enorme entre chatbot de menu e agente de IA. Entenda o que muda na prática.",
+    "read_time": "5 min",
+    "publish_date": "2026-09-02",
+    "status": "draft"
+  }
+]
