@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" role="img">
+  <title>Nova Imob</title>
+  <rect width="340" height="70" fill="#0B0F19" rx="8"/>
+  <defs>
+    <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <text y="50" x="10" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="52" letter-spacing="-1">
+    <tspan font-weight="300" fill="#F1F5F9">nov</tspan><tspan font-weight="700" fill="url(#aiGrad)">AI</tspan><tspan font-weight="300" fill="#F1F5F9">mob</tspan>
+  </text>
+</svg>

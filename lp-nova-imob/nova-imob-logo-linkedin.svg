@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img">
+  <title>Nova Imob</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1425"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#A78BFA" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- fundo -->
+  <rect width="400" height="400" fill="url(#bg)"/>
+
+  <!-- brilho sutil no centro -->
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.08"/>
+    <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="400" height="400" fill="url(#glow)"/>
+
+  <!-- wordmark -->
+  <text x="200" y="218" text-anchor="middle"
+        font-family="'Space Grotesk', 'Inter', system-ui, sans-serif"
+        font-size="68" letter-spacing="-1.5">
+    <tspan font-weight="300" fill="#E2E8F0">nov</tspan><tspan font-weight="700" fill="url(#aiGrad)">AI</tspan><tspan font-weight="300" fill="#E2E8F0">mob</tspan>
+  </text>
+
+  <!-- linha decorativa abaixo -->
+  <rect x="100" y="238" width="200" height="1.5" fill="url(#lineGrad)"/>
+
+  <!-- tagline -->
+  <text x="200" y="268" text-anchor="middle"
+        font-family="'Space Grotesk', 'Inter', system-ui, sans-serif"
+        font-size="13" font-weight="500" letter-spacing="3"
+        fill="#60A5FA" opacity="0.7">CRM IA-FIRST</text>
+</svg>
