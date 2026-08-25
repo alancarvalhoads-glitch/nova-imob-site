@@ -2340,9 +2340,18 @@
 <script>
   // ─── MODAL DE QUALIFICAÇÃO ───
   function openModal() {
+    if (typeof window.__niOpen === 'function') { window.__niOpen(); return; }
+    // fallback direto
     var m = document.getElementById('qmodal');
     if (!m) return;
-    m._open();
+    m.querySelectorAll('.qopt.sel').forEach(function(o){ o.classList.remove('sel'); });
+    var ni=document.getElementById('qNome'); if(ni) ni.value='';
+    var wi=document.getElementById('qWhats'); if(wi) wi.value='';
+    var err=document.getElementById('qErrContato'); if(err) err.hidden=true;
+    m.querySelectorAll('.qstep').forEach(function(s){ s.hidden=s.getAttribute('data-step')!=='contato'; });
+    m.classList.add('open'); m.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){ var f=document.getElementById('qNome'); if(f) f.focus(); },50);
   }
 
   // palavra rotativa no H1 do hero (frios → desqualificados → curiosos)
@@ -2581,6 +2590,7 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":false,"layout":"month_view","theme"
 
   // expõe open() para openModal() global
   modal._open = open;
+  window.__niOpen = open;
 
   sel("#qclose").addEventListener('click',close);
   modal.addEventListener('click',function(e){ if(e.target===modal) close(); });
