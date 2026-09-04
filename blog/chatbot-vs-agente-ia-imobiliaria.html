@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/cta-modal.css" />
 
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -75,13 +76,13 @@
     .cta-box { background: linear-gradient(135deg, rgba(59,130,246,.1), rgba(124,58,237,.1)); border: 1px solid rgba(124,58,237,.2); border-radius: 16px; padding: 36px 32px; margin: 48px 0 0; text-align: center; }
     .cta-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; color: var(--white); margin-bottom: 12px; }
     .cta-box p { color: var(--muted); margin-bottom: 24px; font-size: .95rem; }
-    .btn-primary { display: inline-block; background: var(--gradient); color: #fff; font-weight: 600; font-size: .95rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; transition: opacity .2s; }
+    .btn-primary { display: inline-block; background: var(--gradient); color: #fff; font-weight: 600; font-size: .95rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; transition: opacity .2s; border: 0; font-family: inherit; cursor: pointer; }
     .btn-primary:hover { opacity: .85; text-decoration: none; }
     .video-box { margin: 36px 0; }
     .video-embed { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
     .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
     .video-caption { font-size: 1.05rem; margin: 18px 0 0; }
-    .btn-secondary { display: inline-block; color: var(--blue); font-size: .9rem; margin-top: 10px; text-decoration: none; }
+    .btn-secondary { display: inline-block; color: var(--blue); font-size: .9rem; margin-top: 10px; text-decoration: none; border: 0; background: none; font-family: inherit; cursor: pointer; }
     .btn-secondary:hover { text-decoration: underline; }
     footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-size: .85rem; color: var(--muted); position: relative; z-index: 1; }
     footer a { color: var(--muted); text-decoration: none; }
@@ -189,7 +190,7 @@
       <iframe src="https://www.youtube.com/embed/6c8kPgc43fc" title="Como Agentes de IA Estão Mudando o Mercado Imobiliário" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
     <p class="video-caption">Fiz um vídeo explicando sobre IA no atendimento imobiliário — mostro na prática a diferença entre um chatbot de menu e um agente conversacional de verdade.</p>
-    <a href="https://novaimob.tech/#cta" class="btn-secondary">Quero um agente assim na minha imobiliária →</a>
+    <button onclick="openModal()" class="btn-secondary">Quero um agente assim na minha imobiliária →</button>
   </div>
 
   <h2>Por que isso importa para a conversão</h2>
@@ -222,7 +223,7 @@
   <div class="cta-box">
     <h3>Veja a diferença na prática</h3>
     <p>O sistema da Nova Imob usa agente de IA — não chatbot de menu. Seus leads têm uma experiência natural de atendimento, 24h por dia, com qualificação automática e transferência para o corretor no momento certo.</p>
-    <a href="https://novaimob.tech/#cta" class="btn-primary">Ver demonstração</a>
+    <button onclick="openModal()" class="btn-primary">Ver demonstração</button>
   </div>
 
 </article>
@@ -230,6 +231,9 @@
 <footer>
   <p>© 2026 Nova Imob · <a href="/blog">Blog</a> · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
 </footer>
+
+<!-- modal de qualificação (compartilhado entre todas as páginas do site) -->
+<script src="/assets/cta-modal.js" defer></script>
 
 </body>
 </html>

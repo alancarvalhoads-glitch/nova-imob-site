@@ -1,0 +1,41 @@
+/* ═══ MODAL DE QUALIFICAÇÃO — componente compartilhado ═══
+   Usado em toda pagina do site (home, LP, posts do blog).
+   Cores proprias (nao depende das variaveis --bg/--text/--blue de cada pagina)
+   para ficar visualmente identico em qualquer lugar. */
+.qmodal {
+  --qm-blue: #3B82F6;
+  --qm-gradient: linear-gradient(135deg, #3B82F6, #7C3AED);
+  --qm-bg2: #0f1524;
+  --qm-text: #D1D5DB;
+  --qm-text2: #9CA3AF;
+  position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(5,8,15,.85); backdrop-filter: blur(5px);
+  font-family: 'Inter', sans-serif;
+}
+.qmodal.open { display: flex; }
+.qcard { position: relative; width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; background: var(--qm-bg2); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 32px 26px; box-shadow: 0 30px 90px rgba(0,0,0,.6); }
+.qclose { position: absolute; top: 10px; right: 14px; background: none; border: 0; color: var(--qm-text); font-size: 1.7rem; line-height: 1; cursor: pointer; opacity: .6; }
+.qclose:hover { opacity: 1; color: #fff; }
+.qstep h3 { font-size: 1.2rem; color: #fff; margin: 0 0 4px; line-height: 1.32; font-family: 'Space Grotesk', sans-serif; }
+.qstep .qsub { color: var(--qm-text); font-size: .9rem; margin-bottom: 6px; opacity: .7; }
+.qopt-label { color: var(--qm-text); font-weight: 400; font-size: .85rem; opacity: .6; }
+.qopts { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+.qopt { text-align: left; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); color: var(--qm-text); font: inherit; font-size: 1rem; padding: 14px 16px; border-radius: 12px; cursor: pointer; transition: border-color .15s, background .15s; }
+.qopt:hover, .qopt.sel { border-color: var(--qm-blue); background: rgba(59,130,246,.08); color: #fff; }
+.qnext, .qexit { margin-top: 18px; width: 100%; background: var(--qm-gradient); color: #0B0F19; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem; padding: 15px; border: 0; border-radius: 12px; cursor: pointer; }
+.qnext:disabled { opacity: .5; cursor: default; }
+.qwarn { margin-top: 16px; background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.32); border-radius: 12px; padding: 14px 16px; }
+.qwarn p { color: #fcd9a8; font-size: .9rem; margin: 0 0 12px; line-height: 1.5; }
+.qwarn .qnext { margin-top: 0; background: rgba(255,255,255,.1); color: #fff; }
+.qstep textarea, .qstep input[type=tel], .qstep input[type=text] { width: 100%; margin-top: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); color: #fff; font: inherit; font-size: 1rem; padding: 13px 14px; border-radius: 12px; }
+.qstep input[type=text] { margin-top: 0; }
+.qstep textarea:focus, .qstep input:focus { outline: none; border-color: var(--qm-blue); }
+.qfield { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.qfield label { font-size: .8rem; color: var(--qm-text); opacity: .6; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .05em; }
+.qerr { color: #fca5a5; font-size: .85rem; margin-top: 8px; }
+.qdisq { text-align: center; padding: 12px 6px; }
+.qdisq-icon { font-size: 2.4rem; margin-bottom: 10px; }
+.qdisq p { color: var(--qm-text); font-size: 1.05rem; line-height: 1.55; margin-bottom: 22px; }
+.qdisq strong { color: #fff; }
+.cal-inline { min-height: 560px; margin-top: 14px; border-radius: 12px; overflow: hidden; }
+@keyframes qm-spin { to { transform: rotate(360deg); } }

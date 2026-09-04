@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/cta-modal.css" />
 
   <!-- Meta Pixel -->
   <script>
@@ -231,6 +232,9 @@
       border-radius: 8px;
       text-decoration: none;
       transition: opacity .2s;
+      border: 0;
+      font-family: inherit;
+      cursor: pointer;
     }
     .btn-primary:hover { opacity: .85; text-decoration: none; }
 
@@ -371,7 +375,7 @@
   <div class="cta-box">
     <h3>Sua imobiliária ainda perde leads fora do horário?</h3>
     <p>Conheça como o sistema da Nova Imob funciona. Atendimento 24h no WhatsApp, qualificação automática e painel de gestão — sem chatbot de menu.</p>
-    <a href="https://novaimob.tech/#cta" class="btn-primary">Quero conhecer o sistema</a>
+    <button onclick="openModal()" class="btn-primary">Quero conhecer o sistema</button>
     <br>
     <a href="/blog/como-automatizar-atendimento-imobiliaria-whatsapp" class="btn-secondary">Próximo artigo: como automatizar o atendimento →</a>
   </div>
@@ -381,6 +385,9 @@
 <footer>
   <p>© 2026 Nova Imob · <a href="/blog">Blog</a> · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
 </footer>
+
+<!-- modal de qualificação (compartilhado entre todas as páginas do site) -->
+<script src="/assets/cta-modal.js" defer></script>
 
 </body>
 </html>

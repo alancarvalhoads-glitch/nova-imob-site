@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/cta-modal.css" />
 
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -67,7 +68,7 @@
     .cta-box { background: linear-gradient(135deg, rgba(59,130,246,.1), rgba(124,58,237,.1)); border: 1px solid rgba(124,58,237,.2); border-radius: 16px; padding: 36px 32px; margin: 48px 0 0; text-align: center; }
     .cta-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; color: var(--white); margin-bottom: 12px; }
     .cta-box p { color: var(--muted); margin-bottom: 24px; font-size: .95rem; }
-    .btn-primary { display: inline-block; background: var(--gradient); color: #fff; font-weight: 600; font-size: .95rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; transition: opacity .2s; }
+    .btn-primary { display: inline-block; background: var(--gradient); color: #fff; font-weight: 600; font-size: .95rem; padding: 14px 28px; border-radius: 8px; text-decoration: none; transition: opacity .2s; border: 0; font-family: inherit; cursor: pointer; }
     .btn-primary:hover { opacity: .85; text-decoration: none; }
     .btn-secondary { display: inline-block; color: var(--blue); font-size: .9rem; margin-top: 14px; text-decoration: none; }
     .btn-secondary:hover { text-decoration: underline; }
@@ -177,7 +178,7 @@
   <div class="cta-box">
     <h3>Quantos leads você perdeu essa semana por demora na resposta?</h3>
     <p>O sistema da Nova Imob responde em segundos, qualifica automaticamente e entrega o lead pronto para o corretor — 24h por dia, 7 dias por semana.</p>
-    <a href="https://novaimob.tech/#cta" class="btn-primary">Quero ver como funciona</a>
+    <button onclick="openModal()" class="btn-primary">Quero ver como funciona</button>
     <br>
     <a href="/blog/ia-para-imobiliarias.html" class="btn-secondary">Próximo artigo: IA para imobiliárias — o que é e onde aplicar →</a>
   </div>
@@ -187,6 +188,9 @@
 <footer>
   <p>© 2026 Nova Imob · <a href="/blog">Blog</a> · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
 </footer>
+
+<!-- modal de qualificação (compartilhado entre todas as páginas do site) -->
+<script src="/assets/cta-modal.js" defer></script>
 
 </body>
 </html>

@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/cta-modal.css" />
 
   <!-- Meta Pixel -->
   <script>
@@ -114,6 +115,8 @@
       font-size: 0.85rem;
       text-decoration: none;
       transition: all 0.25s ease;
+      border: 0;
+      cursor: pointer;
     }
     .btn-primary {
       background: var(--gradient);
@@ -241,7 +244,7 @@
         <li><a href="/#como-funciona">Como funciona</a></li>
         <li><a href="/blog" class="active">Blog</a></li>
       </ul>
-      <a href="/#cta" class="btn btn-primary">Ver demonstração</a>
+      <button onclick="openModal()" class="btn btn-primary">Ver demonstração</button>
     </div>
   </div>
 </nav>
@@ -289,6 +292,9 @@
     <p>© 2026 Nova Imob · <a href="/">Início</a> · <a href="/privacidade.html">Privacidade</a></p>
   </div>
 </footer>
+
+<!-- modal de qualificação (compartilhado entre todas as páginas do site) -->
+<script src="/assets/cta-modal.js" defer></script>
 
 </body>
 </html>
