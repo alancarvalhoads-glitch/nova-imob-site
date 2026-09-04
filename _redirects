@@ -1,6 +1,3 @@
 # novaimob.tech redirects
 /app     https://app.novaimob.tech  301
 /app/*   https://app.novaimob.tech/:splat  301
-
-# Blog — URLs sem .html
-/blog/:slug   /blog/:slug.html  200
