@@ -2674,5 +2674,21 @@ Cal.ns["30min"]("ui",{"hideEventTypeDetails":false,"layout":"month_view","theme"
 })();
 </script>
 
+<script>
+  // Chrome com scroll-behavior:smooth as vezes ignora o salto automatico
+  // para a ancora da URL (ex: /#cta) no carregamento inicial da pagina.
+  // Isso forca o scroll manualmente apos a pagina terminar de carregar.
+  if (location.hash) {
+    var anchorTarget = document.querySelector(location.hash);
+    if (anchorTarget) {
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          anchorTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      });
+    }
+  }
+</script>
+
 </body>
 </html>
