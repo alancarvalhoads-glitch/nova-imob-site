@@ -78,14 +78,15 @@
     .highlight li { font-size: .95rem; margin-bottom: 6px; }
     .highlight .total-line { margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(59,130,246,.2); font-size: 1.05rem; }
     .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
-    .compare-col { background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
-    .compare-col.bad { border-color: rgba(248,113,113,.2); }
-    .compare-col.good { border-color: rgba(52,211,153,.2); }
-    .compare-label { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .9rem; margin-bottom: 14px; }
-    .compare-col.bad .compare-label { color: #F87171; }
-    .compare-col.good .compare-label { color: #34D399; }
+    .compare-col { border-radius: 12px; padding: 24px; }
+    .compare-col.bad { background: linear-gradient(160deg, rgba(248,113,113,.22), rgba(248,113,113,.06)); border: 1px solid rgba(248,113,113,.45); box-shadow: 0 8px 24px rgba(248,113,113,.08); }
+    .compare-col.good { background: linear-gradient(160deg, rgba(52,211,153,.22), rgba(52,211,153,.06)); border: 1px solid rgba(52,211,153,.45); box-shadow: 0 8px 24px rgba(52,211,153,.08); }
+    .compare-label { display: inline-flex; align-items: center; gap: 7px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .85rem; padding: 7px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .compare-col.bad .compare-label { background: rgba(248,113,113,.22); color: #FECACA; border: 1px solid rgba(248,113,113,.5); }
+    .compare-col.good .compare-label { background: rgba(52,211,153,.22); color: #A7F3D0; border: 1px solid rgba(52,211,153,.5); }
     .compare-col ul { padding-left: 18px; margin: 0; }
-    .compare-col li { font-size: .9rem; margin-bottom: 8px; color: var(--muted); }
+    .compare-col li { font-size: .92rem; margin-bottom: 10px; color: var(--text); }
+    .compare-col li strong { color: var(--white); }
     .cta-box { background: linear-gradient(135deg, rgba(59,130,246,.1), rgba(124,58,237,.1)); border: 1px solid rgba(124,58,237,.2); border-radius: 16px; padding: 36px 32px; margin: 48px 0 0; text-align: center; }
     .cta-box h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; color: var(--white); margin-bottom: 12px; }
     .cta-box p { color: var(--muted); margin-bottom: 24px; font-size: .95rem; }
@@ -194,19 +195,19 @@
 
   <div class="compare">
     <div class="compare-col bad">
-      <div class="compare-label">Assistente administrativo</div>
+      <div class="compare-label">✗ Assistente administrativo</div>
       <ul>
-        <li>Custo mensal: R$ 3.900 – R$ 4.700</li>
-        <li>Disponibilidade: 176h/mês</li>
+        <li>Custo mensal: <strong>R$ 3.900 – R$ 4.700</strong></li>
+        <li>Disponibilidade: <strong>176h/mês</strong></li>
         <li>Integração com CRM: manual</li>
         <li>Atende vários leads ao mesmo tempo: não</li>
       </ul>
     </div>
     <div class="compare-col good">
-      <div class="compare-label">Agente de IA</div>
+      <div class="compare-label">✓ Agente de IA</div>
       <ul>
-        <li>Custo mensal: a partir de R$ 1.200</li>
-        <li>Disponibilidade: 720h/mês</li>
+        <li>Custo mensal: <strong>a partir de R$ 1.200</strong></li>
+        <li>Disponibilidade: <strong>720h/mês</strong></li>
         <li>Integração com CRM: automática</li>
         <li>Atende vários leads ao mesmo tempo: sim</li>
       </ul>
