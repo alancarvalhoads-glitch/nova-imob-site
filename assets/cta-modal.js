@@ -200,10 +200,25 @@
           disponibilidade: "Sim", observacoes: answers.observacoes,
           whatsapp: whats, eventId: eventId, url: location.href, userAgent: navigator.userAgent, attribution: attribution()
         })
-      }).catch(function () {}).finally(function () {
-        btn.disabled = false; btn.textContent = "Garantir minha vaga";
-        goCal(whats, answers.observacoes);
-      });
+      })
+        .then(function (r) {
+          if (!r.ok) { return r.text().catch(function () { return ""; }).then(function (t) { throw new Error("HTTP " + r.status + " " + t.slice(0, 200)); }); }
+          return r.json().catch(function () { return {}; });
+        })
+        .catch(function (err) {
+          // NAO engolir a falha. Foi exatamente isso que escondeu por 16 dias
+          // que a funcao estava devolvendo 500 e todo lead se perdia: o front
+          // mostrava "Recebido!" do mesmo jeito. Agora a falha vira evento no
+          // GA4 (lp_lead_falhou), onde da pra criar alerta.
+          try { console.error("[cta-modal] falha ao gravar lead:", err); } catch (e) {}
+          ev('lp_lead_falhou', { motivo: String((err && err.message) || err).slice(0, 120) });
+        })
+        .finally(function () {
+          btn.disabled = false; btn.textContent = "Garantir minha vaga";
+          // o visitante segue para a agenda de qualquer forma: se o lead falhou
+          // no nosso lado, o agendamento no cal.com ainda o preserva.
+          goCal(whats, answers.observacoes);
+        });
     });
 
     function goCal(whats, obs) {
