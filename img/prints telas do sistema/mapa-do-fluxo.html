@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O Caminho do Lead</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:#F2F4F8; --surface:#FFFFFF; --linha:#D5DCE7;
+    --ink:#0B0F19; --ink-soft:#4C566E; --ink-faint:#8792A8;
+    --azul:#2563EB; --roxo:#7C3AED; --verde:#15803D; --ambar:#B45309;
+    --caixa-ia:#EEF2FF; --caixa-fim:#F0FDF4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#080B12; --surface:#111823; --linha:#253042;
+      --ink:#E8ECF4; --ink-soft:#98A2B9; --ink-faint:#69738C;
+      --azul:#60A5FA; --roxo:#A78BFA; --verde:#22C55E; --ambar:#FBBF24;
+      --caixa-ia:#151E33; --caixa-fim:#10231A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#080B12; --surface:#111823; --linha:#253042;
+    --ink:#E8ECF4; --ink-soft:#98A2B9; --ink-faint:#69738C;
+    --azul:#60A5FA; --roxo:#A78BFA; --verde:#22C55E; --ambar:#FBBF24;
+    --caixa-ia:#151E33; --caixa-fim:#10231A;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.6;
+  }
+  .wrap { max-width:1500px; margin:0 auto; padding:44px 24px 64px; }
+
+  .marca {
+    font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint);
+    margin:0 0 14px;
+  }
+  h1 {
+    font-family:"Space Grotesk",Inter,sans-serif; font-weight:700;
+    font-size:clamp(1.7rem,3.6vw,2.4rem); line-height:1.12; letter-spacing:-.02em;
+    margin:0 0 12px; max-width:22ch; text-wrap:balance;
+  }
+  h1 .grad {
+    background:linear-gradient(100deg,var(--azul),var(--roxo));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lede { color:var(--ink-soft); max-width:66ch; margin:0 0 34px; font-size:1.0625rem; }
+
+  figure { margin:0; }
+  .quadro {
+    overflow-x:auto; background:var(--surface);
+    border:1px solid var(--linha); border-radius:16px; padding:10px;
+  }
+  svg { display:block; width:100%; min-width:1020px; height:auto; }
+
+  figcaption { color:var(--ink-soft); font-size:.9375rem; margin-top:16px; max-width:74ch; }
+
+  .legenda {
+    display:flex; flex-wrap:wrap; gap:22px; margin-top:20px;
+    font-size:.8125rem; color:var(--ink-soft);
+  }
+  .legenda span { display:flex; align-items:center; gap:9px; }
+  .legenda i { display:block; width:26px; height:0; }
+
+  footer {
+    margin-top:44px; padding-top:22px; border-top:1px solid var(--linha);
+    font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-faint);
+  }
+
+  /* ---- SVG ---- */
+  .caixa       { fill:var(--surface);    stroke:var(--linha); stroke-width:1.5; }
+  .caixa-ia    { fill:var(--caixa-ia);   stroke:var(--azul);  stroke-width:1.5; }
+  .caixa-fim   { fill:var(--caixa-fim);  stroke:var(--verde); stroke-width:1.5; }
+  .caixa-aviso { fill:var(--surface);    stroke:var(--verde); stroke-width:1.5; }
+  .caixa-dado  { fill:var(--surface);    stroke:var(--roxo);  stroke-width:1.5; }
+  .caixa-futuro{ fill:var(--surface);    stroke:var(--ink-faint); stroke-width:1.5;
+                 stroke-dasharray:5 4; }
+
+  .t-titulo { fill:var(--ink); font-family:"Space Grotesk",Inter,sans-serif;
+              font-size:15px; font-weight:700; }
+  .t-sub    { fill:var(--ink-soft); font-family:Inter,sans-serif; font-size:11.5px; }
+  .t-lane   { fill:var(--ink-faint); font-family:"JetBrains Mono",monospace;
+              font-size:11px; letter-spacing:1.6px; }
+  .t-nota   { fill:var(--ink-faint); font-family:Inter,sans-serif; font-size:11.5px; }
+  .t-corte  { fill:var(--azul);  font-family:Inter,sans-serif; font-size:11px; font-weight:600; }
+  .t-tempo  { fill:var(--ambar); font-family:"JetBrains Mono",monospace;
+              font-size:11.5px; font-weight:500; }
+
+  .fluxo  { stroke:var(--azul); stroke-width:2.5; fill:none; }
+  .sobe   { stroke:var(--verde); stroke-width:1.8; fill:none; stroke-dasharray:6 4; }
+  .desce  { stroke:var(--roxo); stroke-width:1.8; fill:none; }
+  .volta  { stroke:var(--ink-faint); stroke-width:1.8; fill:none; stroke-dasharray:2 5; }
+  .divisa { stroke:var(--linha); stroke-width:1; }
+
+  @media (max-width:640px) { .wrap { padding:32px 16px 48px; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <p class="marca">Nova Imob · CRM imobiliário</p>
+  <h1>Do anúncio à venda, e <span class="grad">de volta ao anúncio</span>.</h1>
+  <p class="lede">
+    O caminho que todo contato percorre, o que o sistema dispara sozinho e o que fica
+    gravado em cada passo. Nenhuma etapa depende de alguém lembrar.
+  </p>
+
+  <figure>
+    <div class="quadro">
+      <svg viewBox="0 0 1700 850" role="img"
+           aria-label="Mapa do fluxo do CRM Nova Imob em três faixas simultâneas. Na do meio, o caminho do lead: anúncio da Meta, lead no CRM, atendimento da IA, triagem, corretor da vez e retorno registrado, com a régua de 72 horas e mais 24 horas entre o corretor e o retorno. Na de cima, os três e-mails que o gestor recebe sem pedir. Na de baixo, o que fica gravado em cada etapa. Uma seta tracejada liga a venda de volta ao anúncio.">
+
+        <defs>
+          <marker id="pf" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--azul)"/>
+          </marker>
+          <marker id="pv" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--verde)"/>
+          </marker>
+          <marker id="pr" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--roxo)"/>
+          </marker>
+          <marker id="pc" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--ink-faint)"/>
+          </marker>
+        </defs>
+
+        <!-- ================= FAIXA 1: O GESTOR ================= -->
+        <text class="t-lane" x="34" y="44">O GESTOR RECEBE, SEM PEDIR</text>
+
+        <!-- O vazio a esquerda e' informacao: ate a qualificacao, nada exige o gestor. -->
+        <text class="t-nota" x="34" y="118">Até aqui nada chega até ele.</text>
+        <text class="t-nota" x="34" y="137">A IA está trabalhando sozinha.</text>
+
+        <rect class="caixa-aviso" x="1000" y="72" width="165" height="98" rx="12"/>
+        <text class="t-titulo" x="1082" y="108" text-anchor="middle">Lead qualificado</text>
+        <text class="t-sub"    x="1082" y="130" text-anchor="middle">quem pegou e de</text>
+        <text class="t-sub"    x="1082" y="148" text-anchor="middle">qual anúncio veio</text>
+
+        <rect class="caixa-aviso" x="1208" y="72" width="165" height="98" rx="12"/>
+        <text class="t-titulo" x="1290" y="108" text-anchor="middle">Retorno atrasado</text>
+        <text class="t-sub"    x="1290" y="130" text-anchor="middle">quem parou e</text>
+        <text class="t-sub"    x="1290" y="148" text-anchor="middle">há quantos dias</text>
+
+        <rect class="caixa-aviso" x="1415" y="72" width="165" height="98" rx="12"/>
+        <text class="t-titulo" x="1497" y="108" text-anchor="middle">Retorno chegou</text>
+        <text class="t-sub"    x="1497" y="130" text-anchor="middle">a situação e o</text>
+        <text class="t-sub"    x="1497" y="148" text-anchor="middle">relato do corretor</text>
+
+        <line class="divisa" x1="34" y1="205" x2="1666" y2="205"/>
+
+        <!-- ================= FAIXA 2: O LEAD ================= -->
+        <text class="t-lane" x="34" y="252">O CAMINHO DO LEAD</text>
+
+        <rect class="caixa" x="40" y="290" width="175" height="100" rx="12"/>
+        <text class="t-titulo" x="127" y="331" text-anchor="middle">Anúncio Meta</text>
+        <text class="t-sub"    x="127" y="353" text-anchor="middle">formulário no Insta</text>
+        <text class="t-sub"    x="127" y="371" text-anchor="middle">ou no Facebook</text>
+
+        <rect class="caixa" x="265" y="290" width="175" height="100" rx="12"/>
+        <text class="t-titulo" x="352" y="331" text-anchor="middle">Lead no CRM</text>
+        <text class="t-sub"    x="352" y="353" text-anchor="middle">em segundos, com a</text>
+        <text class="t-sub"    x="352" y="371" text-anchor="middle">origem já anexada</text>
+
+        <rect class="caixa-ia" x="490" y="290" width="175" height="100" rx="12"/>
+        <text class="t-titulo" x="577" y="331" text-anchor="middle">A IA atende</text>
+        <text class="t-sub"    x="577" y="353" text-anchor="middle">tira dúvida e faz as</text>
+        <text class="t-sub"    x="577" y="371" text-anchor="middle">perguntas de perfil</text>
+
+        <rect class="caixa-ia" x="715" y="290" width="175" height="100" rx="12"/>
+        <text class="t-titulo" x="802" y="331" text-anchor="middle">Triagem</text>
+        <text class="t-sub"    x="802" y="353" text-anchor="middle">tem perfil de compra</text>
+        <text class="t-sub"    x="802" y="371" text-anchor="middle">ou não tem</text>
+
+        <rect class="caixa" x="995" y="290" width="175" height="100" rx="12"/>
+        <text class="t-titulo" x="1082" y="331" text-anchor="middle">Corretor da vez</text>
+        <text class="t-sub"    x="1082" y="353" text-anchor="middle">link individual, sem</text>
+        <text class="t-sub"    x="1082" y="371" text-anchor="middle">senha e sem app</text>
+
+        <rect class="caixa-fim" x="1410" y="290" width="175" height="100" rx="12"/>
+        <text class="t-titulo" x="1497" y="331" text-anchor="middle">Retorno registrado</text>
+        <text class="t-sub"    x="1497" y="353" text-anchor="middle">situação do lead e</text>
+        <text class="t-sub"    x="1497" y="371" text-anchor="middle">relato obrigatório</text>
+
+        <!-- setas do caminho -->
+        <line class="fluxo" x1="215" y1="340" x2="257" y2="340" marker-end="url(#pf)"/>
+        <line class="fluxo" x1="440" y1="340" x2="482" y2="340" marker-end="url(#pf)"/>
+        <line class="fluxo" x1="665" y1="340" x2="707" y2="340" marker-end="url(#pf)"/>
+
+        <!-- o funil aperta aqui: so' uma parte passa -->
+        <line class="fluxo" x1="890" y1="340" x2="987" y2="340" marker-end="url(#pf)"/>
+        <text class="t-corte" x="938" y="326" text-anchor="middle">só quem tem perfil</text>
+
+        <!-- a regua: uma seta, dois prazos -->
+        <line class="fluxo" x1="1170" y1="340" x2="1402" y2="340" marker-end="url(#pf)"/>
+        <text class="t-tempo" x="1286" y="322" text-anchor="middle">72h · pergunta como foi</text>
+        <text class="t-tempo" x="1286" y="364" text-anchor="middle">+24h · cobra</text>
+
+        <!-- avisos ao gestor -->
+        <line class="sobe" x1="1082" y1="286" x2="1082" y2="176" marker-end="url(#pv)"/>
+        <line class="sobe" x1="1286" y1="312" x2="1290" y2="176" marker-end="url(#pv)"/>
+        <line class="sobe" x1="1497" y1="286" x2="1497" y2="176" marker-end="url(#pv)"/>
+
+        <line class="divisa" x1="34" y1="440" x2="1666" y2="440"/>
+
+        <!-- ================= FAIXA 3: REGISTRO ================= -->
+        <text class="t-lane" x="34" y="487">O QUE FICA GRAVADO</text>
+
+        <rect class="caixa-dado" x="265" y="524" width="175" height="92" rx="12"/>
+        <text class="t-titulo" x="352" y="560" text-anchor="middle">Origem</text>
+        <text class="t-sub"    x="352" y="582" text-anchor="middle">campanha, anúncio e</text>
+        <text class="t-sub"    x="352" y="600" text-anchor="middle">o que ele respondeu</text>
+
+        <rect class="caixa-dado" x="490" y="524" width="175" height="92" rx="12"/>
+        <text class="t-titulo" x="577" y="560" text-anchor="middle">Quem esfriou</text>
+        <text class="t-sub"    x="577" y="582" text-anchor="middle">sai do quadro e fica</text>
+        <text class="t-sub"    x="577" y="600" text-anchor="middle">na base para depois</text>
+
+        <rect class="caixa-dado" x="715" y="524" width="175" height="92" rx="12"/>
+        <text class="t-titulo" x="802" y="560" text-anchor="middle">Motivo do não</text>
+        <text class="t-sub"    x="802" y="582" text-anchor="middle">orçamento, aluguel,</text>
+        <text class="t-sub"    x="802" y="600" text-anchor="middle">sem resposta</text>
+
+        <rect class="caixa-dado" x="1410" y="524" width="175" height="92" rx="12"/>
+        <text class="t-titulo" x="1497" y="560" text-anchor="middle">Custo real</text>
+        <text class="t-sub"    x="1497" y="582" text-anchor="middle">por conversa e por</text>
+        <text class="t-sub"    x="1497" y="600" text-anchor="middle">lead com perfil</text>
+
+        <line class="desce" x1="352"  y1="394" x2="352"  y2="518" marker-end="url(#pr)"/>
+        <line class="desce" x1="577"  y1="394" x2="577"  y2="518" marker-end="url(#pr)"/>
+        <line class="desce" x1="802"  y1="394" x2="802"  y2="518" marker-end="url(#pr)"/>
+        <line class="desce" x1="1497" y1="394" x2="1497" y2="518" marker-end="url(#pr)"/>
+
+        <!-- ================= O CICLO QUE FECHA ================= -->
+        <path class="volta" d="M 1497 620 L 1497 748 L 127 748 L 127 396"
+              marker-end="url(#pc)"/>
+
+        <rect class="caixa-futuro" x="600" y="722" width="420" height="52" rx="12"/>
+        <text class="t-titulo" x="810" y="746" text-anchor="middle">A venda volta para a Meta</text>
+        <text class="t-sub"    x="810" y="765" text-anchor="middle">o anúncio passa a procurar quem compra, não quem preenche</text>
+
+        <text class="t-nota" x="1512" y="672">próxima entrega</text>
+      </svg>
+    </div>
+
+    <figcaption>
+      As três faixas acontecem ao mesmo tempo. O lead anda pela do meio; o gestor é
+      avisado por cima sem perguntar nada; o registro por baixo é o que transforma
+      atendimento em número. O ciclo só fecha quando a venda volta para a Meta, e é isso
+      que faz o anúncio ficar mais barato com o tempo.
+    </figcaption>
+
+    <div class="legenda">
+      <span><i style="border-top:2.5px solid var(--azul)"></i> caminho do lead</span>
+      <span><i style="border-top:2.5px dashed var(--verde)"></i> aviso automático ao gestor</span>
+      <span><i style="border-top:2.5px solid var(--roxo)"></i> registro no banco</span>
+      <span><i style="border-top:2.5px dotted var(--ink-faint)"></i> próxima entrega</span>
+    </div>
+  </figure>
+
+  <footer>Nova Imob · CRM imobiliário · novaimob.tech</footer>
+</div>
+
+</body>
+</html>

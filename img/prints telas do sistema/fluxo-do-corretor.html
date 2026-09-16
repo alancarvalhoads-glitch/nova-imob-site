@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Régua do Corretor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  /* Paleta da marca Nova Imob: fundo #0B0F19, degradê #60A5FA -> #A78BFA, verde #22C55E.
+     O tema claro reusa os mesmos acentos sobre um cinza de viés frio, para o degradê
+     continuar sendo o mesmo objeto nos dois temas. */
+  :root {
+    --ground:     #F2F4F8;
+    --surface:    #FFFFFF;
+    --surface-2:  #E9EDF4;
+    --line:       #D5DCE7;
+    --ink:        #0B0F19;
+    --ink-soft:   #4C566E;
+    --ink-faint:  #7C87A0;
+    --azul:       #2563EB;
+    --roxo:       #7C3AED;
+    --verde:      #15803D;
+    --ambar:      #B45309;
+    --vermelho:   #DC2626;
+    --shot-frame: #C8D1DF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:     #080B12;
+      --surface:    #10151F;
+      --surface-2:  #161C29;
+      --line:       #232B3B;
+      --ink:        #E8ECF4;
+      --ink-soft:   #97A1B8;
+      --ink-faint:  #69738C;
+      --azul:       #60A5FA;
+      --roxo:       #A78BFA;
+      --verde:      #22C55E;
+      --ambar:      #FBBF24;
+      --vermelho:   #F87171;
+      --shot-frame: #232B3B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:     #080B12;
+    --surface:    #10151F;
+    --surface-2:  #161C29;
+    --line:       #232B3B;
+    --ink:        #E8ECF4;
+    --ink-soft:   #97A1B8;
+    --ink-faint:  #69738C;
+    --azul:       #60A5FA;
+    --roxo:       #A78BFA;
+    --verde:      #22C55E;
+    --ambar:      #FBBF24;
+    --vermelho:   #F87171;
+    --shot-frame: #232B3B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- abertura ---------- */
+  .hero { padding: 72px 0 56px; }
+  .marca {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-faint); margin: 0 0 20px;
+  }
+  h1 {
+    font-family: "Space Grotesk", Inter, sans-serif;
+    font-weight: 700; font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.08; letter-spacing: -.02em;
+    margin: 0 0 20px; max-width: 17ch; text-wrap: balance;
+  }
+  h1 .grad {
+    background: linear-gradient(100deg, var(--azul), var(--roxo));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: 1.125rem; color: var(--ink-soft); max-width: 62ch; margin: 0; }
+
+  /* ---------- números ---------- */
+  .fatos {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    margin: 44px 0 0;
+  }
+  .fato { background: var(--surface); padding: 22px 24px; }
+  .fato b {
+    display: block; font-family: "Space Grotesk", sans-serif;
+    font-size: 2rem; font-weight: 700; line-height: 1.1;
+    font-variant-numeric: tabular-nums; margin-bottom: 4px;
+  }
+  .fato span { font-size: .875rem; color: var(--ink-soft); }
+
+  /* ---------- passos ---------- */
+  .passos { padding: 64px 0 24px; display: flex; flex-direction: column; gap: 56px; }
+
+  .passo { border-top: 1px solid var(--line); padding-top: 28px; }
+
+  .cab { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+  .marco {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px; font-weight: 500; letter-spacing: .04em;
+    padding: 4px 10px; border-radius: 999px;
+    border: 1px solid currentColor; white-space: nowrap;
+  }
+  .p1 .marco { color: var(--azul); }
+  .p2 .marco { color: var(--ambar); }
+  .p3 .marco { color: var(--vermelho); }
+
+  .passo h2 {
+    font-family: "Space Grotesk", Inter, sans-serif;
+    font-size: 1.5rem; font-weight: 700; letter-spacing: -.01em;
+    margin: 0; text-wrap: balance;
+  }
+  .passo p.diz { color: var(--ink-soft); max-width: 64ch; margin: 10px 0 0; }
+
+  /* ---------- prints ---------- */
+  /* Duas colunas fixas, nao auto-fit: com auto-fit, a etapa que tem um print so'
+     esticava a imagem para a largura inteira e ela aparecia tres vezes maior que as
+     das outras etapas. Coluna fixa mantem toda tela do mesmo tamanho.
+     align-items: start impede que o card mais curto estique para igualar o vizinho. */
+  .telas {
+    display: grid; gap: 22px; margin-top: 28px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .tela {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;
+  }
+  .tela figcaption {
+    padding: 14px 18px 0;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .tela .nota { padding: 6px 18px 14px; font-size: .875rem; color: var(--ink-soft); }
+  .tela img {
+    display: block; width: 100%; height: auto;
+    border-top: 1px solid var(--shot-frame);
+  }
+
+  /* ---------- três momentos do gestor ---------- */
+  /* Diferente de .telas: ali a tela E' o conteudo e precisa ser lida. Aqui o titulo
+     carrega a informacao e a imagem so' prova que aquilo existe, entao ela encolhe. */
+  .tres {
+    display: grid; gap: 18px; margin-top: 26px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .cartao {
+    margin: 0; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px; display: flex; flex-direction: column;
+  }
+  .cartao h3 {
+    font-family: "Space Grotesk", Inter, sans-serif;
+    font-size: 1.0625rem; font-weight: 700; color: var(--ink);
+    margin: 0 0 6px; letter-spacing: -.01em; text-wrap: balance;
+  }
+  .cartao p { font-size: .875rem; color: var(--ink-soft); margin: 0 0 16px; flex: 1; }
+  .cartao img {
+    display: block; width: 100%; max-width: 210px; height: auto;
+    border: 1px solid var(--shot-frame); border-radius: 8px; align-self: center;
+  }
+
+  /* ---------- detalhes ---------- */
+  .detalhes { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+  .detalhes li {
+    display: flex; gap: 10px; align-items: baseline;
+    font-size: .9375rem; color: var(--ink-soft);
+  }
+  .detalhes li::before {
+    content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--verde); transform: translateY(-2px);
+  }
+  .detalhes strong { color: var(--ink); font-weight: 600; }
+
+  code {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: .85em; background: var(--surface-2);
+    padding: 2px 6px; border-radius: 5px; color: var(--ink);
+  }
+
+  /* ---------- fecho ---------- */
+  .fecho {
+    border: 1px solid var(--line); border-radius: 16px;
+    background: var(--surface); padding: 32px; margin: 40px 0 0;
+  }
+  .fecho h2 {
+    font-family: "Space Grotesk", Inter, sans-serif;
+    font-size: 1.25rem; margin: 0 0 10px; font-weight: 700;
+  }
+  .fecho p { margin: 0; color: var(--ink-soft); max-width: 66ch; }
+
+  footer {
+    padding: 40px 0 64px; margin-top: 40px;
+    border-top: 1px solid var(--line);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 720px) {
+    .hero { padding: 48px 0 36px; }
+    .passos { gap: 44px; }
+    .telas { grid-template-columns: 1fr; }
+    .tres { grid-template-columns: 1fr; }
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="marca">Nova Imob · CRM imobiliário</p>
+    <h1>O lead qualificado <span class="grad">não fica esperando</span> resposta.</h1>
+    <p class="lede">
+      Quando a inteligência artificial termina de qualificar um contato, o corretor recebe o
+      lead no WhatsApp com a ficha pronta. A partir dali começa a contagem: ele tem prazo
+      para dizer o que aconteceu. Se não disser, o sistema pergunta. Se continuar em
+      silêncio, o gestor fica sabendo.
+    </p>
+
+    <div class="fatos">
+      <div class="fato">
+        <b>10 de 13</b>
+        <span>retornos de corretor só chegaram depois da cobrança automática</span>
+      </div>
+      <div class="fato">
+        <b>0</b>
+        <span>senhas, logins ou aplicativos para o corretor instalar</span>
+      </div>
+      <div class="fato">
+        <b>3</b>
+        <span>momentos de contato, todos disparados sem ninguém lembrar</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="passos">
+
+    <!-- 1 -->
+    <section class="passo p1">
+      <div class="cab">
+        <span class="marco">na hora</span>
+        <h2>O lead cai na mão do corretor</h2>
+      </div>
+      <p class="diz">
+        A IA qualificou e o CRM já sabe de quem é a vez na fila. O corretor recebe uma
+        mensagem curta com um link individual. Sem senha, sem app, sem planilha.
+      </p>
+
+      <div class="telas">
+        <figure class="tela">
+          <figcaption>No WhatsApp do corretor</figcaption>
+          <p class="nota">A mensagem chega pelo número oficial da imobiliária.</p>
+          <img src="Template%201%20-%20notifica%20corretor.jpeg" alt="Mensagem de WhatsApp avisando o corretor sobre um novo lead, com link individual">
+        </figure>
+        <figure class="tela">
+          <figcaption>Ao abrir o link</figcaption>
+          <p class="nota">A ficha completa do cliente, pronta para a abordagem.</p>
+          <img src="Tela%20Nova%20Imob%20-%20novo%20lead%20atribuido%20ao%20corretor.jpeg" alt="Página com os dados do lead, resumo da conversa e botão para falar no WhatsApp">
+        </figure>
+      </div>
+
+      <ul class="detalhes">
+        <li><strong>O resumo é escrito pela IA</strong> a partir da conversa real, então o corretor já sabe o que foi combinado antes de ligar.</li>
+        <li><strong>O botão verde abre o WhatsApp do cliente</strong> com a primeira mensagem pronta, sem copiar número.</li>
+        <li><strong>O selo de visita</strong> aparece quando o cliente pediu para conhecer o decorado.</li>
+      </ul>
+    </section>
+
+    <!-- 2 -->
+    <section class="passo p2">
+      <div class="cab">
+        <span class="marco">+ 3 dias</span>
+        <h2>A imobiliária pergunta como foi</h2>
+      </div>
+      <p class="diz">
+        Passados três dias sem nenhum retorno registrado, o corretor recebe a pergunta. Não é
+        cobrança ainda: é a imobiliária querendo saber o que aconteceu com o cliente dela.
+      </p>
+
+      <div class="telas">
+        <figure class="tela">
+          <figcaption>No WhatsApp do corretor</figcaption>
+          <p class="nota">O lead é identificado por número, nome e empreendimento.</p>
+          <img src="Template%202%20-%20notifica%20corretor%203%20dias%20depois.jpeg" alt="Mensagem de WhatsApp pedindo o retorno do corretor sobre o lead">
+        </figure>
+        <figure class="tela">
+          <figcaption>O formulário de retorno</figcaption>
+          <p class="nota">Situação do lead e o relato, em menos de um minuto.</p>
+          <img src="Tela%20Nova%20Imob%20-%20cobranca%20de%20feedback%203d%20depois.jpeg" alt="Formulário onde o corretor escolhe a situação do lead e escreve o que aconteceu">
+        </figure>
+      </div>
+
+      <ul class="detalhes">
+        <li><strong>O relato escrito é obrigatório.</strong> Marcar uma opção e sair não conta como retorno.</li>
+        <li><strong>A ficha do cliente continua ali em cima</strong>, então ele responde olhando para o caso, não de memória.</li>
+        <li><strong>Tudo o que ele escreve vai para o CRM</strong> e fica no histórico daquele lead.</li>
+      </ul>
+    </section>
+
+    <!-- 3 -->
+    <section class="passo p3">
+      <div class="cab">
+        <span class="marco">+ 24 horas</span>
+        <h2>O silêncio deixa de ser invisível</h2>
+      </div>
+      <p class="diz">
+        Mais um dia sem resposta e a mensagem muda de tom. O corretor é avisado de que a
+        pendência subiu, e o gestor recebe um e-mail com o nome do lead, o nome do corretor
+        e há quantos dias aquilo está parado.
+      </p>
+
+      <!-- As duas pontas do mesmo instante: o corretor e' cobrado e o gestor descobre
+           a pendencia. Lado a lado porque acontecem juntas. -->
+      <div class="telas">
+        <figure class="tela">
+          <figcaption>No WhatsApp do corretor</figcaption>
+          <p class="nota">Segundo aviso, e o corretor sabe que o gestor foi informado.</p>
+          <img src="Template%203%20-%20cobra%20corretor%2024h%20ap%C3%B3s%20o%20template%202.jpeg" alt="Mensagem de WhatsApp cobrando o retorno pendente e avisando que o gestor foi notificado">
+        </figure>
+        <figure class="tela">
+          <figcaption>No e-mail do gestor</figcaption>
+          <p class="nota">No mesmo minuto, com o nome do corretor e há quantos dias parou.</p>
+          <img src="Email%20gestor%20-%20corretor%20n%C3%A3o%20deu%20o%20feedback%20%284%20dias%20depois%29.jpeg" alt="E-mail avisando o gestor que o corretor não deu retorno">
+        </figure>
+      </div>
+
+      <ul class="detalhes">
+        <li><strong>O gestor não precisa perguntar nada a ninguém.</strong> A pendência chega até ele.</li>
+        <li><strong>O link continua válido</strong> por dez dias, então a cobrança nunca leva a uma página morta.</li>
+        <li><strong>O gestor pode passar o lead para outro corretor</strong> a qualquer momento, inclusive depois do retorno. O novo dono é avisado na hora e o acesso do anterior cai.</li>
+      </ul>
+    </section>
+
+    <!-- 4 -->
+    <section class="passo p1">
+      <div class="cab">
+        <span class="marco">em paralelo</span>
+        <h2>O gestor acompanha por e-mail</h2>
+      </div>
+      <p class="diz">
+        O corretor recebe por WhatsApp, que é onde ele vive. O gestor recebe por e-mail,
+        que é onde fica o registro. Ele não precisa entrar em lugar nenhum para saber o
+        que está acontecendo.
+      </p>
+
+      <!-- Aqui o titulo e' a mensagem. Sao tres momentos, e o leitor precisa sair
+           sabendo QUAIS sao, nao ler tres e-mails inteiros. A imagem vira prova de que
+           existem, entao entra pequena. -->
+      <div class="tres">
+        <figure class="cartao">
+          <h3>Quando a IA qualifica</h3>
+          <p>Quem foi qualificado, qual corretor pegou e de qual anúncio veio.</p>
+          <img src="Email%20gestor%20Novo%20lead%20qualificado.jpeg" alt="E-mail avisando o gestor que a IA qualificou um lead e atribuiu a um corretor">
+        </figure>
+        <figure class="cartao">
+          <h3>Quando o retorno chega</h3>
+          <p>A situação do lead e o relato que o corretor escreveu.</p>
+          <img src="Email%20gestor%20-%20corretor%20registrou%20feedback.jpeg" alt="E-mail avisando o gestor que o corretor registrou o retorno">
+        </figure>
+        <figure class="cartao">
+          <h3>Quando o retorno não chega</h3>
+          <p>Quatro dias depois, com o nome do corretor e o tempo parado.</p>
+          <img src="Email%20gestor%20-%20corretor%20n%C3%A3o%20deu%20o%20feedback%20%284%20dias%20depois%29.jpeg" alt="E-mail avisando o gestor que o corretor não deu retorno">
+        </figure>
+      </div>
+
+      <ul class="detalhes">
+        <li><strong>Nada disso exige alguém perguntar.</strong> A informação vai até o gestor, não o contrário.</li>
+        <li><strong>O anúncio de origem viaja junto</strong>, então ele já sabe qual campanha está entregando lead bom.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <section class="fecho">
+    <h2>O que a imobiliária ganha com isso</h2>
+    <p>
+      Lead qualificado que ninguém trabalhou é dinheiro de anúncio jogado fora, e o
+      problema raramente aparece: o gestor só descobre quando o cliente já comprou em outro
+      lugar. Aqui, cada lead qualificado tem um dono com nome, um prazo e um registro do que
+      foi feito. O que não aconteceu fica tão visível quanto o que aconteceu.
+    </p>
+  </section>
+
+  <footer>
+    Nova Imob · CRM imobiliário · novaimob.tech
+  </footer>
+
+</div>
+
+</body>
+</html>

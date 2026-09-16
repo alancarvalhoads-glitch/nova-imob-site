@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova Imob na prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground:#F2F4F8; --surface:#FFFFFF; --surface-2:#E9EDF4; --line:#D5DCE7;
+    --ink:#0B0F19; --ink-soft:#4C566E; --ink-faint:#7C87A0;
+    --azul:#2563EB; --roxo:#7C3AED; --verde:#15803D; --ambar:#B45309; --vermelho:#DC2626;
+    --barra:#DDE3EC;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#080B12; --surface:#10151F; --surface-2:#161C29; --line:#232B3B;
+      --ink:#E8ECF4; --ink-soft:#97A1B8; --ink-faint:#69738C;
+      --azul:#60A5FA; --roxo:#A78BFA; --verde:#22C55E; --ambar:#FBBF24; --vermelho:#F87171;
+      --barra:#1C2434;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#080B12; --surface:#10151F; --surface-2:#161C29; --line:#232B3B;
+    --ink:#E8ECF4; --ink-soft:#97A1B8; --ink-faint:#69738C;
+    --azul:#60A5FA; --roxo:#A78BFA; --verde:#22C55E; --ambar:#FBBF24; --vermelho:#F87171;
+    --barra:#1C2434;
+  }
+
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1060px; margin:0 auto; padding:0 24px; }
+  .mono { font-family:"JetBrains Mono",ui-monospace,monospace; }
+
+  /* ---------- topo ---------- */
+  .topo { padding:56px 0 32px; }
+  .marca { font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.18em;
+           text-transform:uppercase; color:var(--ink-faint); margin:0 0 18px; }
+  h1 { font-family:"Space Grotesk",Inter,sans-serif; font-weight:700;
+       font-size:clamp(1.9rem,4.6vw,2.9rem); line-height:1.1; letter-spacing:-.02em;
+       margin:0 0 16px; max-width:19ch; text-wrap:balance; }
+  h1 .grad { background:linear-gradient(100deg,var(--azul),var(--roxo));
+             -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lede { font-size:1.0625rem; color:var(--ink-soft); max-width:60ch; margin:0; }
+
+  /* ---------- navegação ---------- */
+  .navbar { position:sticky; top:0; z-index:20; background:var(--ground);
+            border-bottom:1px solid var(--line); margin-top:32px; }
+  .abas { display:flex; gap:2px; overflow-x:auto; padding:0; margin:0;
+          scrollbar-width:none; }
+  .abas::-webkit-scrollbar { display:none; }
+  .aba {
+    flex:none; appearance:none; background:none; border:0; cursor:pointer;
+    font-family:Inter,sans-serif; font-size:.875rem; font-weight:500;
+    color:var(--ink-faint); padding:15px 16px; white-space:nowrap;
+    border-bottom:2px solid transparent; transition:color .15s,border-color .15s;
+  }
+  .aba:hover { color:var(--ink); }
+  .aba[aria-selected="true"] { color:var(--ink); border-bottom-color:var(--azul); font-weight:600; }
+  .aba:focus-visible { outline:2px solid var(--azul); outline-offset:-4px; border-radius:4px; }
+
+  /* ---------- painéis ---------- */
+  .painel { padding:44px 0 24px; }
+  .painel[hidden] { display:none; }
+  .painel > h2 {
+    font-family:"Space Grotesk",Inter,sans-serif; font-size:1.6rem; font-weight:700;
+    letter-spacing:-.015em; margin:0 0 10px; text-wrap:balance;
+  }
+  .painel > p.intro { color:var(--ink-soft); max-width:62ch; margin:0 0 32px; font-size:1.0625rem; }
+
+  h3 { font-family:"Space Grotesk",Inter,sans-serif; font-size:1.125rem; font-weight:600;
+       margin:0 0 8px; letter-spacing:-.01em; }
+  p { margin:0 0 14px; }
+  .painel p, .painel li { color:var(--ink-soft); }
+  .painel strong { color:var(--ink); font-weight:600; }
+
+  .bloco { margin:0 0 40px; }
+  .bloco:last-child { margin-bottom:0; }
+
+  /* ---------- números ---------- */
+  .numeros { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+             gap:1px; background:var(--line); border:1px solid var(--line);
+             border-radius:12px; overflow:hidden; margin:0 0 32px; }
+  .num { background:var(--surface); padding:20px; }
+  .num b { display:block; font-family:"Space Grotesk",sans-serif; font-size:1.75rem;
+           font-weight:700; line-height:1.15; font-variant-numeric:tabular-nums;
+           color:var(--ink); margin-bottom:3px; }
+  .num span { font-size:.8125rem; color:var(--ink-soft); line-height:1.45; display:block; }
+
+  /* ---------- etapas numeradas ---------- */
+  .etapas { list-style:none; padding:0; margin:0; display:grid; gap:2px; }
+  .etapa { background:var(--surface); border:1px solid var(--line); border-radius:10px;
+           padding:16px 18px; display:flex; gap:14px; align-items:baseline; }
+  .etapa .n { font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:500;
+              color:var(--azul); flex:none; width:22px; }
+  .etapa div { flex:1; }
+  .etapa b { display:block; color:var(--ink); font-weight:600; font-size:.9375rem; margin-bottom:2px; }
+  .etapa span { font-size:.875rem; color:var(--ink-soft); }
+
+  /* ---------- barras ---------- */
+  .barras { display:grid; gap:12px; margin:0 0 8px; }
+  .linha-b { display:grid; grid-template-columns:minmax(120px,auto) 1fr auto;
+             gap:14px; align-items:center; font-size:.875rem; }
+  .linha-b .rot { color:var(--ink); font-weight:500; }
+  .linha-b .trilho { background:var(--barra); border-radius:5px; height:26px; overflow:hidden; }
+  .linha-b .cheio { height:100%; border-radius:5px;
+                    background:linear-gradient(90deg,var(--azul),var(--roxo)); }
+  .linha-b .val { font-family:"JetBrains Mono",monospace; font-variant-numeric:tabular-nums;
+                  color:var(--ink); font-size:.8125rem; white-space:nowrap; }
+  .barras.motivos .cheio { background:var(--ink-faint); }
+  .barras.motivos .cheio.ok { background:var(--verde); }
+
+  /* Dois graficos lado a lado, cada um com a propria escala. Numa escala so', a barra
+     de R$ 5,73 fica invisivel ao lado da de R$ 215 e a comparacao se perde. */
+  .par { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:20px; }
+  .meia { background:var(--surface); border:1px solid var(--line);
+          border-radius:12px; padding:20px; }
+  .rotulo-g { font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.11em;
+              text-transform:uppercase; color:var(--ink-faint); margin:0 0 16px; }
+  .leg { font-size:.8125rem; margin:14px 0 0; }
+  .meia .linha-b { grid-template-columns:minmax(60px,auto) 1fr auto; }
+
+  /* ---------- tabela ---------- */
+  .rolagem { overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+  table { width:100%; border-collapse:collapse; font-size:.875rem; }
+  th { text-align:left; font-family:"JetBrains Mono",monospace; font-size:10px;
+       letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint);
+       padding:14px 16px; border-bottom:1px solid var(--line); white-space:nowrap; font-weight:500; }
+  td { padding:13px 16px; border-bottom:1px solid var(--line); color:var(--ink-soft); }
+  tr:last-child td { border-bottom:0; }
+  td.n { font-family:"JetBrains Mono",monospace; font-variant-numeric:tabular-nums; color:var(--ink); }
+  td.destaque { color:var(--verde); font-weight:600; }
+  td.alerta { color:var(--vermelho); font-weight:600; }
+
+  /* ---------- prints ---------- */
+  .telas { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px;
+           align-items:start; margin:24px 0 0; }
+  .tela { background:var(--surface); border:1px solid var(--line); border-radius:12px;
+          overflow:hidden; display:flex; flex-direction:column; }
+  .tela figcaption { padding:13px 16px 0; font-family:"JetBrains Mono",monospace;
+                     font-size:10px; letter-spacing:.11em; text-transform:uppercase;
+                     color:var(--ink-faint); }
+  .tela .nota { padding:5px 16px 13px; font-size:.8125rem; color:var(--ink-soft); margin:0; }
+  .tela img { display:block; width:100%; height:auto; border-top:1px solid var(--line); }
+  /* Bloco dos e-mails: numero de colunas acompanha quantos prints existem. Aqui o
+     auto-fit e' seguro porque nunca ha um print sozinho. */
+  .telas.auto { grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+
+  /* ---------- destaque ---------- */
+  .achado { border:1px solid var(--line); border-left:3px solid var(--azul);
+            background:var(--surface); border-radius:0 12px 12px 0; padding:22px 24px; margin:28px 0 0; }
+  .achado h3 { margin-bottom:6px; }
+  .achado p:last-child { margin-bottom:0; }
+
+  .aviso { border:1px solid var(--line); border-left:3px solid var(--ambar);
+           background:var(--surface); border-radius:0 12px 12px 0; padding:18px 22px; margin:24px 0 0;
+           font-size:.9375rem; }
+  .aviso p:last-child { margin-bottom:0; }
+
+  ul.lista { list-style:none; padding:0; margin:0; display:grid; gap:9px; }
+  ul.lista li { display:flex; gap:10px; align-items:baseline; font-size:.9375rem; }
+  ul.lista li::before { content:""; flex:none; width:5px; height:5px; border-radius:50%;
+                        background:var(--verde); transform:translateY(-2px); }
+
+  /* ---------- navegação por slide ---------- */
+  /* Sem isto, quem nao repara na barra de abas acha que a apresentacao termina no
+     primeiro painel. As setas dizem "tem mais coisa" sem precisar de legenda. */
+  .passagem {
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    margin:48px 0 0; padding-top:24px; border-top:1px solid var(--line);
+  }
+  .seta {
+    appearance:none; cursor:pointer; display:flex; align-items:center; gap:10px;
+    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    padding:12px 18px; color:var(--ink); font-family:Inter,sans-serif;
+    font-size:.875rem; font-weight:500; max-width:44%; text-align:left;
+    transition:border-color .15s, color .15s;
+  }
+  .seta:hover:not(:disabled) { border-color:var(--azul); color:var(--azul); }
+  .seta:focus-visible { outline:2px solid var(--azul); outline-offset:2px; }
+  .seta:disabled { opacity:.35; cursor:default; }
+  .seta .glifo { font-size:1.05rem; line-height:1; flex:none; }
+  .seta .txt { display:flex; flex-direction:column; min-width:0; }
+  .seta .txt small {
+    font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.11em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:2px;
+  }
+  .seta .txt span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .seta.depois { flex-direction:row-reverse; text-align:right; }
+  .seta.depois .txt { align-items:flex-end; }
+  .conta {
+    font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.08em;
+    color:var(--ink-faint); font-variant-numeric:tabular-nums; flex:none;
+  }
+
+  /* ---------- seta flutuante ---------- */
+  /* Existe para o leitor saber que ha mais paineis ANTES de rolar a pagina inteira.
+     Some quando a navegacao completa do rodape aparece, senao ficariam dois controles
+     iguais na mesma tela disputando a atencao. */
+  .flutua {
+    position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+    z-index:30; display:flex; align-items:center; gap:4px;
+    padding:5px 7px; border-radius:999px;
+    background:color-mix(in srgb, var(--surface) 88%, transparent);
+    border:1px solid var(--line);
+    box-shadow:0 6px 22px rgba(8,11,18,.16);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    opacity:1; transition:opacity .22s ease, transform .22s ease;
+  }
+  .flutua.oculta { opacity:0; transform:translateX(-50%) translateY(10px); pointer-events:none; }
+  .mini {
+    appearance:none; cursor:pointer; background:none; border:0;
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft); font-size:1rem; line-height:1;
+    transition:background .15s, color .15s;
+  }
+  .mini:hover:not(:disabled) { background:var(--surface-2); color:var(--ink); }
+  .mini:disabled { opacity:.28; cursor:default; }
+  .mini-conta {
+    font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.06em;
+    color:var(--ink-faint); font-variant-numeric:tabular-nums;
+    min-width:30px; text-align:center; user-select:none;
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .flutua { transition:opacity .01s; }
+    .flutua.oculta { transform:translateX(-50%); }
+  }
+
+  footer { padding:36px 0 56px; margin-top:32px; border-top:1px solid var(--line);
+           font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+           text-transform:uppercase; color:var(--ink-faint); }
+
+  @media (max-width:720px) {
+    .telas { grid-template-columns:1fr; }
+    .par { grid-template-columns:1fr; }
+    .linha-b { grid-template-columns:1fr auto; }
+    .linha-b .trilho { grid-column:1 / -1; }
+  }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topo">
+    <p class="marca">Nova Imob · CRM imobiliário</p>
+    <h1>Todo lead tem um dono, um prazo e uma <span class="grad">resposta registrada</span>.</h1>
+    <p class="lede">
+      O que segue são as telas e os números reais de uma construtora usando o sistema hoje,
+      a Sacisa, no Rio de Janeiro. Escolha por onde começar.
+    </p>
+  </header>
+
+  <nav class="navbar" aria-label="Seções">
+    <div class="abas" role="tablist">
+      <button class="aba" role="tab" aria-selected="true"  aria-controls="p-visao"     id="t-visao">Visão geral</button>
+      <button class="aba" role="tab" aria-selected="false" aria-controls="p-chegada"   id="t-chegada">Do anúncio à conversa</button>
+      <button class="aba" role="tab" aria-selected="false" aria-controls="p-corretor"  id="t-corretor">O corretor</button>
+      <button class="aba" role="tab" aria-selected="false" aria-controls="p-gestor"    id="t-gestor">O que o gestor vê</button>
+      <button class="aba" role="tab" aria-selected="false" aria-controls="p-campanha"  id="t-campanha">Campanhas</button>
+      <button class="aba" role="tab" aria-selected="false" aria-controls="p-venda"     id="t-venda">A venda e o Meta</button>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- ================= VISÃO GERAL ================= -->
+  <section class="painel" id="p-visao" role="tabpanel" aria-labelledby="t-visao" tabindex="0">
+    <h2>O problema não é gerar lead. É saber o que aconteceu com ele.</h2>
+    <p class="intro">
+      Uma campanha bem feita entrega centenas de contatos por mês. O gargalo aparece depois:
+      alguém precisa falar com todos, separar quem tem perfil, entregar para o corretor certo
+      e descobrir o que foi feito. Sem isso, a imobiliária paga por lead e não sabe onde ele parou.
+    </p>
+
+    <div class="numeros">
+      <div class="num"><b>2.655</b><span>contatos recebidos desde janeiro de 2026</span></div>
+      <div class="num"><b>1.422</b><span>conversaram com a IA, sem ninguém digitar</span></div>
+      <div class="num"><b>58</b><span>chegaram prontos na mão do corretor</span></div>
+      <div class="num"><b>R$ 11.386</b><span>investidos em anúncio, com cada real rastreado</span></div>
+    </div>
+
+    <div class="bloco">
+      <h3>O caminho completo</h3>
+      <div class="barras" id="funil"></div>
+      <p style="font-size:.8125rem;margin-top:14px">
+        O corretor só toca em <strong>4 de cada 100</strong> contatos. Os outros 96 foram
+        atendidos, respondidos e classificados sem ocupar ninguém da equipe.
+      </p>
+    </div>
+
+    <div class="bloco">
+      <h3>O que o sistema faz, em uma frase cada</h3>
+      <ol class="etapas">
+        <li class="etapa"><span class="n">01</span><div><b>Captura</b><span>O lead do anúncio entra no CRM em segundos, com campanha e anúncio de origem.</span></div></li>
+        <li class="etapa"><span class="n">02</span><div><b>Atende</b><span>A IA puxa conversa no WhatsApp, tira dúvida sobre o empreendimento e faz as perguntas de qualificação.</span></div></li>
+        <li class="etapa"><span class="n">03</span><div><b>Classifica</b><span>Separa quem tem perfil de quem não tem, e registra o motivo de cada descarte.</span></div></li>
+        <li class="etapa"><span class="n">04</span><div><b>Distribui</b><span>Manda o lead qualificado para o próximo corretor da fila, com a ficha pronta.</span></div></li>
+        <li class="etapa"><span class="n">05</span><div><b>Cobra</b><span>Pede o retorno em 3 dias. Se não vier, cobra de novo e avisa o gestor.</span></div></li>
+        <li class="etapa"><span class="n">06</span><div><b>Mede</b><span>Cruza o gasto de cada anúncio com o que virou conversa, qualificação e visita.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= DO ANÚNCIO À CONVERSA ================= -->
+  <section class="painel" id="p-chegada" role="tabpanel" aria-labelledby="t-chegada" tabindex="0" hidden>
+    <h2>Do clique no anúncio até a conversa começar</h2>
+    <p class="intro">
+      A pessoa preenche o formulário dentro do Instagram ou do Facebook e não sai de lá.
+      Do outro lado, o CRM já recebeu o cadastro e a IA já está digitando.
+    </p>
+
+    <div class="bloco">
+      <ol class="etapas">
+        <li class="etapa"><span class="n">01</span><div><b>O formulário é preenchido</b><span>Nome, telefone e as perguntas do anúncio. A Meta avisa o CRM na mesma hora.</span></div></li>
+        <li class="etapa"><span class="n">02</span><div><b>O lead nasce no CRM</b><span>Já com campanha, conjunto, anúncio e as respostas do formulário guardadas.</span></div></li>
+        <li class="etapa"><span class="n">03</span><div><b>A IA manda a primeira mensagem</b><span>Pelo WhatsApp oficial da construtora, citando o empreendimento que a pessoa pediu.</span></div></li>
+        <li class="etapa"><span class="n">04</span><div><b>Quem não responde recebe de novo</b><span>Uma sequência de retomada em dias diferentes, sempre com uma pergunta simples de sim ou não.</span></div></li>
+        <li class="etapa"><span class="n">05</span><div><b>Quem esfria vai para a geladeira</b><span>Sai do quadro ativo, mas continua no banco e pode ser reativado numa campanha futura.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="bloco">
+      <h3>A base fria não é lixo, é ativo</h3>
+      <div class="barras" id="geladeira"></div>
+      <p style="font-size:.8125rem;margin-top:14px">
+        São <strong>1.206 contatos</strong> que já demonstraram interesse em algum
+        empreendimento. Quando entra um lançamento, essa lista é o primeiro público,
+        e ela não custa mídia.
+      </p>
+    </div>
+
+    <div class="achado">
+      <h3>Um detalhe que só aparece com histórico</h3>
+      <p>
+        <strong>50 pessoas preencheram o formulário mais de uma vez</strong>, às vezes
+        para empreendimentos diferentes, com meses de distância. O CRM reconhece que é a mesma
+        pessoa e mostra as duas passagens na ficha. Sem isso, ela viraria dois leads e dois
+        atendimentos do zero.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= O CORRETOR ================= -->
+  <section class="painel" id="p-corretor" role="tabpanel" aria-labelledby="t-corretor" tabindex="0" hidden>
+    <h2>O corretor recebe pronto e tem prazo para responder</h2>
+    <p class="intro">
+      Sem login, sem aplicativo, sem planilha. Um link individual no WhatsApp, que abre a ficha
+      do cliente e o botão para começar a conversa.
+    </p>
+
+    <div class="bloco">
+      <h3>Na hora: o lead cai na mão dele</h3>
+      <div class="telas">
+        <figure class="tela">
+          <figcaption>No WhatsApp do corretor</figcaption>
+          <p class="nota">Chega pelo número oficial da construtora.</p>
+          <img src="Template%201%20-%20notifica%20corretor.jpeg" alt="Mensagem avisando o corretor sobre um novo lead">
+        </figure>
+        <figure class="tela">
+          <figcaption>Ao abrir o link</figcaption>
+          <p class="nota">Ficha completa e resumo escrito pela IA.</p>
+          <img src="Tela%20Nova%20Imob%20-%20novo%20lead%20atribuido%20ao%20corretor.jpeg" alt="Página com dados do lead e botão para falar no WhatsApp">
+        </figure>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h3>Em 3 dias: a construtora pergunta como foi</h3>
+      <div class="telas">
+        <figure class="tela">
+          <figcaption>No WhatsApp do corretor</figcaption>
+          <p class="nota">O lead é identificado por número, nome e empreendimento.</p>
+          <img src="Template%202%20-%20notifica%20corretor%203%20dias%20depois.jpeg" alt="Mensagem pedindo o retorno do corretor">
+        </figure>
+        <figure class="tela">
+          <figcaption>O formulário de retorno</figcaption>
+          <p class="nota">Situação e relato. O texto escrito é obrigatório.</p>
+          <img src="Tela%20Nova%20Imob%20-%20cobranca%20de%20feedback%203d%20depois.jpeg" alt="Formulário de retorno do corretor">
+        </figure>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h3>Em 4 dias: o gestor fica sabendo</h3>
+      <div class="telas">
+        <figure class="tela">
+          <figcaption>No WhatsApp do corretor</figcaption>
+          <p class="nota">Segundo aviso, e o gestor recebe um e-mail com a pendência.</p>
+          <img src="Template%203%20-%20cobra%20corretor%2024h%20ap%C3%B3s%20o%20template%202.jpeg" alt="Mensagem cobrando o retorno pendente">
+        </figure>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h3>Em paralelo: o gestor é avisado por e-mail</h3>
+      <p style="font-size:.9375rem">
+        O corretor recebe por WhatsApp, que é onde ele vive. O gestor recebe por e-mail,
+        que é onde fica o registro. Ele não precisa entrar no sistema para saber o que
+        está acontecendo.
+      </p>
+      <div class="telas auto">
+                <figure class="tela">
+          <figcaption>Quando a IA qualifica</figcaption>
+          <p class="nota">Diz quem foi qualificado e qual corretor recebeu.</p>
+          <img src="Email%20gestor%20Novo%20lead%20qualificado.jpeg" alt="E-mail avisando o gestor que a IA qualificou um lead e atribuiu a um corretor">
+        </figure>
+
+        <figure class="tela">
+          <figcaption>Quando o retorno chega</figcaption>
+          <p class="nota">Com a situação e o relato escrito pelo corretor.</p>
+          <img src="Email%20gestor%20-%20corretor%20registrou%20feedback.jpeg" alt="E-mail avisando o gestor que o corretor registrou o retorno">
+        </figure>
+        <figure class="tela">
+          <figcaption>Quando o retorno não chega</figcaption>
+          <p class="nota">Quatro dias depois da atribuição, com o nome do corretor.</p>
+          <img src="Email%20gestor%20-%20corretor%20n%C3%A3o%20deu%20o%20feedback%20%284%20dias%20depois%29.jpeg" alt="E-mail avisando o gestor que o corretor não deu retorno">
+        </figure>
+      </div>
+    </div>
+
+    <div class="achado">
+      <h3>Por que a cobrança automática existe</h3>
+      <p>
+        Dos <strong>13 retornos</strong> já registrados pelos corretores da Sacisa,
+        <strong>10 só chegaram depois da cobrança</strong> automática. Ninguém está de má
+        vontade: corretor bom está na rua, vendendo. O sistema lembra por ele.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= O GESTOR ================= -->
+  <section class="painel" id="p-gestor" role="tabpanel" aria-labelledby="t-gestor" tabindex="0" hidden>
+    <h2>O gestor para de perguntar e passa a olhar</h2>
+    <p class="intro">
+      Toda a operação em um quadro só: em que etapa cada lead está, quem é o dono, o que ele
+      respondeu e há quanto tempo nada acontece.
+    </p>
+
+    <div class="bloco">
+      <h3>Desempenho por corretor, sem ninguém preencher planilha</h3>
+      <div class="rolagem">
+        <table>
+          <thead><tr><th>Corretor</th><th>Recebidos</th><th>Retornos</th><th>Avançaram</th></tr></thead>
+          <tbody>
+            <tr><td>Bairon</td><td class="n">4</td><td class="n destaque">4</td><td class="n">3</td></tr>
+            <tr><td>Janne</td><td class="n">4</td><td class="n destaque">4</td><td class="n">1</td></tr>
+            <tr><td>Vilas Boas</td><td class="n">3</td><td class="n">2</td><td class="n">0</td></tr>
+            <tr><td>Célia</td><td class="n">4</td><td class="n alerta">0</td><td class="n">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.8125rem;margin-top:14px">
+        Quatro leads entregues e nenhum retorno é uma informação que não existia antes.
+        Não é para punir ninguém: é para o gestor conseguir perguntar a coisa certa.
+      </p>
+    </div>
+
+    <div class="bloco">
+      <h3>Por que a IA não passou o lead adiante</h3>
+      <div class="barras motivos" id="motivos"></div>
+      <p style="font-size:.8125rem;margin-top:14px">
+        Cada descarte tem motivo registrado. Quando <strong>orçamento baixo</strong> domina,
+        o problema é a mídia atraindo o público errado. Quando domina
+        <strong>não respondeu</strong>, o problema é a abordagem.
+      </p>
+    </div>
+
+    <div class="bloco">
+      <h3>O que mais fica no painel</h3>
+      <ul class="lista">
+        <li><strong>Quadro por etapa</strong>, com o lead andando sozinho conforme a conversa acontece.</li>
+        <li><strong>Ficha do lead</strong> com a conversa inteira, as respostas do formulário e o anúncio de origem.</li>
+        <li><strong>Trocar o corretor</strong> a qualquer momento, inclusive depois do retorno. O novo é avisado na hora e o acesso do anterior cai.</li>
+        <li><strong>E-mail para o gestor</strong> quando um retorno chega e quando um corretor atrasa.</li>
+        <li><strong>Consumo da IA</strong> por período, para o custo do atendimento nunca ser surpresa.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= CAMPANHAS ================= -->
+  <section class="painel" id="p-campanha" role="tabpanel" aria-labelledby="t-campanha" tabindex="0" hidden>
+    <h2>O painel da Meta para no lead. O CRM continua.</h2>
+    <p class="intro">
+      A Meta sabe quanto custou cada cadastro. Ela não sabe quem respondeu, quem tinha perfil
+      e quem marcou visita. Cruzando as duas pontas, a leitura muda.
+    </p>
+
+    <div class="bloco">
+      <div class="rolagem">
+        <table>
+          <thead><tr><th>Campanha</th><th>Investido</th><th>Custo por lead</th><th>Qualificados</th><th>Custo por qualificado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Prime 187</td><td class="n">R$ 8.393,91</td>
+              <td class="n">R$ 14,94</td><td class="n">39</td><td class="n">R$ 215,23</td>
+            </tr>
+            <tr>
+              <td>Expand</td><td class="n">R$ 2.993,06</td>
+              <td class="n destaque">R$ 5,73</td><td class="n">15</td><td class="n">R$ 199,54</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="achado">
+      <h3>O que esse número muda na prática</h3>
+      <p>
+        Olhando só o gerenciador da Meta, a campanha do Expand parece
+        <strong>2,6 vezes melhor</strong>: R$ 5,73 contra R$ 14,94 por lead. A decisão óbvia
+        seria tirar verba do Prime e jogar no Expand.
+      </p>
+      <p>
+        Só que o lead do Prime conversa mais e qualifica mais. Quando a conta chega no que
+        interessa, quem tem perfil de compra, as duas campanhas <strong>praticamente
+        empatam</strong>: R$ 215 contra R$ 199. A decisão óbvia estava errada, e por pouco
+        não custou caro.
+      </p>
+    </div>
+
+    <div class="bloco" style="margin-top:40px">
+      <h3>A mesma comparação, vista de dois jeitos</h3>
+      <p style="font-size:.9375rem">
+        Cada gráfico tem a própria escala. É a mudança de forma entre os dois que conta a história.
+      </p>
+
+      <div class="par">
+        <div class="meia">
+          <p class="rotulo-g">O que a Meta mostra: custo por lead</p>
+          <div class="barras" id="c-lead"></div>
+          <p class="leg">O Expand parece disparado melhor.</p>
+        </div>
+        <div class="meia">
+          <p class="rotulo-g">O que o CRM mostra: custo por qualificado</p>
+          <div class="barras" id="c-qual"></div>
+          <p class="leg">Na hora de contar quem tem perfil, empate técnico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VENDA E CAPI ================= -->
+  <section class="painel" id="p-venda" role="tabpanel" aria-labelledby="t-venda" tabindex="0" hidden>
+    <h2>Fechar o ciclo é o que faz o anúncio ficar mais barato</h2>
+    <p class="intro">
+      Esta é a parte que quase nenhuma imobiliária faz, e é a que mais muda o resultado
+      depois de alguns meses.
+    </p>
+
+    <div class="bloco">
+      <h3>Como a Meta aprende hoje</h3>
+      <p>
+        O algoritmo só enxerga até onde você conta para ele. Se a última coisa que ele soube
+        foi <strong>formulário preenchido</strong>, é isso que ele vai perseguir: mais
+        formulários, das pessoas que costumam preencher formulários. Muitas delas nunca
+        tiveram intenção de comprar.
+      </p>
+    </div>
+
+    <div class="bloco">
+      <h3>Como passa a aprender</h3>
+      <p>
+        Quando o CRM devolve para a Meta quem virou <strong>conversa</strong>, quem virou
+        <strong>visita</strong> e quem virou <strong>venda</strong>, o alvo muda. O algoritmo
+        para de procurar quem parece com quem preenche e passa a procurar quem parece com
+        quem comprou.
+      </p>
+      <ol class="etapas" style="margin-top:18px">
+        <li class="etapa"><span class="n">01</span><div><b>O corretor registra a venda</b><span>Contrato assinado, valor e empreendimento. Reserva e visita não contam como venda.</span></div></li>
+        <li class="etapa"><span class="n">02</span><div><b>O CRM sabe de onde aquele cliente veio</b><span>Campanha e anúncio ficaram guardados desde o primeiro dia.</span></div></li>
+        <li class="etapa"><span class="n">03</span><div><b>A Meta recebe o evento</b><span>Direto de servidor, sem depender de cookie ou do navegador da pessoa.</span></div></li>
+        <li class="etapa"><span class="n">04</span><div><b>A campanha se ajusta</b><span>Com volume suficiente, ela passa a otimizar por venda, não por cadastro.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="achado">
+      <h3>O número que ninguém tem</h3>
+      <p>
+        Com o ciclo fechado, a pergunta deixa de ser <strong>quanto custa um lead</strong> e
+        passa a ser <strong>quanto custa uma venda, por campanha e por anúncio</strong>. É a
+        única métrica que decide orçamento sem chute.
+      </p>
+    </div>
+
+    <div class="aviso">
+      <p>
+        <strong>Onde a Sacisa está hoje:</strong> a captura, o atendimento, a distribuição, a
+        cobrança e as métricas de campanha estão no ar. O registro de venda é a próxima
+        entrega, e é ela que liga o último fio.
+      </p>
+    </div>
+  </section>
+
+  </main>
+
+  <nav class="passagem" aria-label="Navegar entre as seções">
+    <button class="seta antes" id="ir-antes" type="button">
+      <span class="glifo" aria-hidden="true">&#8592;</span>
+      <span class="txt"><small>Anterior</small><span id="rot-antes"></span></span>
+    </button>
+    <span class="conta" id="conta" aria-live="polite"></span>
+    <button class="seta depois" id="ir-depois" type="button">
+      <span class="glifo" aria-hidden="true">&#8594;</span>
+      <span class="txt"><small>Próximo</small><span id="rot-depois"></span></span>
+    </button>
+  </nav>
+
+  <footer>Nova Imob · CRM imobiliário · novaimob.tech</footer>
+</div>
+
+<!-- Duplica a navegação do rodapé, então fica fora da árvore de acessibilidade:
+     quem usa leitor de tela já tem os botões nomeados lá embaixo. -->
+<div class="flutua" id="flutua" aria-hidden="true">
+  <button class="mini" id="mini-antes" type="button" tabindex="-1" title="Anterior">&#8592;</button>
+  <span class="mini-conta" id="mini-conta"></span>
+  <button class="mini" id="mini-depois" type="button" tabindex="-1" title="Próximo">&#8594;</button>
+</div>
+
+<script>
+(function () {
+  // ---------- barras desenhadas a partir dos dados, nao chumbadas no HTML ----------
+  function barras(alvo, itens, opcoes) {
+    var el = document.getElementById(alvo);
+    if (!el) return;
+    var teto = Math.max.apply(null, itens.map(function (i) { return i.v; }));
+    el.innerHTML = itens.map(function (i) {
+      var pct = teto ? (i.v / teto * 100) : 0;
+      var classe = i.ok ? ' ok' : '';
+      return '<div class="linha-b">' +
+               '<span class="rot">' + i.r + '</span>' +
+               '<div class="trilho"><div class="cheio' + classe + '" style="width:' + pct.toFixed(1) + '%"></div></div>' +
+               '<span class="val">' + (i.t || i.v.toLocaleString('pt-BR')) + '</span>' +
+             '</div>';
+    }).join('');
+  }
+
+  barras('funil', [
+    { r: 'Contatos recebidos', v: 2655 },
+    { r: 'Conversaram com a IA', v: 1422 },
+    { r: 'Classificados', v: 1019 },
+    { r: 'Qualificados', v: 58 }
+  ]);
+
+  barras('geladeira', [
+    { r: '15 dias parado', v: 25 },
+    { r: '30 dias', v: 73 },
+    { r: '60 dias', v: 129 },
+    { r: '90 dias ou mais', v: 979 }
+  ]);
+
+  barras('motivos', [
+    { r: 'Não respondeu', v: 431 },
+    { r: 'Recusou seguir', v: 178 },
+    { r: 'Orçamento baixo', v: 193 },
+    { r: 'Ainda morno', v: 175 },
+    { r: 'Não é comprador', v: 20 },
+    { r: 'Queria alugar', v: 14 },
+    { r: 'Fora do perfil', v: 8 }
+  ]);
+
+  barras('c-lead', [
+    { r: 'Prime 187', v: 14.94, t: 'R$ 14,94' },
+    { r: 'Expand',    v: 5.73,  t: 'R$ 5,73' }
+  ]);
+
+  barras('c-qual', [
+    { r: 'Prime 187', v: 215.23, t: 'R$ 215,23' },
+    { r: 'Expand',    v: 199.54, t: 'R$ 199,54' }
+  ]);
+
+  // ---------- abas e setas ----------
+  var abas   = Array.prototype.slice.call(document.querySelectorAll('.aba'));
+  var antes  = document.getElementById('ir-antes');
+  var depois = document.getElementById('ir-depois');
+  var rotA   = document.getElementById('rot-antes');
+  var rotD   = document.getElementById('rot-depois');
+  var conta  = document.getElementById('conta');
+  var flutua = document.getElementById('flutua');
+  var mAntes = document.getElementById('mini-antes');
+  var mDepois= document.getElementById('mini-depois');
+  var mConta = document.getElementById('mini-conta');
+  var atual  = 0;
+
+  function mostrar(i, rolarAoTopo) {
+    atual = i;
+    abas.forEach(function (a, j) {
+      var sel = j === i;
+      a.setAttribute('aria-selected', sel ? 'true' : 'false');
+      document.getElementById(a.getAttribute('aria-controls')).hidden = !sel;
+    });
+    abas[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+
+    // Nas pontas a seta fica visivel porem desabilitada: sumir com ela mudaria o
+    // layout a cada passo e o leitor perderia a referencia de onde clicar.
+    var temAntes  = i > 0;
+    var temDepois = i < abas.length - 1;
+    antes.disabled  = !temAntes;
+    depois.disabled = !temDepois;
+    rotA.textContent = temAntes  ? abas[i - 1].textContent : 'Começo';
+    rotD.textContent = temDepois ? abas[i + 1].textContent : 'Fim';
+    conta.textContent = (i + 1) + ' / ' + abas.length;
+
+    mAntes.disabled  = !temAntes;
+    mDepois.disabled = !temDepois;
+    mConta.textContent = (i + 1) + '/' + abas.length;
+
+    if (rolarAoTopo) {
+      document.querySelector('.navbar').scrollIntoView({
+        block: 'start',
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      });
+    }
+  }
+
+  abas.forEach(function (aba, i) {
+    aba.addEventListener('click', function () { mostrar(i, false); });
+    aba.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var prox = (i + d + abas.length) % abas.length;
+      abas[prox].focus();
+      mostrar(prox, false);
+    });
+  });
+
+  function anda(passo, rolar) {
+    var alvo = atual + passo;
+    if (alvo >= 0 && alvo < abas.length) mostrar(alvo, rolar);
+  }
+
+  antes.addEventListener('click',  function () { anda(-1, true); });
+  depois.addEventListener('click', function () { anda(1,  true); });
+
+  // A flutuante leva ao topo do painel novo, igual as grandes: continuar lendo do meio
+  // de um painel que voce nao viu comecar e' desorientador.
+  mAntes.addEventListener('click',  function () { anda(-1, true); });
+  mDepois.addEventListener('click', function () { anda(1,  true); });
+
+  mostrar(0, false);
+
+  // Some quando a navegacao completa do rodape entra na tela. Dois controles iguais
+  // visiveis ao mesmo tempo so' geram duvida sobre qual e' o certo.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entradas) {
+      flutua.classList.toggle('oculta', entradas[0].isIntersecting);
+    }, { rootMargin: '0px 0px -8px 0px' }).observe(document.querySelector('.passagem'));
+  }
+})();
+</script>
+
+</body>
+</html>
