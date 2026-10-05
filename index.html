@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plantão Infinito | Nova Imob, atendimento de leads com IA para imobiliárias</title>
-<meta name="description" content="42,68% dos leads de imóveis chegam fora do horário comercial. O Plantão Infinito atende no WhatsApp a qualquer hora, qualifica e acompanha cada lead até o corretor fechar.">
+<title>Nova Imob | Infraestrutura de atendimento com IA para o mercado imobiliário</title>
+<meta name="description" content="A Nova Imob desenha e opera o atendimento de leads de imobiliárias: agente de IA no WhatsApp pela API oficial, qualificação automática, retomada de base e painel de gestão. Entenda como funciona.">
 <link rel="canonical" href="https://novaimob.tech/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://novaimob.tech/">
 <meta property="og:site_name" content="Nova Imob">
-<meta property="og:title" content="Seu plantão fecha às 18h. O lead não.">
-<meta property="og:description" content="O funil que atende, qualifica e acompanha cada lead até o seu corretor fechar. Para imobiliárias de Praia Grande e da Baixada Santista.">
+<meta property="og:title" content="Nova Imob | Infraestrutura de atendimento com IA para imobiliárias">
+<meta property="og:description" content="Agente de IA no WhatsApp pela API oficial, qualificação automática, retomada de base e painel de gestão. Veja o fluxo completo, do primeiro contato ao corretor.">
 <meta property="og:image" content="https://novaimob.tech/alan-carvalho.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Seu plantão fecha às 18h. O lead não.">
-<meta name="twitter:description" content="O funil que atende, qualifica e acompanha cada lead até o corretor fechar.">
+<meta name="twitter:title" content="Nova Imob | IA aplicada ao atendimento imobiliário">
+<meta name="twitter:description" content="Como funciona um atendimento que não fecha às 18h: o fluxo, a tecnologia e o que muda na operação da imobiliária.">
 <meta name="twitter:image" content="https://novaimob.tech/alan-carvalho.jpg">
 
   <!-- Meta Pixel -->
@@ -36,202 +36,169 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/assets/cta-modal.css">
 
 <style>
   :root{
-    --bg:#0B0F19; --bg-alt:#0F1524; --card:#141A29; --card-alt:#111729;
-    --line:#2A3247; --text:#D1D5DB; --white:#FFFFFF; --muted:#9CA3AF;
-    --blue:#3B82F6; --blue-soft:#60A5FA; --blue-pale:#93C5FD;
-    --purple:#7C3AED; --red:#F87171; --red-soft:#FCA5A5;
-    --green:#34D399; --green-pale:#6EE7B7;
+    --bg:#0B0F19; --bg-alt:#0D1220; --card:#131A2B; --line:rgba(255,255,255,.08);
+    --text:#C7D0E0; --white:#F8FAFC; --muted:#97A3B8; --faint:#6B7689;
+    --blue:#60A5FA; --purple:#A78BFA; --green:#22C55E;
     --grad:linear-gradient(135deg,#2563EB,#6D28D9);
     --display:'Space Grotesk',system-ui,sans-serif;
     --body:Inter,system-ui,sans-serif;
     --mono:'JetBrains Mono',ui-monospace,monospace;
-    --wrap:1160px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.55;overflow-x:hidden}
-  a{color:var(--blue-pale)}
-  a:hover{color:var(--white)}
-  h1,h2,h3{font-family:var(--display);color:var(--white);margin:0;line-height:1.1}
-  h1{font-size:clamp(38px,5.4vw,64px);font-weight:700;line-height:1.05}
-  h2{font-size:clamp(30px,4vw,44px);font-weight:700}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);
+    font-size:17px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--display);color:var(--white);margin:0;line-height:1.1;letter-spacing:-.02em}
+  h1{font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.04}
+  h2{font-size:clamp(28px,3.6vw,42px);font-weight:700}
+  h3{font-size:19px;font-weight:600}
   p{margin:0}
-  .wrap{max-width:var(--wrap);margin:0 auto;padding:88px 24px}
-  .stack{display:flex;flex-direction:column;gap:40px}
-  .intro{display:flex;flex-direction:column;gap:14px;max-width:760px}
-  .eyebrow{font-family:var(--mono);font-size:13px;color:var(--blue-pale)}
-  .src{font-size:13px;color:var(--muted)}
-  .alt{background:var(--bg-alt)}
-  .card{padding:28px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{color:var(--white)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  section{padding:96px 0}
+  .alt{background:var(--bg-alt);border-block:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+  .intro{max-width:740px;display:flex;flex-direction:column;gap:16px;margin-bottom:48px}
+  .intro p{font-size:18px;color:var(--muted)}
   .grid{display:grid;gap:20px}
-  .grid-3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-  .grid-4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-  .big{font-family:var(--display);font-size:44px;font-weight:700;color:var(--white);line-height:1.1}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;
+    display:flex;flex-direction:column;gap:12px}
+  .card p{font-size:15.5px;color:var(--muted)}
+  .ico{width:44px;height:44px;border-radius:12px;background:rgba(96,165,250,.1);
+    border:1px solid rgba(96,165,250,.22);display:flex;align-items:center;justify-content:center}
 
-  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;
-    border:0;border-radius:10px;background:var(--grad);color:var(--white);font-family:var(--body);
-    font-weight:600;font-size:17px;text-decoration:none;cursor:pointer;text-align:center}
-  .btn:hover{color:var(--white);filter:brightness(1.08)}
-  .btn-sm{min-height:44px;padding:0 20px;font-size:15px;border-radius:8px}
-  .btn-lg{min-height:56px;padding:0 34px;font-size:18px;border-radius:12px}
-  .btn-ghost{background:none;color:var(--text);font-weight:500;padding:0 8px;min-height:52px;
-    display:inline-flex;align-items:center;text-decoration:none}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;
+    padding:0 26px;border:0;border-radius:12px;background:var(--grad);color:#fff;
+    font-family:var(--body);font-weight:600;font-size:16px;cursor:pointer}
+  .btn:hover{color:#fff;filter:brightness(1.1)}
+  .btn-line{background:none;border:1px solid var(--line);color:var(--white)}
+  .btn-line:hover{border-color:var(--blue)}
+  .btn-sm{min-height:42px;padding:0 18px;font-size:14.5px;border-radius:9px}
 
   /* topo */
-  .nav{max-width:var(--wrap);margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;gap:16px;
-    align-items:center;justify-content:space-between}
-  .logo{font-family:var(--display);font-size:24px;color:var(--white)}
-  .logo b{color:var(--blue-soft);font-weight:700}
+  header{position:sticky;top:0;z-index:50;background:rgba(11,15,25,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;
+    max-width:1120px;margin:0 auto}
+  .logo{font-family:var(--display);font-size:22px;color:var(--white);font-weight:400}
+  .logo b{color:var(--blue);font-weight:700}
+  .nav-links{display:flex;gap:26px;align-items:center;font-size:15px}
+  .nav-links a{color:var(--muted)}
+  .nav-links a:hover{color:var(--white)}
+  @media(max-width:820px){.nav-links{display:none}}
 
   /* hero */
-  .hero{background:radial-gradient(900px 500px at 85% 0%,rgba(59,130,246,.22),transparent 70%),
-                   radial-gradient(700px 500px at 0% 100%,rgba(124,58,237,.18),transparent 70%)}
-  .hero .wrap{padding:48px 24px 88px;display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-  .hero-copy{flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:24px}
-  .hero-copy p{font-size:19px;max-width:560px}
-  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue);
-    margin-right:10px;animation:pulse 1.8s infinite}
-  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .hero{position:relative;padding:110px 0 96px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-40% -20% auto -20%;height:120%;
+    background:radial-gradient(60% 50% at 70% 10%,rgba(96,165,250,.18),transparent 70%),
+               radial-gradient(50% 50% at 10% 60%,rgba(167,139,250,.16),transparent 70%);
+    animation:drift 22s ease-in-out infinite alternate;pointer-events:none}
+  .mesh{position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),
+                     linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(70% 60% at 50% 30%,#000,transparent 75%)}
+  .hero .wrap{position:relative}
+  .hero-inner{max-width:820px;display:flex;flex-direction:column;gap:24px}
+  .hero p.sub{font-size:19.5px;color:var(--muted);max-width:660px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .pill{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding:7px 13px;
+    border:1px solid var(--line);border-radius:99px;background:rgba(255,255,255,.02)}
 
-  /* celular */
-  .phone-col{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:18px}
-  .toggle{display:flex;gap:6px;padding:5px;border-radius:12px;background:var(--card);border:1px solid var(--line)}
-  .toggle button{min-height:44px;padding:0 16px;border:0;border-radius:8px;background:none;
-    color:var(--text);font:600 14px var(--body);cursor:pointer}
-  .toggle button[aria-pressed="true"]{background:var(--grad);color:var(--white)}
-  .toggle button.off[aria-pressed="true"]{background:#7F1D1D}
-  .phone{width:100%;max-width:340px;border-radius:36px;padding:14px;background:var(--card);
-    border:1px solid var(--line);box-shadow:0 30px 80px rgba(59,130,246,.25)}
-  .screen{border-radius:24px;background:var(--bg);padding:18px 14px;min-height:430px;
-    display:flex;flex-direction:column;gap:12px}
-  .screen-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;
-    color:var(--muted);padding-bottom:10px;border-bottom:1px solid var(--line)}
-  .msg{max-width:85%;padding:10px 14px;font-size:15px;color:var(--white)}
-  .msg time{display:block;font-size:11px;color:var(--muted);margin-top:4px}
-  .msg-in{align-self:flex-start;border-radius:4px 16px 16px 16px;background:#1F2937}
-  .msg-out{align-self:flex-end;border-radius:16px 4px 16px 16px;background:var(--grad);animation:rise .4s both}
-  .msg-out time{color:#DBEAFE}
-  .no-answer{margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:10px;
-    text-align:center;animation:rise .5s both}
-  .no-answer strong{font-family:var(--display);font-size:20px;font-weight:600;color:var(--red-soft)}
-  .no-answer span{font-size:14px;max-width:230px}
-  .ok-bar{margin-top:auto;display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;
-    background:rgba(52,211,153,.1);border:1px solid #065F46;font-size:13px;color:#A7F3D0;animation:rise .4s 1s both}
-  .caption{font-size:12px;color:var(--muted)}
-
-  /* 4 pontos */
-  .leak{position:relative;display:flex;flex-direction:column;gap:12px}
-  .leak h3{font-size:22px;font-weight:600}
-  .leak p{font-size:15px}
-  .leak::after{content:"";position:absolute;left:44px;bottom:-8px;width:8px;height:8px;
-    border-radius:50%;background:var(--red);animation:drip 2.2s infinite}
-  .leak:nth-of-type(2)::after{animation-delay:.5s}
-  .leak:nth-of-type(3)::after{animation-delay:1s}
-  .leak:nth-of-type(4)::after{animation-delay:1.5s}
-
-  /* relogio */
-  .clock-row{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-  .clock{flex:0 1 340px;min-width:260px;margin:0 auto}
-  .clock svg{width:100%;height:auto;display:block}
-  .clock-copy{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:24px}
-
-  /* calculadora */
-  .calc{display:flex;flex-wrap:wrap;gap:24px}
-  .calc-controls{flex:1 1 420px;min-width:0;padding:32px;border-radius:20px;background:var(--card);
-    border:1px solid var(--line);display:flex;flex-direction:column;gap:22px}
-  .calc-controls label{display:flex;justify-content:space-between;font-weight:500;color:var(--white)}
-  .calc-controls output{font-family:var(--mono);color:var(--blue-pale)}
-  .calc input[type=range]{accent-color:var(--blue);width:100%;height:44px;margin:0;cursor:pointer}
-  .calc-out{flex:1 1 340px;min-width:0;padding:2px;border-radius:20px;background:linear-gradient(135deg,#3B82F6,#7C3AED)}
-  .calc-out>div{height:100%;padding:32px;border-radius:18px;background:var(--card-alt);
-    display:flex;flex-direction:column;gap:18px;justify-content:center}
-  .calc-out .money{font-family:var(--display);font-size:clamp(36px,5vw,52px);font-weight:700;color:var(--red-soft);line-height:1.1}
-  .calc-out .year{font-family:var(--display);font-size:32px;font-weight:700;color:var(--white)}
-  .conseq{display:flex;gap:14px;align-items:flex-start;font-size:15px}
-  .conseq svg{flex:none}
-  .conseq strong{color:var(--white)}
-
-  /* funil */
-  .mech{background:radial-gradient(800px 500px at 50% 0%,rgba(124,58,237,.2),transparent 70%)}
-  .mech .wrap{padding:96px 24px;display:flex;flex-direction:column;gap:44px;align-items:center;text-align:center}
-  .mech h2{font-size:clamp(36px,5.5vw,64px);line-height:1.05}
-  .mech .lead{font-size:19px;max-width:780px}
-  .posts{width:100%;display:flex;flex-direction:column;gap:14px;align-items:center}
-  .post{width:100%;display:flex;gap:18px;align-items:center;padding:16px 22px;border-radius:16px;
-    cursor:pointer;background:var(--card);border:1px solid var(--line);min-height:76px;
-    font-family:var(--body);text-align:left;color:var(--text)}
-  .post[aria-expanded="true"]{background:#1B2140;border-color:var(--blue)}
-  .post:nth-of-type(1){max-width:960px}
-  .post:nth-of-type(2){max-width:845px}
-  .post:nth-of-type(3){max-width:730px}
-  .post:nth-of-type(4){max-width:615px}
-  .post .n{flex:none;width:44px;height:44px;border-radius:50%;background:var(--grad);display:flex;
-    align-items:center;justify-content:center;font:700 18px var(--display);color:var(--white)}
-  .post .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
-  .post .name{font:600 20px var(--display);color:var(--white)}
-  .post .fecha{font:400 13px var(--mono);color:var(--green-pale)}
-  .post .detail{font-size:15px;animation:rise .3s both}
-  .post[aria-expanded="false"] .detail{display:none}
-  .post .chev{flex:none;transition:transform .2s}
-  .post[aria-expanded="true"] .chev{transform:rotate(180deg)}
-  .mech-note{max-width:640px;padding:24px 28px;border-radius:16px;border:1px dashed #4B5563;
-    display:flex;flex-direction:column;gap:14px;align-items:center}
-
-  /* prova */
-  .proof{display:flex;flex-wrap:wrap;gap:24px}
-  .proof>div{flex:1 1 420px;min-width:0;padding:36px;border-radius:20px;background:var(--card);
-    border:1px solid var(--line);display:flex;flex-direction:column;gap:18px}
-  .proof h2{font-size:30px;line-height:1.15}
-  .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;font-size:15px;margin:0}
-  .roles dt{font:600 14px var(--mono);color:var(--blue-pale);margin-bottom:8px}
-  .roles dd{margin:0}
-  .roles .green dt{color:var(--green-pale)}
-  blockquote{margin:0;font-size:18px;color:var(--white)}
-  .author{font:600 17px var(--display);color:var(--white)}
-  .author span{display:block;font:400 15px var(--body);color:var(--blue-pale)}
-
-  /* cta final */
-  .final{background:radial-gradient(900px 500px at 50% 100%,rgba(59,130,246,.25),transparent 70%)}
-  .final .wrap{max-width:860px;padding:96px 24px;display:flex;flex-direction:column;gap:28px;
-    align-items:center;text-align:center}
-  .final h2{font-size:clamp(32px,4.6vw,52px);line-height:1.08}
-  .final p{font-size:19px;max-width:640px}
-  .marks{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:center;font-size:15px}
-  .marks span{display:inline-flex;gap:8px;align-items:center}
-
-  footer{border-top:1px solid var(--line)}
-  footer .wrap{padding:28px 24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
-    font-size:13px;color:var(--muted)}
-  footer .logo{font-size:18px}
-
-  @keyframes pulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
-  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  @keyframes drip{0%{transform:translateY(0);opacity:1}100%{transform:translateY(46px);opacity:0}}
-  @keyframes sweep{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  .sweep{transform-origin:100px 100px;animation:sweep 12s linear infinite}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important}html{scroll-behavior:auto}}
-  @media (max-width:640px){
-    .wrap{padding:64px 20px}
-    .hero .wrap{padding:32px 20px 64px;gap:40px}
-    .cta-row .btn{width:100%}
-    .post{padding:14px 16px;gap:12px}
-    .post:nth-of-type(n){max-width:100%}
-    .calc-controls,.calc-out>div{padding:24px}
-    .proof>div{padding:28px}
+  /* fluxo */
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:8px}
+  .node{position:relative;padding:24px 18px;text-align:center;display:flex;flex-direction:column;
+    align-items:center;gap:10px}
+  .node .ring{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;background:var(--card);border:1px solid var(--line);position:relative;z-index:2}
+  .node.on .ring{border-color:var(--blue);box-shadow:0 0 0 6px rgba(96,165,250,.08)}
+  .node .k{font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .node h3{font-size:16.5px}
+  .node p{font-size:14px;color:var(--muted);line-height:1.5}
+  .node::before{content:"";position:absolute;top:52px;left:-50%;width:100%;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(96,165,250,.35),transparent)}
+  .node:first-child::before{display:none}
+  .node::after{content:"";position:absolute;top:49px;left:-50%;width:6px;height:6px;border-radius:50%;
+    background:var(--blue);box-shadow:0 0 10px rgba(96,165,250,.9);opacity:0}
+  .flow.go .node::after{animation:travel 2.6s linear infinite}
+  .flow.go .node:nth-child(2)::after{animation-delay:.2s}
+  .flow.go .node:nth-child(3)::after{animation-delay:.6s}
+  .flow.go .node:nth-child(4)::after{animation-delay:1s}
+  .flow.go .node:nth-child(5)::after{animation-delay:1.4s}
+  .loop{margin-top:22px;display:flex;align-items:center;gap:12px;justify-content:center;
+    font-size:14.5px;color:var(--muted);text-align:center;flex-wrap:wrap}
+  .loop code{font-family:var(--mono);font-size:13px;color:var(--purple)}
+  @media(max-width:860px){
+    .flow{grid-template-columns:1fr;gap:4px}
+    .node{flex-direction:row;text-align:left;align-items:flex-start;gap:16px;padding:16px 0}
+    .node .txt{flex:1}
+    .node::before{top:0;left:27px;width:1px;height:100%;
+      background:linear-gradient(180deg,transparent,rgba(96,165,250,.35),transparent)}
+    .node::after{display:none}
   }
+
+  /* blog */
+  .post{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;
+    display:flex;flex-direction:column;gap:10px}
+  .post h3{font-size:17px;line-height:1.3}
+  .post p{font-size:14.5px;color:var(--muted)}
+  .post span{font-family:var(--mono);font-size:12px;color:var(--blue);margin-top:auto}
+  .post:hover{border-color:rgba(96,165,250,.4)}
+
+  /* tech */
+  .tech{display:flex;gap:16px;align-items:flex-start}
+  .tech svg{flex:none;margin-top:2px}
+  .tech strong{color:var(--white);display:block;font-weight:600;margin-bottom:3px}
+  .tech p{font-size:15px;color:var(--muted)}
+
+  /* quem faz */
+  .about{display:flex;flex-wrap:wrap;gap:36px;align-items:center}
+  .about img{width:132px;height:132px;border-radius:50%;object-fit:cover;
+    border:2px solid rgba(96,165,250,.3)}
+  .about div{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:14px}
+
+  /* rodape */
+  footer{border-top:1px solid var(--line);padding:44px 0 36px;font-size:14.5px;color:var(--faint)}
+  .foot{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:flex-start}
+  .foot nav{display:flex;gap:22px;flex-wrap:wrap}
+  .foot a{color:var(--muted)}
+
+  /* animacoes */
+  @keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-3%,2%,0) scale(1.06)}}
+  @keyframes travel{0%{opacity:0;transform:translateX(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateX(100%)}}
+  /* O conteudo e visivel por padrao. A animacao de entrada so existe quando o
+     script marca <html class="js-anim">, entao JavaScript quebrado, observer que
+     nao dispara ou leitor sem JS continuam vendo a pagina inteira. */
+  .js-anim .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .js-anim .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .js-anim .reveal{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+  @media(max-width:640px){section{padding:72px 0}.hero{padding:72px 0 64px}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="nav">
-    <div class="logo">nov<b>AI</b>mob</div>
-    <a class="btn btn-sm" href="#contato">Pedir meu raio-x</a>
+    <a class="logo" href="/">nov<b>AI</b>mob</a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#tecnologia">Tecnologia</a>
+      <a href="/blog/">Conteúdo</a>
+    </nav>
+    <button type="button" class="btn btn-sm btn-line" data-abre-modal>Falar com a gente</button>
   </div>
 </header>
 
@@ -239,267 +206,207 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="mesh"></div>
   <div class="wrap">
-    <div class="hero-copy">
-      <p class="eyebrow"><span class="dot"></span>para imobiliárias de Praia Grande e da Baixada Santista</p>
-      <h1>Seu plantão fecha às 18h. O lead <span style="color:var(--blue-soft)">não.</span></h1>
-      <p>42,68% dos leads de imóveis chegam fora do horário comercial. Conheça o <strong style="color:var(--white)">Plantão Infinito</strong>, o funil que atende, qualifica e acompanha cada lead até o seu corretor fechar.</p>
-      <div class="cta-row">
-        <a class="btn" href="#contato">Quero ver o funil funcionando</a>
-        <a class="btn-ghost" href="#funil">O que é o Plantão Infinito?</a>
+    <div class="hero-inner">
+      <p class="eyebrow">IA aplicada ao mercado imobiliário</p>
+      <h1>O atendimento da sua imobiliária não precisa ter horário.</h1>
+      <p class="sub">A Nova Imob desenha e opera a camada de atendimento das imobiliárias: um agente de IA que responde na hora, qualifica antes de passar para o corretor, retoma quem esfriou e deixa o gestor enxergando tudo.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#como-funciona">Ver o fluxo completo</a>
+        <a class="btn btn-line" href="/blog/">Ler o conteúdo</a>
       </div>
-      <p class="src">Fonte: Leadster, Pesquisa Leads Fora do Horário 2026 (3,4 milhões de leads).</p>
-    </div>
-
-    <div class="phone-col">
-      <div class="toggle" role="group" aria-label="Comparar plantão comum e Plantão Infinito">
-        <button type="button" class="off" id="btn-sem" aria-pressed="false">Plantão comum</button>
-        <button type="button" id="btn-com" aria-pressed="true">Plantão Infinito</button>
+      <div class="pills">
+        <span class="pill">WhatsApp pela API oficial</span>
+        <span class="pill">qualificação automática</span>
+        <span class="pill">retomada de base</span>
+        <span class="pill">painel de gestão</span>
       </div>
-
-      <div class="phone">
-        <div class="screen">
-          <div class="screen-top"><span>sábado</span><span>22:47</span></div>
-          <div class="msg msg-in">Oi! Vi o apartamento no Canto do Forte. Ainda está disponível?<time>22:47</time></div>
-
-          <div id="cena-sem" hidden>
-            <div class="no-answer">
-              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#F87171" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-              <strong>Sem resposta</strong>
-              <span>O plantão acabou às 18h. No mercado, a primeira resposta leva em média 5h08min.</span>
-            </div>
-          </div>
-
-          <div id="cena-com" style="display:contents">
-            <div class="msg msg-out">Está sim! Você procura para morar ou para investir?<time>Ícaro · 22:47</time></div>
-            <div class="msg msg-in" style="animation:rise .4s .5s both">Para morar. Quero visitar no fim de semana.<time>22:48</time></div>
-            <div class="ok-bar">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              Lead qualificado e enviado ao corretor da vez
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="caption">Conversa ilustrativa. Toque nos botões para comparar.</p>
     </div>
   </div>
 </section>
 
-<!-- PRAIA GRANDE -->
+<!-- O QUE FAZEMOS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="intro reveal">
+      <p class="eyebrow">o que a gente faz</p>
+      <h2>Quatro funções que uma imobiliária costuma deixar na mão da sorte.</h2>
+      <p>Nenhuma delas é novidade: toda imobiliária sabe que precisa responder rápido, separar curioso de comprador, voltar a procurar quem não comprou e saber o que aconteceu com cada lead. O que muda é deixar isso rodando sozinho.</p>
+    </div>
+    <div class="grid g2">
+      <article class="card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"/></svg></div>
+        <h3>Atender na hora</h3>
+        <p>O lead chega a qualquer hora, inclusive de madrugada e no fim de semana. O agente responde em segundos, com conversa de verdade, não menu de opções.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></div>
+        <h3>Qualificar antes de passar</h3>
+        <p>Orçamento, região, prazo e finalidade. O corretor recebe o lead já com contexto, em vez de descobrir no meio da conversa que não era perfil.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></div>
+        <h3>Retomar quem esfriou</h3>
+        <p>Quem não comprou agora não some da base. Entra numa régua automática que volta a procurar em dias, semanas e meses, sem ninguém precisar lembrar.</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+        <h3>Mostrar o que aconteceu</h3>
+        <p>Cada lead com etapa, responsável e histórico num painel. O gestor para de perguntar no grupo o que foi feito com o contato da semana passada.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="intro reveal">
+      <p class="eyebrow">como funciona</p>
+      <h2>O caminho que todo lead percorre.</h2>
+      <p>Do primeiro contato até a mesa do corretor, sem etapa que dependa de alguém lembrar de fazer.</p>
+    </div>
+
+    <div class="flow" id="flow">
+      <div class="node reveal">
+        <div class="ring"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H7l-3 3z"/></svg></div>
+        <div class="txt"><p class="k">01</p><h3>O lead chega</h3><p>WhatsApp, site, portal ou Instagram. Tudo cai no mesmo lugar.</p></div>
+      </div>
+      <div class="node reveal">
+        <div class="ring"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <div class="txt"><p class="k">02</p><h3>A IA responde</h3><p>Em segundos, a qualquer hora, treinada no portfólio da imobiliária.</p></div>
+      </div>
+      <div class="node reveal">
+        <div class="ring"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg></div>
+        <div class="txt"><p class="k">03</p><h3>Qualifica</h3><p>Entende o que a pessoa procura e quanto pode investir.</p></div>
+      </div>
+      <div class="node reveal">
+        <div class="ring"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 11a4 4 0 1 0-8 0"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></div>
+        <div class="txt"><p class="k">04</p><h3>Vai ao corretor</h3><p>Com o histórico da conversa e o retorno cobrado depois.</p></div>
+      </div>
+      <div class="node reveal">
+        <div class="ring"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 9h18M8 14h5"/></svg></div>
+        <div class="txt"><p class="k">05</p><h3>O gestor enxerga</h3><p>Etapa, responsável e histórico de cada lead, em tempo real.</p></div>
+      </div>
+    </div>
+
+    <p class="loop reveal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      Quem não avançou volta para o começo pela régua de retomada, em <code>3, 7, 15, 30, 45 e 60 dias</code>.
+    </p>
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section class="alt" id="tecnologia">
+  <div class="wrap">
+    <div class="intro reveal">
+      <p class="eyebrow">tecnologia</p>
+      <h2>Feito para durar, não para impressionar na demonstração.</h2>
+      <p>A parte menos visível é a que mais importa quando o volume cresce: por onde a mensagem sai, onde o dado fica e o que acontece quando algo falha.</p>
+    </div>
+    <div class="grid g2">
+      <div class="tech reveal">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        <p><strong>API oficial do WhatsApp</strong>Nada de gateway não oficial. O número da imobiliária não entra na fila de banimento da Meta, e o histórico da conversa não se perde.</p>
+      </div>
+      <div class="tech reveal">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3z"/><path d="M4 7v10c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+        <p><strong>Integra com o que já existe</strong>CRM, portais e planilha da operação continuam no lugar. A camada de atendimento conversa com eles em vez de pedir para trocar tudo.</p>
+      </div>
+      <div class="tech reveal">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <p><strong>Monitorado de verdade</strong>Quando um canal para de responder, alguém é avisado no mesmo dia. Falha silenciosa é o que faz uma operação perder semanas sem perceber.</p>
+      </div>
+      <div class="tech reveal">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <p><strong>Dado da imobiliária é da imobiliária</strong>A base de leads fica registrada no sistema da empresa, não no celular pessoal de um corretor que pode sair amanhã.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
 <section>
-  <div class="wrap stack">
-    <div class="intro">
-      <p class="eyebrow">praia grande em números</p>
-      <h2>A cidade cresceu 33,5%. A disputa por cada comprador cresceu junto.</h2>
+  <div class="wrap">
+    <div class="intro reveal">
+      <p class="eyebrow">conteúdo</p>
+      <h2>O que a gente aprende, a gente publica.</h2>
+      <p>Material aberto sobre IA, atendimento e gestão de leads no mercado imobiliário. Sem exigir cadastro para ler.</p>
     </div>
-    <div class="grid grid-3">
-      <div class="card"><p class="big">349.935</p><p>moradores no Censo 2022. Eram 262.051 em 2010.</p></div>
-      <div class="card"><p class="big" style="color:var(--blue-soft)">+87.884</p><p>pessoas em 12 anos. Praia Grande virou a 2ª maior cidade da Baixada.</p></div>
-      <div class="card"><p class="big" style="color:var(--red-soft)">&minus;18%</p><p>nas vendas de imóveis na Baixada em abril de 2026, em 143 imobiliárias pesquisadas.</p></div>
+    <div class="grid g3">
+      <a class="post reveal" href="/blog/ia-para-imobiliarias">
+        <h3>IA para imobiliárias: o que é, como funciona e onde aplicar</h3>
+        <p>Entenda o que a tecnologia já resolve hoje na operação e o que ainda é promessa.</p>
+        <span>ler o artigo</span>
+      </a>
+      <a class="post reveal" href="/blog/chatbot-vs-agente-ia-imobiliaria">
+        <h3>Chatbot ou agente de IA: qual faz sentido para imobiliárias</h3>
+        <p>A diferença entre o menu de opções que irrita o cliente e uma conversa que qualifica.</p>
+        <span>ler o artigo</span>
+      </a>
+      <a class="post reveal" href="/blog/tempo-de-resposta-leads-imobiliaria">
+        <h3>Tempo de resposta para leads: o erro que custa vendas</h3>
+        <p>Quanto tempo você tem antes de o lead procurar a próxima imobiliária da lista.</p>
+        <span>ler o artigo</span>
+      </a>
+      <a class="post reveal" href="/blog/imobiliarias-perdem-leads-fora-do-horario-comercial">
+        <h3>Por que imobiliárias perdem leads fora do horário comercial</h3>
+        <p>O que acontece com quem chama às 22h e encontra o plantão fechado.</p>
+        <span>ler o artigo</span>
+      </a>
+      <a class="post reveal" href="/blog/automatizar-gestao-locacao-imobiliaria">
+        <h3>Como automatizar a gestão de aluguel da imobiliária</h3>
+        <p>Cobrança, repasse e segunda via sem ocupar o time administrativo.</p>
+        <span>ler o artigo</span>
+      </a>
+      <a class="post reveal" href="/blog/quanto-custa-agente-ia-imobiliaria">
+        <h3>Quanto custa um agente de IA frente a um assistente administrativo</h3>
+        <p>A comparação de custo que a maioria das imobiliárias nunca fez no papel.</p>
+        <span>ler o artigo</span>
+      </a>
     </div>
-    <svg viewBox="0 0 1160 150" style="width:100%;height:auto;display:block" role="img" aria-label="Ilustração da orla de Praia Grande com prédios e mar">
-      <defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs>
-      <g fill="none" stroke="url(#sky)" stroke-width="2">
-        <path d="M0 118h1160"/>
-        <path d="M40 118V70h34v48M90 118V44h40v74M146 118V82h28v36M190 118V30h46v88M252 118V62h32v56M300 118V50h38v68M354 118V88h26v30M396 118V36h44v82M456 118V72h30v46M502 118V54h36v64"/>
-        <path d="M620 118V78h30v40M666 118V48h40v70M722 118V26h46v92M784 118V66h32v52M832 118V40h42v78M890 118V84h28v34M934 118V58h36v60M986 118V34h44v84M1046 118V74h30v44M1092 118V52h36v66"/>
-        <path d="M0 134c40-8 60 8 100 0s60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 60 0" opacity=".6"/>
-      </g>
-      <g fill="#60A5FA"><rect x="100" y="56" width="6" height="6"/><rect x="114" y="72" width="6" height="6"/><rect x="204" y="46" width="6" height="6"/><rect x="218" y="78" width="6" height="6"/><rect x="410" y="52" width="6" height="6"/><rect x="736" y="42" width="6" height="6"/><rect x="750" y="70" width="6" height="6"/><rect x="846" y="56" width="6" height="6"/><rect x="1000" y="50" width="6" height="6"/></g>
-    </svg>
-    <p style="max-width:760px">Mais gente procurando imóvel e menos negócios fechando no mês: é nesse cenário que um lead sem resposta custa mais. Na mesma pesquisa, 37,1% das compras foram à vista. Esse comprador não espera até segunda-feira.</p>
-    <p class="src">Fontes: IBGE, Censo 2022; Pesquisa CRECISP Baixada Santista, abril de 2026.</p>
+    <p style="margin-top:28px"><a href="/blog/">Ver todos os artigos</a></p>
   </div>
 </section>
 
-<!-- ONDE O LEAD SOME -->
+<!-- QUEM FAZ -->
 <section class="alt">
-  <div class="wrap stack">
-    <div class="intro">
-      <p class="eyebrow">onde o lead some</p>
-      <h2>Você paga para o lead chegar. Ele se perde em 4 pontos.</h2>
-    </div>
-    <div class="grid grid-4">
-      <article class="card leak">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FCA5A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <h3>Espera</h3><p>O lead chama às 22h e ninguém responde. Ele chama a próxima imobiliária da lista.</p>
-      </article>
-      <article class="card leak">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FCA5A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg>
-        <h3>Triagem</h3><p>Curioso e comprador entram na mesma roleta. Seu melhor corretor gasta a vez com quem só queria saber o preço.</p>
-      </article>
-      <article class="card leak">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FCA5A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z"/><path d="M4 4l16 16"/></svg>
-        <h3>Mão do corretor</h3><p>O lead foi passado. Foi atendido? Virou visita? Você fica sem enxergar a operação.</p>
-      </article>
-      <article class="card leak">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FCA5A5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M9 15h6"/></svg>
-        <h3>Esquecimento</h3><p>Quem não comprou este mês some da base. Ninguém volta a procurar em 30 ou 60 dias.</p>
-      </article>
+  <div class="wrap about">
+    <img src="/alan-carvalho.jpg" alt="Alan Carvalho, responsável pela Nova Imob" width="132" height="132" loading="lazy">
+    <div class="reveal">
+      <p class="eyebrow">quem faz</p>
+      <h2 style="font-size:clamp(26px,3vw,34px)">Gente que opera, não só vende.</h2>
+      <p>A Nova Imob nasceu dentro de uma agência que já cuidava de tráfego, automação e atendimento para outros setores. Cada fluxo aqui foi construído atendendo operação real, com volume real e com os problemas que só aparecem depois do terceiro mês rodando.</p>
+      <p style="color:var(--muted);font-size:15.5px">Alan Carvalho cuida da parte técnica e do desenho dos fluxos.</p>
     </div>
   </div>
 </section>
 
-<!-- RELÓGIO -->
+<!-- CONVITE DISCRETO -->
 <section>
-  <div class="wrap clock-row">
-    <div class="clock">
-      <svg viewBox="0 0 200 200" role="img" aria-label="Relógio de 24 horas: 42,68 por cento dos leads chegam fora do horário comercial">
-        <circle cx="100" cy="100" r="78" fill="none" stroke="#2A3247" stroke-width="18"/>
-        <circle cx="100" cy="100" r="78" fill="none" stroke="#3B82F6" stroke-width="18" stroke-dasharray="209.2 490.1" stroke-dashoffset="-104" transform="rotate(-90 100 100)" stroke-linecap="round"/>
-        <g class="sweep"><path d="M100 100V34" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></g>
-        <circle cx="100" cy="100" r="4" fill="#FFFFFF"/>
-        <text x="100" y="92" text-anchor="middle" fill="#FFFFFF" style="font:700 26px 'Space Grotesk',sans-serif">42,68%</text>
-        <text x="100" y="124" text-anchor="middle" fill="#D1D5DB" style="font:500 9px Inter,sans-serif">fora do horário comercial</text>
-      </svg>
-    </div>
-    <div class="clock-copy">
-      <p class="eyebrow">o que o mercado mostra</p>
-      <h2>O lead escolhe o horário. Quase metade escolhe o seu horário de folga.</h2>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
-        <div class="card" style="padding:24px"><p class="big" style="font-size:40px">5h08min</p><p style="font-size:15px">é o tempo médio até a primeira resposta a um lead imobiliário.</p></div>
-        <div class="card" style="padding:24px"><p class="big" style="font-size:40px;color:var(--red-soft)">23%</p><p style="font-size:15px">das empresas testadas em um estudo com 2.241 companhias nunca responderam ao lead.</p></div>
-      </div>
-      <p class="src">Fontes: Leadster, 2026 (setor de imóveis, seg. a sex. das 8h às 18h); Morada.ai, 2026 (operações de incorporadoras brasileiras); Harvard Business Review, 2011 (empresas dos EUA).</p>
-    </div>
-  </div>
-</section>
-
-<!-- CALCULADORA -->
-<section class="alt">
-  <div class="wrap stack">
-    <div class="intro">
-      <p class="eyebrow">faça a conta</p>
-      <h2>Quanto custa, na sua imobiliária, o lead que ninguém respondeu?</h2>
-      <p>Arraste para os seus números. A conta usa só o que você já gastou para gerar o lead, sem contar a comissão da venda que não aconteceu.</p>
-    </div>
-    <div class="calc">
-      <div class="calc-controls">
-        <div>
-          <label for="c-leads"><span>Leads por mês</span><output id="o-leads" for="c-leads">200</output></label>
-          <input id="c-leads" type="range" min="20" max="1000" step="10" value="200">
-        </div>
-        <div>
-          <label for="c-cpl"><span>Custo por lead</span><output id="o-cpl" for="c-cpl">R$ 25</output></label>
-          <input id="c-cpl" type="range" min="5" max="150" step="1" value="25">
-        </div>
-        <div>
-          <label for="c-pct"><span>Leads sem resposta</span><output id="o-pct" for="c-pct">30%</output></label>
-          <input id="c-pct" type="range" min="5" max="80" step="1" value="30">
-          <p class="src">Ajuste para o número da sua operação.</p>
-        </div>
-      </div>
-      <div class="calc-out">
-        <div aria-live="polite">
-          <div><p style="font-size:15px">Verba em leads sem resposta, por mês</p><p class="money">R$ <span id="o-mes">1.500</span></p></div>
-          <div><p style="font-size:15px">Em 12 meses</p><p class="year">R$ <span id="o-ano">18.000</span></p></div>
-          <p style="font-size:15px">São <strong style="color:var(--white)"><span id="o-perdidos">60</span> leads</strong> por mês que você pagou e ninguém atendeu.</p>
-        </div>
-      </div>
-    </div>
-    <div class="grid grid-3">
-      <div class="conseq"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><p><strong>Corretor desmotivado.</strong> Quem recebe lead frio perde a vez na roleta e a paciência.</p></div>
-      <div class="conseq"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><p><strong>Decisão no escuro.</strong> Sem saber qual canal vira visita, a verba de anúncio vai no achismo.</p></div>
-      <div class="conseq"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><p><strong>Base parada.</strong> Centenas de contatos antigos no WhatsApp que ninguém tem tempo de retomar.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- O MECANISMO -->
-<section class="mech" id="funil">
-  <div class="wrap">
-    <div class="intro" style="align-items:center;text-align:center;max-width:780px">
-      <p class="eyebrow">o mecanismo</p>
-      <h2>Plantão Infinito</h2>
-    </div>
-    <p class="lead">Um plantão com 4 postos, um para cada ponto onde o lead some. Ele não fecha às 18h, não acaba quando o lead vai para o corretor e não esquece quem esfriou.</p>
-
-    <div class="posts" id="postos">
-      <button type="button" class="post" aria-expanded="true">
-        <span class="n">1</span>
-        <span class="txt">
-          <span class="name">Atende na hora</span>
-          <span class="fecha">fecha: Espera</span>
-          <span class="detail">O Ícaro responde no WhatsApp a qualquer hora: noite, fim de semana e feriado.</span>
-        </span>
-        <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <button type="button" class="post" aria-expanded="false">
-        <span class="n">2</span>
-        <span class="txt">
-          <span class="name">Qualifica</span>
-          <span class="fecha">fecha: Triagem</span>
-          <span class="detail">Antes da roleta, o lead já disse o que procura. O corretor só usa a vez com quem tem perfil.</span>
-        </span>
-        <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <button type="button" class="post" aria-expanded="false">
-        <span class="n">3</span>
-        <span class="txt">
-          <span class="name">Entrega e cobra o retorno</span>
-          <span class="fecha">fecha: Mão do corretor</span>
-          <span class="detail">O lead vai pronto para o corretor da vez. O gestor é avisado do que aconteceu depois.</span>
-        </span>
-        <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <button type="button" class="post" aria-expanded="false">
-        <span class="n">4</span>
-        <span class="txt">
-          <span class="name">Retoma</span>
-          <span class="fecha">fecha: Esquecimento</span>
-          <span class="detail">Quem não comprou agora volta a ser procurado em 3, 7, 15, 30, 45 e 60 dias.</span>
-        </span>
-        <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-    </div>
-
-    <div class="mech-note">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-      <p>O que cada posto pergunta, quando passa o lead e como cobra o retorno do corretor, a gente mostra ao vivo, com o Ícaro atendendo e o painel do gestor aberto.</p>
-      <a class="btn" href="#contato">Quero ver o funil por dentro</a>
-    </div>
-  </div>
-</section>
-
-<!-- CORRETOR + PROVA -->
-<section class="alt">
-  <div class="wrap proof">
-    <div>
-      <h2>O corretor continua fechando.</h2>
-      <p>A IA não substitui o seu melhor corretor. Ela garante que todo lead chegue nele já atendido e qualificado, a qualquer hora.</p>
-      <dl class="roles">
-        <div><dt>o Ícaro</dt><dd>Responde na hora<br>Qualifica antes de passar<br>Retoma quem esfriou</dd></div>
-        <div class="green"><dt>o corretor</dt><dd>Atende quem tem perfil<br>Faz a visita<br>Negocia e fecha</dd></div>
-      </dl>
-    </div>
-    <div>
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="#3B82F6" aria-hidden="true"><path d="M4 18v-5c0-4 2-7 6-8l1 2c-2 1-3 2-3 4h3v7zm9 0v-5c0-4 2-7 6-8l1 2c-2 1-3 2-3 4h3v7z"/></svg>
-      <blockquote>Em vários momentos contribuiu não apenas com a execução, mas também com ideias e sugestões para melhorar os processos e a arquitetura da solução. Recomendo seu trabalho para empresas que buscam automação, integrações e soluções envolvendo IA.</blockquote>
-      <p class="author">Fernando Larroyd<span>Larroyd Imóveis</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="final" id="contato">
-  <div class="wrap">
-    <h2>A gente testa o seu atendimento como um lead faria. E te mostra onde ele para.</h2>
-    <p>Peça o raio-x da sua imobiliária. Em uma conversa, você vê o resultado do teste e o Plantão Infinito funcionando ao vivo.</p>
-    <button type="button" class="btn btn-lg" data-abre-modal>Quero o raio-x do meu atendimento</button>
-    <div class="marks">
-      <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Implantação em 15 a 30 dias</span>
-      <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30 dias para cancelar se não ficar satisfeito</span>
-      <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>WhatsApp pela API oficial</span>
-    </div>
+  <div class="wrap" style="text-align:center;display:flex;flex-direction:column;gap:20px;align-items:center">
+    <h2 class="reveal" style="max-width:720px">Quer ver como isso ficaria na sua operação?</h2>
+    <p class="reveal" style="max-width:600px;color:var(--muted);font-size:18px">A gente testa o atendimento da sua imobiliária como um lead faria e te mostra onde ele para. Sem compromisso e sem apresentação de vendas.</p>
+    <button type="button" class="btn reveal" data-abre-modal>Conversar com a gente</button>
   </div>
 </section>
 
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="logo">nov<b>AI</b>mob</div>
-    <div>Atendimento e gestão de leads com IA para imobiliárias · Praia Grande e Baixada Santista</div>
+  <div class="wrap foot">
+    <div>
+      <p class="logo" style="margin-bottom:8px">nov<b>AI</b>mob</p>
+      <p>Atendimento e gestão de leads com IA para imobiliárias.</p>
+    </div>
+    <nav>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#tecnologia">Tecnologia</a>
+      <a href="/blog/">Conteúdo</a>
+      <a href="/privacidade.html">Privacidade</a>
+    </nav>
   </div>
 </footer>
 
@@ -510,8 +417,10 @@
   "name": "Nova Imob",
   "url": "https://novaimob.tech/",
   "logo": "https://novaimob.tech/alan-carvalho.jpg",
-  "description": "Atendimento e gestão de leads com IA para imobiliárias. O Plantão Infinito atende no WhatsApp a qualquer hora, qualifica e acompanha cada lead até o corretor fechar.",
-  "areaServed": "Praia Grande e Baixada Santista, SP"
+  "description": "Infraestrutura de atendimento com IA para imobiliárias: agente no WhatsApp pela API oficial, qualificação automática de leads, retomada de base e painel de gestão.",
+  "founder": { "@type": "Person", "name": "Alan Carvalho" },
+  "areaServed": "BR",
+  "knowsAbout": ["Inteligência artificial", "Mercado imobiliário", "Atendimento ao cliente", "Gestão de leads"]
 }
 </script>
 
@@ -519,66 +428,47 @@
 <script>
 (function () {
   "use strict";
+  var semAnimacao = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var alvos = [].slice.call(document.querySelectorAll('.reveal'));
+  var podeAnimar = !semAnimacao && typeof IntersectionObserver !== 'undefined';
 
-  /* ---- comparador do celular: plantão comum x Plantão Infinito ---- */
-  var btnSem = document.getElementById('btn-sem');
-  var btnCom = document.getElementById('btn-com');
-  var cenaSem = document.getElementById('cena-sem');
-  var cenaCom = document.getElementById('cena-com');
+  function revelarTudo() { alvos.forEach(function (el) { el.classList.add('in'); }); }
 
-  function mostrar(modo) {
-    var sem = modo === 'sem';
-    btnSem.setAttribute('aria-pressed', String(sem));
-    btnCom.setAttribute('aria-pressed', String(!sem));
-    cenaSem.hidden = !sem;
-    cenaCom.style.display = sem ? 'none' : 'contents';
+  if (podeAnimar) {
+    // so a partir daqui o CSS pode esconder os blocos
+    document.documentElement.classList.add('js-anim');
+    // rede de seguranca: se por qualquer motivo o observer nao entregar,
+    // a pagina aparece inteira em 2,5s em vez de ficar em branco
+    setTimeout(revelarTudo, 2500);
   }
-  btnSem.addEventListener('click', function () { mostrar('sem'); });
-  btnCom.addEventListener('click', function () { mostrar('com'); });
 
-  /* ---- calculadora do lead sem resposta ---- */
-  var leads = document.getElementById('c-leads');
-  var cpl = document.getElementById('c-cpl');
-  var pct = document.getElementById('c-pct');
-  var saidas = {
-    leads: document.getElementById('o-leads'), cpl: document.getElementById('o-cpl'),
-    pct: document.getElementById('o-pct'), perdidos: document.getElementById('o-perdidos'),
-    mes: document.getElementById('o-mes'), ano: document.getElementById('o-ano')
-  };
-  var fmt = function (n) { return n.toLocaleString('pt-BR'); };
+  if (!podeAnimar) {
+    revelarTudo();
+  } else {
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      });
+    }, { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+    alvos.forEach(function (el, i) { el.style.transitionDelay = (Math.min(i, 4) * 60) + 'ms'; obs.observe(el); });
 
-  function calcular() {
-    var l = Number(leads.value), c = Number(cpl.value), p = Number(pct.value);
-    var perdidos = Math.round(l * p / 100);
-    var mes = perdidos * c;
-    saidas.leads.textContent = fmt(l);
-    saidas.cpl.textContent = 'R$ ' + fmt(c);
-    saidas.pct.textContent = p + '%';
-    saidas.perdidos.textContent = fmt(perdidos);
-    saidas.mes.textContent = fmt(mes);
-    saidas.ano.textContent = fmt(mes * 12);
+    /* o fluxo so comeca a pulsar quando esta a vista, para nao gastar
+       bateria animando fora da tela */
+    var flow = document.getElementById('flow');
+    if (flow) {
+      var io2 = new IntersectionObserver(function (e) {
+        flow.classList.toggle('go', e[0].isIntersecting);
+      }, { threshold: .25 });
+      io2.observe(flow);
+    }
   }
-  [leads, cpl, pct].forEach(function (el) { el.addEventListener('input', calcular); });
-  calcular();
 
-  /* ---- acordeão dos 4 postos ---- */
-  var postos = [].slice.call(document.querySelectorAll('#postos .post'));
-  postos.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var aberto = b.getAttribute('aria-expanded') === 'true';
-      postos.forEach(function (o) { o.setAttribute('aria-expanded', 'false'); });
-      b.setAttribute('aria-expanded', aberto ? 'false' : 'true');
-    });
-  });
-
-  /* ---- CTAs abrem o modal de qualificação do site ----
-     O modal mora em /assets/cta-modal.js (compartilhado com o blog e a /lp-2).
-     Ele grava prospect + deal no Cockpit e dispara Lead no Pixel e na CAPI.
-     Se por algum motivo não carregar, o link continua rolando ate a seção
-     #contato, em vez de o botão ficar inerte. */
+  /* o convite abre o modal de qualificacao compartilhado do site */
   document.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href="#contato"], a[href$="#contato"], [data-abre-modal]');
-    if (!a || typeof window.openModal !== 'function') return;
+    var g = e.target.closest('[data-abre-modal]');
+    if (!g || typeof window.openModal !== 'function') return;
     e.preventDefault();
     window.openModal();
   });
